@@ -1,5 +1,11 @@
 import React from "react"
+import Seo from "../layout/seo"
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+    <>
+      <Seo />
+      <div>Hello world!</div>
+    </>
+  )
 }

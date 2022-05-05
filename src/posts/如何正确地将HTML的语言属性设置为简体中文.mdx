@@ -1,0 +1,111 @@
+---
+title: "如何正确地将HTML的语言属性设置为简体中文"
+date: 2021-09-16T22:00:00+08:00
+lastmod: 2021-09-17T11:00:00+08:00
+tags: [html, frontend]
+categories: [编程技术]
+---
+
+按照顺序来说，`lang`可能是在常见的 HTML 文档中碰到的第一个需要设置的属性。
+
+## 为什么要设置语言属性？
+
+通俗来说，设置语言属性就是告诉浏览器或者其他工具现在网页使用的文本主要是哪种语言。正确设置语言属性的好处是：可以让网页翻译工具显示正确的翻译规则、网页阅读器选择正确的语音或者是网页显示正确的文本渲染方式（例如：中文和日文有一些类似文字，但是结构上有细微的差别）等等。
+
+## 设置语言属性的标准
+
+WHATWG 工作小组制定的`HTML`标准中对`lang`语言属性描述如下 [<sup>[1]</sup>](#参考文献)：
+
+> The `lang` attribute (in no namespace) specifies the primary language for the element's contents and for any of the element's attributes that contain text. Its value must be a valid BCP 47 language tag, or the empty string. Setting the attribute to the empty string indicates that the primary language is unknown. [BCP47](https://html.spec.whatwg.org/multipage/references.html#refsBCP47)
+
+简单描述就是：如果需要设置语言属性，其值必须是一个由 **BCP 47 (BCP 表示：Best Current Practice，当前最佳实践)** 所规定的有效的语言标签。
+
+> _BCP 47_ 是由互联网工程任务组（Internet Engineering Task Force，IETF）制定的关于语言标签结构的标准。当前的最新版本是由 2009 年 9 月发表的 _RFC 5646_（Request for Comments，请求意见稿）。
+
+该意见稿规定，语言标签（Language Tag）是一个或多个语言子标签（Subtags）构成 [<sup>[2]</sup>](#参考文献)，每个子标签之间用连字符（`-`）隔开。
+这些子标签排列的顺序为：
+
+> `language-extlang-script-region-variant-extension-privateuse`
+
+| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 标签 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |                                                                 含义                                                                 | 标准       |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: | :--------- |
+|                                                                                                                                          `language`                                                                                                                                          |                               主要语言子标签，由两位或者三位字母构成。例如：`zh`代表中文，`fr`代表法语                               | ISO 639    |
+|                                                                                                                                          `extlang`                                                                                                                                           |              扩展语言子标签，由三位字母构成，用于区分相同主语言下的语言分支。例如：`cmn`代表中文普通话，`yue`代表粤语。              | ISO 639    |
+|                                                                                                                                           `script`                                                                                                                                           |            文字子标签，由四位字母构成，用于区分不同的文字体系。例如：`zh-Hans`和`zh-Hant`分别代表中文简体字和中文繁体字。            | ISO 15924  |
+|                                                                                                                                           `region`                                                                                                                                           | 地区子标签，由两位字母或者三位数字构成，用于区分语言所使用的国家或者区域。例如：`zh-CN`和`zh-HK`分别代表在中国大陆和香港使用的中文。 | ISO 3166   |
+|                                                                                                                                          `variant`                                                                                                                                           |                      语言变体子标签，代表语言的变体或者方言。例如：`zh-Latn-pinyin`代表用拉丁文书写的中文拼音。                      | 无特定标准 |
+|                                                                                                                                         `extension`                                                                                                                                          |                                                      扩展子标签，用于特殊用途。                                                      | 无特定标准 |
+|                                                                                                                                         `privateuse`                                                                                                                                         |                                                       私有标签，用于特殊用途。                                                       | 无特定标准 |
+
+所有已注册的语言子标签都可以在 [iana](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) 的网站上查询到。在查询时，需要注意有一些标签已失效（Deprecated）或者过时（grandfathered）。
+使用这些语言子标签时，原理上都可以不用区分大小写，但是有一些约定俗成的规定：
+
+1. 主要语言子标签用小写，例如`en`;
+2. 文字子标签首字母大写，其余字母小写，例如：`Hans`；
+3. 地区子标签全为大写，例如`US`
+
+## 将语言属性设置为简体中文的正确方式
+
+根据上方的介绍，可见将语言属性设置为大部分人常用的简体中文的正确方式是：`zh-cmn-Hans-CN`。
+但是，截至目前（2021/9/16），几乎所有的互联网大公司（包括及不限于苹果、微软、淘宝和小米等）简体中文网页的语言属性都使用了`zh-CN`。
+其实从规定语言属性的标准是一个“请求意见稿”就可以看出，如何设置语言属性在目前来说并没有严格的规定。各大公司为了使网页能匹配更多的浏览器，沿用了以前经典的设置方法。
+而根据查询 iana 网站以及许多文章[<sup>[3, 4]</sup>](#参考文献)也指出，`zh`这个标签现在（2009 年更新）已属于宏语言`macrolanguage`[<span>[注释]</span>](#注释)，因此并不推荐使用它，而是使用更具体的语言子标签。根据 ISO 639 标准，现行中文这种宏语言下一共有 16 种语言子标签：
+
+- cdo – 闽东语
+- cjy – 晋语
+- cmn – 普通话
+- cnp – 桂北平话
+- cpx – 莆仙话
+- csp – 桂南平话
+- czh – 徽语
+- czo – 闽中语
+- gan – 赣语
+- hak – 客家话
+- hsn – 湘语
+- lzh – 文言文
+- mnp – 闽北语
+- nan – 闽南语
+- wuu – 吴语
+- yue – 越语
+
+因此，现行标准推荐设置语言属性为简体中文的写法是：`cmn-Hans-CN`。但是在实际使用中，为了网页的适配性，还是使用`zh-CN`最为妥当（繁体使用`zh-HK`或`zh-TW`）。
+比如，[Google 翻译的 API 文档](https://cloud.google.com/translate/docs/languages?hl=zh-CN)指出，中文的语言代码为`zh`或`zh-CN`。
+
+## 一句话总结
+
+没有“最正确”的方式 🤪，最合适（或者说实用）的方法是设置为`zh-CN`。
+
+## 注释
+
+根据 RFC 5646 意见稿指出，和扩展子标签一起使用的主要语言子标签为宏语言（`macrolanguage`）。例如`zh-yue`语言标签中，`zh` 为主要语言子标签，`yue` 为扩展子标签，因此 `zh` 称为宏语言。
+在 iana 注册使用的子标签中，所有的扩展子标签都会有两条注册信息，一条为扩展子标签，另一条为主要语言子标签， RFC 5646 意见稿推荐使用更为具体的扩展子标签作为主要语言子标签来构成语言标签。
+例如：`cmn`在 iana 保存注册语言标签的[网站](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)上可以查询到两条注册信息：
+
+```
+Type: language
+Subtag: cmn
+Description: Mandarin Chinese
+Added: 2009-07-29
+Macrolanguage: zh
+```
+
+以及
+
+```
+Type: extlang
+Subtag: cmn
+Description: Mandarin Chinese
+Added: 2009-07-29
+Preferred-Value: cmn
+Prefix: zh
+Macrolanguage: zh
+```
+
+这种情况下，根据 RFC 5646 意见稿，推荐使用`cmn`作为开头的语言子标签。
+
+## 参考文献
+
+1. [HTML Living Standard — Last Updated 2 July 2021: 3.2.6.2 The lang and xml:lang attributes](https://html.spec.whatwg.org/multipage/dom.html#the-lang-and-xml:lang-attributes)
+2. [RFC 5646: Tags for Identifying Languages](https://www.rfc-editor.org/rfc/rfc5646.html)
+3. [Language tags in HTML and XML](https://www.w3.org/International/articles/language-tags/)
+4. [网页头部的声明应该是用 lang="zh" 还是 lang="zh-cn"？ - 贺师俊的回答 - 知乎](https://www.zhihu.com/question/20797118/answer/16809331)
