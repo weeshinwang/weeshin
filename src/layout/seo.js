@@ -10,7 +10,6 @@ export default function Seo(props) {
         siteMetadata {
           title
           siteUrl
-          favicon
           logo
           description
         }
@@ -18,35 +17,30 @@ export default function Seo(props) {
     }
   `)
 
-  // const defaults = data?.site?.siteMetadata
-
+  const defaults = data?.site?.siteMetadata
   const title = props.title || "home"
-  // const description = props.description || defaults.description
-  // const image = new URL(props.image || defaults.image, defaults.siteUrl)
-  // const url = new URL(props.path || "/", defaults.siteUrl)
-  // console.log(defaults.logo)
-  // const logo = defaults.logo
-  // const logo = new URL(defaults.logo, defaults.siteUrl)
+  const description = props.description || defaults.description
+  const url = new URL(props.path || "/", defaults.siteUrl)
+  const logo = new URL(props.logo || defaults.logo, defaults.siteUrl)
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: "zh-CN" }}>
       <title>🌟{title} | weeshin🌟</title>
       <link rel="icon" type="image/png" href={Favicon} />
-      {/* <meta name="icon" href={logo} /> */}
-
-      {/* <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      {image && <meta name="image" content={image} />}
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+      <meta name="description" content={description} />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="robots" content="all" />
+      <meta name="referrer" content="same-origin" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      {/* TODO: WHAT DO THESE MEANS??? */}
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {image && <meta name="og:image" content={image} />}
-
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      {image && <meta name="twitter:image" content={image} />} */}
+      {logo && <meta name="og:image" content={logo} />}
     </Helmet>
   )
 }
