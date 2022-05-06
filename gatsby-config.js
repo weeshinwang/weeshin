@@ -8,10 +8,9 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     siteUrl: "https://weeshin.wang",
-    title: "weeshin 的个人主页",
+    title: "weeshin的个人主页",
     description: "weeshin的个人主页",
     logo: "../images/logo.png",
-    favicon: "../images/favicon.ico",
   },
   plugins: [
     "gatsby-plugin-react-helmet",

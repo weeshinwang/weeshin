@@ -1,9 +1,35 @@
 import React from "react"
+import styled from "styled-components/macro"
+import GlobalStyle from "./global-styles"
+import Seo from "./seo"
+import Header from "./header"
+import Footer from "./footer"
 
-export default Layout = () => {
+export default function Layout({
+  children,
+  title = false,
+  description = false,
+  image = false,
+  path = false,
+}) {
   return (
     <>
-      <div>HELLO</div>
+      <GlobalStyle />
+      <LayoutWrapper>
+        <Seo
+          title={title}
+          description={description}
+          image={image}
+          path={path}
+        />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </LayoutWrapper>
     </>
   )
 }
+
+const LayoutWrapper = styled.div`
+  height: 100%;
+`

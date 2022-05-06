@@ -1,81 +1,71 @@
+import { Link } from "gatsby"
 import React from "react"
-import styled from "styled-components"
-import Spacer from "../components/spacer"
+import styled from "styled-components/macro"
+import Logo from "../components/logo"
+import Nav from "./nav"
+import ThemeSwitcher from "../components/theme-switcher"
 
-const Header = ({ type }) => {
+const Header = () => {
   return (
     <Wrapper>
       <Left>
-        <MainLogo animated={type === "hero"} />
-        <DesktopNavigation />
+        <LogoWrapper>
+          <Link to="/">
+            <Logo />
+          </Link>
+        </LogoWrapper>
+        <DesktopNav />
       </Left>
-
       <RightDesktop>
         <IconWrapper>
-          {/* <DarkModeToggle /> */}
-          <Spacer size={18} />
-          {/* <SoundToggle /> */}
-          <RssWrapper>
-            <Spacer size={18} />
-            <RssLink />
-          </RssWrapper>
+          <ThemeSwitcher />
         </IconWrapper>
       </RightDesktop>
-
-      {/* <RightMobile>
-        <MobileNav triggerY={12} />
-      </RightMobile> */}
     </Wrapper>
   )
 }
 
 const Wrapper = styled.header`
-  height: ${HEADER_HEIGHT}px;
+  height: 48px;
+  width: 100%;
+  max-width: 1100px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
   padding: 0;
-`
-
-const DesktopNavigation = styled(Navigation)`
-  @media ${(p) => p.theme.breakpoints.mobile} {
-    display: none;
-  }
+  margin: 10px auto;
 `
 
 const Left = styled.div`
-  flex: 1;
   display: flex;
-  align-items: baseline;
-`
-
-const MainLogo = styled(Logo)`
-  margin-right: ${(p) => p.theme.unit * 4}px;
+  flex: 4;
+  justify-content: space-around;
+  align-items: flex-end;
 `
 
 const RightDesktop = styled.div`
-  @media ${(p) => p.theme.breakpoints.mobile} {
-    display: none;
+  flex: 1;
+`
+
+const LogoWrapper = styled.div`
+  height: 40px;
+  width: 40px;
+  border-radius: 25%;
+  border: 1px solid lightyellow;
+  overflow: hidden;
+  transition: 750ms ease-in-out;
+  &:hover {
+    transform: rotate(360deg);
+    cursor: pointer;
   }
 `
 
 const IconWrapper = styled.div`
   display: flex;
-  transition: opacity 250ms;
+  justify-content: flex-end;
+  padding-right: 32px;
 `
 
-const RightMobile = styled.div`
-  @media ${(p) => p.theme.breakpoints.desktop} {
-    display: none;
-  }
-`
-
-const RssWrapper = styled.div`
-  display: flex;
-
-  @media (max-width: 840px) {
-    display: none;
-  }
-`
+const DesktopNav = styled(Nav)``
 
 export default React.memo(Header)

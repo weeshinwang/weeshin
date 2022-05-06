@@ -34,6 +34,9 @@ export default function ThemeSwitcher() {
   )
 }
 
-const Button = styled.button``
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+`
 
 const Svg = styled.svg``

@@ -1,11 +1,6 @@
 import React from "react"
-import Seo from "../layout/seo"
-
+import styled from "styled-components/macro"
+import Layout from "../layout/layout"
 export default function Home() {
-  return (
-    <>
-      <Seo />
-      <div>Hello world!</div>
-    </>
-  )
+  return <Layout></Layout>
 }

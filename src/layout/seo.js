@@ -1,7 +1,7 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-import Favicon from "../images/favicon.png"
+import Logo from "../images/logo.svg"
 
 export default function Seo(props) {
   const data = useStaticQuery(graphql`
@@ -25,8 +25,8 @@ export default function Seo(props) {
 
   return (
     <Helmet htmlAttributes={{ lang: "zh-CN" }}>
-      <title>🌟{title} | weeshin🌟</title>
-      <link rel="icon" type="image/png" href={Favicon} />
+      <title>{title} | weeshin</title>
+      <link rel="icon" type="image/svg+xml" href={Logo} />
       <link rel="canonical" href={url} />
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
