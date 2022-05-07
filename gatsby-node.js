@@ -1,5 +1,5 @@
 const path = require("path")
-const slugify = require("slugify")
+var slug = require("slug")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions

@@ -9,7 +9,7 @@ const BlogIndex = ({ data }) => {
         {posts.map(({ node: post }) => (
           <li key={post.id}>
             <Link to={post.frontmatter.title}>
-              <h2>{post.frontmatter.title}</h2>
+              <h2>{post.frontmatter.displayTitle}</h2>
             </Link>
             <p>{post.excerpt}</p>
           </li>
@@ -27,6 +27,7 @@ export const pageQuery = graphql`
           excerpt
           frontmatter {
             title
+            displayTitle
           }
         }
       }
