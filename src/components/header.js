@@ -1,9 +1,9 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components/macro"
-import Logo from "../components/logo"
+import Logo from "./logo"
 import Nav from "./nav"
-import ThemeSwitcher from "../components/theme-switcher"
+import ThemeSwitcher from "./theme-switcher"
 
 const Header = () => {
   return (

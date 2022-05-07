@@ -89,3 +89,17 @@ const GlobalStyle = createGlobalStyle`
 
 `
 export default GlobalStyle
+
+// background-image: linear-gradient(
+//   325deg,
+//   hsl(258deg 100% 7%) 0%,
+//   hsl(289deg 100% 6%) 11%,
+//   hsl(313deg 100% 6%) 22%,
+//   hsl(331deg 88% 7%) 33%,
+//   hsl(349deg 70% 8%) 44%,
+//   hsl(10deg 68% 8%) 56%,
+//   hsl(22deg 69% 7%) 67%,
+//   hsl(30deg 53% 7%) 78%,
+//   hsl(37deg 29% 8%) 89%,
+//   hsl(48deg 11% 9%) 100%
+// );
