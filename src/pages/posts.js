@@ -20,7 +20,7 @@ const BlogIndex = ({ data }) => {
 }
 export const pageQuery = graphql`
   query blogIndex {
-    allMdx {
+    allMdx(filter: { frontmatter: { type: { eq: "post" } } }) {
       edges {
         node {
           id

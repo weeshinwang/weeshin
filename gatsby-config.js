@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "posts",
+        name: "about",
         path: `${__dirname}/src/about`,
       },
     },
@@ -41,7 +41,7 @@ module.exports = {
           },
         ],
         defaultLayouts: {
-          posts: require.resolve("./src/layout/post-layout.js"),
+          posts: require.resolve(`${__dirname}/src/layout/post-layout.js`),
         },
       },
     },

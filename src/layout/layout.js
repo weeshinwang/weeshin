@@ -23,7 +23,7 @@ export default function Layout({
           path={path}
         />
         <Header />
-        <main>{children}</main>
+        <MainWrapper>{children}</MainWrapper>
         <Footer />
       </LayoutWrapper>
     </>
@@ -32,4 +32,14 @@ export default function Layout({
 
 const LayoutWrapper = styled.div`
   height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 8fr 1fr / 50px 1fr 50px;
+  grid-template-areas:
+    "header header header"
+    "left main right"
+    "footer footer footer";
+`
+
+const MainWrapper = styled.div`
+  grid-area: main;
 `

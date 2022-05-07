@@ -16,7 +16,6 @@ const WavingHands = styled.span`
       ${Waving} 1750ms ease-in-out both infinite
     `};
   transform-origin: 75% 85%;
-  font-size: 3rem;
 `
 
 const Waving = keyframes`

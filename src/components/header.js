@@ -7,7 +7,7 @@ import ThemeSwitcher from "./theme-switcher"
 
 const Header = () => {
   return (
-    <Wrapper>
+    <HeaderWrapper>
       <Left>
         <LogoWrapper>
           <Link to="/">
@@ -21,19 +21,13 @@ const Header = () => {
           <ThemeSwitcher />
         </IconWrapper>
       </RightDesktop>
-    </Wrapper>
+    </HeaderWrapper>
   )
 }
 
-const Wrapper = styled.header`
-  height: 48px;
+const HeaderWrapper = styled.header`
+  grid-area: header;
   width: 100%;
-  max-width: 1100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 0;
-  margin: 10px auto;
 `
 
 const Left = styled.div`
