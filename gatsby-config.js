@@ -21,6 +21,13 @@ module.exports = {
         path: `${__dirname}/src/posts`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: `${__dirname}/src/about`,
+      },
+    },
     "gatsby-remark-images",
     {
       resolve: "gatsby-plugin-mdx",
