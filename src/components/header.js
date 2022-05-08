@@ -14,8 +14,8 @@ const Header = () => {
             <Logo />
           </Link>
         </LogoWrapper>
-        <DesktopNav />
       </Left>
+      <DesktopNav />
       <RightDesktop>
         <IconWrapper>
           <ThemeSwitcher />
@@ -28,17 +28,25 @@ const Header = () => {
 const HeaderWrapper = styled.header`
   grid-area: header;
   width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  justify-items: center;
+  align-items: end;
 `
 
 const Left = styled.div`
-  display: flex;
-  flex: 4;
-  justify-content: space-around;
-  align-items: flex-end;
+  grid-column: 1/2;
+  justify-self: end;
+`
+
+const DesktopNav = styled(Nav)`
+  grid-column: 2/3;
 `
 
 const RightDesktop = styled.div`
-  flex: 1;
+  grid-column: 3/4;
+  justify-self: start;
 `
 
 const LogoWrapper = styled.div`
@@ -55,11 +63,9 @@ const LogoWrapper = styled.div`
 `
 
 const IconWrapper = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: flex-end;
-  padding-right: 32px;
+  padding-right: 32px; */
 `
-
-const DesktopNav = styled(Nav)``
 
 export default React.memo(Header)

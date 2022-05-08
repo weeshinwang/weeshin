@@ -33,13 +33,13 @@ export default function Layout({
 const LayoutWrapper = styled.div`
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 8fr 1fr / 50px 1fr 50px;
+  grid-template: 60px 1fr 60px / 100px 1fr 100px;
   grid-template-areas:
     "header header header"
     "left main right"
     "footer footer footer";
 `
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.main`
   grid-area: main;
 `

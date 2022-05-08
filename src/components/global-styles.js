@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components/macro"
+import styled, { createGlobalStyle } from "styled-components/macro"
 
 const GlobalStyle = createGlobalStyle`
   /* GRAB FROM https://www.joshwcomeau.com/css/custom-css-reset/ */
@@ -19,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
   */
   html, body {
     height: 100%;
-
   }
   /*
     Typographic tweaks!
@@ -59,14 +58,19 @@ const GlobalStyle = createGlobalStyle`
   /*
   10. Gatsby Specific settings
   */
-  #___gatsby, #gatsby-focus-wrapper {
+  /* #___gatsby {
     height: 100%;
-    isolation: isolate;
   }
 
-  html, body{
+  #gatsby-focus-wrapper {
+    height: 100%;
+  } */
+  #___gatsby, #gatsby-focus-wrapper {
+    all: inherit;
+  }
 
 
+  html, body {
     background-image: linear-gradient(
       315deg,
       hsl(240deg 100% 93%) 0%,
@@ -101,7 +105,5 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --font-size: 16px
   }
-
-
 `
 export default GlobalStyle

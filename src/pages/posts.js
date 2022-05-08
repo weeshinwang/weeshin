@@ -1,11 +1,13 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Layout from "../layout/layout"
+import styled from "styled-components/macro"
 
 const BlogIndex = ({ data }) => {
   const { edges: posts } = data.allMdx
   return (
-    <div>
-      <ul>
+    <Layout>
+      <PostListWrapper>
         {posts.map(({ node: post }) => (
           <li key={post.id}>
             <Link to={post.frontmatter.title}>
@@ -14,8 +16,8 @@ const BlogIndex = ({ data }) => {
             <p>{post.excerpt}</p>
           </li>
         ))}
-      </ul>
-    </div>
+      </PostListWrapper>
+    </Layout>
   )
 }
 export const pageQuery = graphql`
@@ -34,4 +36,11 @@ export const pageQuery = graphql`
     }
   }
 `
+
+const PostListWrapper = styled.ul`
+  list-style: none;
+  max-width: 700px;
+  margin: 0 auto;
+`
+
 export default BlogIndex
