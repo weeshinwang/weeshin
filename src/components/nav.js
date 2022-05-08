@@ -6,24 +6,20 @@ export default function Nav() {
   return (
     <NavWrapper>
       <List>
-        <ListWrapper>
-          <ListItem to="/">主页</ListItem>
-        </ListWrapper>
-        <ListWrapper>
-          <ListItem to="/projects">项目</ListItem>
-        </ListWrapper>
-        <ListWrapper>
-          <ListItem to="/posts">文章</ListItem>
-        </ListWrapper>
-        <ListWrapper>
-          <ListItem to="/about">关于我</ListItem>
-        </ListWrapper>
+        {/* <ListItem to="/">主页</ListItem> */}
+        <ListItem to="/projects">项目</ListItem>
+        <ListItem activeStyle={{ backgroundColor: "black" }} to="/posts">
+          文章
+        </ListItem>
+        <ListItem to="/about">关于我</ListItem>
       </List>
     </NavWrapper>
   )
 }
 
-const NavWrapper = styled.nav``
+const NavWrapper = styled.nav`
+  justify-self: start;
+`
 
 const List = styled.ul`
   display: flex;
@@ -33,26 +29,21 @@ const List = styled.ul`
 
 const ListItem = styled(Link)`
   outline: none;
-  margin: 0 10px;
+  margin: 0 5px;
+  padding: 2px 5px;
   font-weight: 700;
   font-size: 1.15rem;
   text-decoration: none;
   &:visited {
-    color: initial;
     border-color: white;
   }
-`
-
-const ListWrapper = styled.div`
   margin: 0 10px;
   border: none;
   background-color: transparent;
   border-radius: 3px;
   &:hover {
     background-color: #f47fb5;
-    & > a {
-      color: white;
-    }
+    color: white;
   }
-  transition: 0.5s;
+  transition: 300ms;
 `

@@ -1,4 +1,10 @@
 import styled, { createGlobalStyle } from "styled-components/macro"
+import {
+  LIGHT_COLORS,
+  DARK_COLORS,
+  BREAKPOINTS,
+  BREAKPOINT_SIZES,
+} from "../utils/constants"
 
 const GlobalStyle = createGlobalStyle`
   /* GRAB FROM https://www.joshwcomeau.com/css/custom-css-reset/ */
@@ -71,21 +77,7 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    background-image: linear-gradient(
-      315deg,
-      hsl(240deg 100% 93%) 0%,
-      hsl(266deg 83% 92%) 9%,
-      hsl(297deg 62% 91%) 18%,
-      hsl(324deg 96% 93%) 27%,
-      hsl(337deg 100% 94%) 36%,
-      hsl(351deg 100% 95%) 45%,
-      hsl(7deg 100% 95%) 55%,
-      hsl(19deg 100% 95%) 64%,
-      hsl(28deg 100% 95%) 73%,
-      hsl(36deg 100% 95%) 82%,
-      hsl(45deg 100% 96%) 91%,
-      hsl(56deg 100% 97%) 100%
-    );
+    background-image: ${LIGHT_COLORS.homepageBgImage}
 
     /* background-image: linear-gradient(
   325deg,
@@ -101,9 +93,11 @@ const GlobalStyle = createGlobalStyle`
   hsl(48deg 11% 9%) 100%
 ); */
   }
-
   :root {
     --font-size: 16px
+  }
+  * {
+    color: ${LIGHT_COLORS.text};
   }
 `
 export default GlobalStyle

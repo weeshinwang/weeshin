@@ -12,21 +12,21 @@ export default function Home() {
         <IntroWrapper>
           <p>
             <WavingHand />
-            <span>你好</span>
+            <span> 你好 </span>
           </p>
           <p>我是 weeshin</p>
         </IntroWrapper>
         <SecondaryIntroWrapper>
           <p>一个自学的前端工程师</p>
         </SecondaryIntroWrapper>
-        <LinkButtonWrapper>
+        {/* <LinkButtonWrapper>
           <Button>
             <StyledLink to="/prjects">我的项目</StyledLink>
           </Button>
           <Button>
             <StyledLink to="posts">我的文章</StyledLink>
           </Button>
-        </LinkButtonWrapper>
+        </LinkButtonWrapper> */}
         <SocialIconWrapper>
           <SocialIcons />
         </SocialIconWrapper>

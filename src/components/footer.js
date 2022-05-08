@@ -16,7 +16,6 @@ const FooterWrapper = styled.div`
   justify-items: center;
   & a {
     text-decoration: underline dotted #f47fb5;
-    color: initial;
     &:hover {
       background-color: #f47fb5;
       color: white;
