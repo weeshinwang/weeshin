@@ -27,7 +27,7 @@ export default function ThemeSwitcher() {
 
   return (
     <>
-      <Button aria-label={theme} onClick={handleClick}>
+      <SwitcherWrapper aria-label={theme} onClick={handleClick}>
         <Svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
           <mask className="moon" id="moon-mask">
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
@@ -52,13 +52,13 @@ export default function ThemeSwitcher() {
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </g>
         </Svg>
-      </Button>
+      </SwitcherWrapper>
     </>
   )
 }
 
-const Button = styled.button`
-  --size: 1.8rem;
+const SwitcherWrapper = styled.div`
+  --size: 38px;
   --icon-fill: hsl(210 10% 30%);
   --icon-fill-hover: hsl(210 10% 15%);
 
@@ -106,7 +106,7 @@ const Svg = styled.svg`
   & > :is(.moon, .sun) {
     fill: var(--icon-fill);
 
-    ${Button}:is(:hover, :focus-visible) > & {
+    ${SwitcherWrapper}:is(:hover, :focus-visible) > & {
       fill: var(--icon-fill-hover);
     }
   }
@@ -115,7 +115,7 @@ const Svg = styled.svg`
     stroke: var(--icon-fill);
     stroke-width: 2px;
 
-    ${Button}:is(:hover, :focus-visible) & {
+    ${SwitcherWrapper}:is(:hover, :focus-visible) & {
       stroke: var(--icon-fill-hover);
     }
   }

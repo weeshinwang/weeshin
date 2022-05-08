@@ -14,9 +14,7 @@ export default function Home() {
             <WavingHand />
             <span> 你好 </span>
           </p>
-          <p>
-            我是<span> weeshin</span>
-          </p>
+          <p>我是 weeshin</p>
         </IntroWrapper>
         <SecondaryIntroWrapper>
           <p>一个自学的前端工程师</p>
@@ -54,6 +52,7 @@ const IntroWrapper = styled.div`
   font-size: 2.5rem;
   text-align: center;
   font-weight: 700;
+  white-space: nowrap;
 `
 
 const SecondaryIntroWrapper = styled.div``

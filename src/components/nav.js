@@ -41,6 +41,9 @@ export default function Nav() {
 
 const NavWrapper = styled.nav`
   justify-self: start;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `
 
 const List = styled.ul`
