@@ -14,7 +14,9 @@ export default function Home() {
             <WavingHand />
             <span> 你好 </span>
           </p>
-          <p>我是 weeshin</p>
+          <p>
+            我是<span> weeshin</span>
+          </p>
         </IntroWrapper>
         <SecondaryIntroWrapper>
           <p>一个自学的前端工程师</p>

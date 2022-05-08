@@ -6,7 +6,7 @@ import styled from "styled-components/macro"
 const BlogIndex = ({ data }) => {
   const { edges: posts } = data.allMdx
   return (
-    <Layout>
+    <Layout title="posts">
       <PostListWrapper>
         {posts.map(({ node: post }) => (
           <li key={post.id}>

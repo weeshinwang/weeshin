@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useLayoutEffect, useContext } from "react"
 import styled from "styled-components"
 import { THEME_STORAGE_KEY } from "../utils/constants"
 import ThemeContext from "./theme-context"
@@ -15,7 +15,7 @@ export default function ThemeSwitcher() {
 
   const [theme, setTheme] = useContext(ThemeContext)
 
-  useEffect(setPreference)
+  useLayoutEffect(setPreference)
 
   const reflectPreference = () => {
     document.firstElementChild.setAttribute("data-theme", theme)
@@ -84,8 +84,8 @@ const Button = styled.button`
   }
 
   [data-theme="dark"] & {
-    --icon-fill: hsl(210 10% 70%);
-    --icon-fill-hover: hsl(210 15% 90%);
+    --icon-fill: hsl(210 15% 90%);
+    --icon-fill-hover: hsl(210 10% 70%);
   }
 
   @media (hover: none) {

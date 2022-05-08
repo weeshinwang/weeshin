@@ -58,7 +58,7 @@ export default function SocialIcons() {
 }
 
 const IconWrapper = styled.div`
-  width: 1.5rem;
+  width: 1.8rem;
   display: inline-block;
   margin: 0 5px;
 
@@ -73,5 +73,7 @@ const IconWrapper = styled.div`
     &:hover path {
       fill: ${({ hover }) => hover || `var(--hover-bg)`};
     }
+
+    transition: 300ms;
   }
 `

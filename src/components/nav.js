@@ -7,11 +7,33 @@ export default function Nav() {
     <NavWrapper>
       <List>
         {/* <ListItem to="/">主页</ListItem> */}
-        <ListItem to="/projects">项目</ListItem>
-        <ListItem activeStyle={{ backgroundColor: "black" }} to="/posts">
+        <ListItem
+          activeStyle={{
+            backgroundColor: "var(--hover-bg)",
+            color: "var(--hover-text)",
+          }}
+          to="/projects"
+        >
+          项目
+        </ListItem>
+        <ListItem
+          activeStyle={{
+            backgroundColor: "var(--hover-bg)",
+            color: "var(--hover-text)",
+          }}
+          to="/posts"
+        >
           文章
         </ListItem>
-        <ListItem to="/about">关于我</ListItem>
+        <ListItem
+          activeStyle={{
+            backgroundColor: "var(--hover-bg)",
+            color: "var(--hover-text)",
+          }}
+          to="/about"
+        >
+          关于我
+        </ListItem>
       </List>
     </NavWrapper>
   )

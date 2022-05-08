@@ -89,7 +89,7 @@ const GlobalStyle = createGlobalStyle`
 
 
   html {
-    background-image: ${(props) =>
+    --backgroundColor: ${(props) =>
       props.theme === "dark"
         ? DARK_COLORS.homepageBgImage
         : LIGHT_COLORS.homepageBgImage};
@@ -99,15 +99,18 @@ const GlobalStyle = createGlobalStyle`
       props.theme === "dark" ? DARK_COLORS.hoverBg : LIGHT_COLORS.hoverBg};
     --hover-text: ${(props) =>
       props.theme === "dark" ? DARK_COLORS.hoverText : LIGHT_COLORS.hoverText};
-
+    --font-size: 16px;
+    font-size: var(--font-size);
   }
 
-  :root {
-    --font-size: 16px;
-    font-size: 16px;
+  body {
+    background-image: var(--backgroundColor);
+    transition: background 300ms;
   }
 
   body * {
     color: var(--text);
   }
+
+
 `
