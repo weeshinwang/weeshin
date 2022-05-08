@@ -1,10 +1,22 @@
-import styled, { createGlobalStyle } from "styled-components/macro"
+import React, { useContext } from "react"
+import styled, { createGlobalStyle, keyframes } from "styled-components/macro"
 import {
   LIGHT_COLORS,
   DARK_COLORS,
   BREAKPOINTS,
   BREAKPOINT_SIZES,
 } from "../utils/constants"
+import ThemeContext from "./theme-context"
+
+export default function GlobalStyles() {
+  const [theme] = useContext(ThemeContext)
+
+  return (
+    <>
+      <GlobalStyle theme={theme} />
+    </>
+  )
+}
 
 const GlobalStyle = createGlobalStyle`
   /* GRAB FROM https://www.joshwcomeau.com/css/custom-css-reset/ */
@@ -77,27 +89,21 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    background-image: ${LIGHT_COLORS.homepageBgImage}
+    background-image: ${(props) =>
+      props.theme === "dark"
+        ? DARK_COLORS.homepageBgImage
+        : LIGHT_COLORS.homepageBgImage}
 
-    /* background-image: linear-gradient(
-  325deg,
-  hsl(258deg 100% 7%) 0%,
-  hsl(289deg 100% 6%) 11%,
-  hsl(313deg 100% 6%) 22%,
-  hsl(331deg 88% 7%) 33%,
-  hsl(349deg 70% 8%) 44%,
-  hsl(10deg 68% 8%) 56%,
-  hsl(22deg 69% 7%) 67%,
-  hsl(30deg 53% 7%) 78%,
-  hsl(37deg 29% 8%) 89%,
-  hsl(48deg 11% 9%) 100%
-); */
   }
+
   :root {
-    --font-size: 16px
+    --font-size: 16px;
+    font-size: 16px;
   }
+
   * {
-    color: ${LIGHT_COLORS.text};
+    color: ${(props) =>
+      props.theme === "dark" ? DARK_COLORS.text : LIGHT_COLORS.text};
+    transition: 500ms;
   }
 `
-export default GlobalStyle

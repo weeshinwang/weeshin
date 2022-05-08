@@ -150,6 +150,8 @@ export const BREAKPOINTS = {
   desktop: `(min-width: ${BREAKPOINT_SIZES.md + 1}px)`,
 }
 
+export const THEME_STORAGE_KEY = "theme-preference"
+
 // export const SPRINGS = {
 //   default: {
 //     // This is literally the default for React Spring.
