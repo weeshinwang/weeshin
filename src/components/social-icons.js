@@ -65,5 +65,13 @@ const IconWrapper = styled.div`
   & svg {
     width: 100%;
     height: auto;
+
+    & path {
+      fill: ${({ hover }) => hover || `var(--text)`};
+    }
+
+    &:hover path {
+      fill: ${({ hover }) => hover || `var(--hover-bg)`};
+    }
   }
 `

@@ -88,11 +88,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
 
-  html, body {
+  html {
     background-image: ${(props) =>
       props.theme === "dark"
         ? DARK_COLORS.homepageBgImage
-        : LIGHT_COLORS.homepageBgImage}
+        : LIGHT_COLORS.homepageBgImage};
+    --text: ${(props) =>
+      props.theme === "dark" ? DARK_COLORS.text : LIGHT_COLORS.text};
+    --hover-bg: ${(props) =>
+      props.theme === "dark" ? DARK_COLORS.hoverBg : LIGHT_COLORS.hoverBg};
+    --hover-text: ${(props) =>
+      props.theme === "dark" ? DARK_COLORS.hoverText : LIGHT_COLORS.hoverText};
 
   }
 
@@ -101,9 +107,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
-  * {
-    color: ${(props) =>
-      props.theme === "dark" ? DARK_COLORS.text : LIGHT_COLORS.text};
-    transition: 500ms;
+  body * {
+    color: var(--text);
   }
 `

@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { THEME_STORAGE_KEY } from "../utils/constants"
 import ThemeContext from "./theme-context"
 
 export default function ThemeSwitcher() {
   const storageKey = THEME_STORAGE_KEY
-
-  const [theme, setTheme] = useContext(ThemeContext)
-
-  useEffect(() => {
-    setPreference()
-  }, [theme])
+  const ISSERVER = typeof window === "undefined"
 
   const setPreference = () => {
+    if (ISSERVER) return
     localStorage.setItem(storageKey, theme)
     reflectPreference()
   }
+
+  const [theme, setTheme] = useContext(ThemeContext)
+
+  useEffect(setPreference)
 
   const reflectPreference = () => {
     document.firstElementChild.setAttribute("data-theme", theme)
@@ -58,7 +58,7 @@ export default function ThemeSwitcher() {
 }
 
 const Button = styled.button`
-  --size: 2rem;
+  --size: 1.8rem;
   --icon-fill: hsl(210 10% 30%);
   --icon-fill-hover: hsl(210 10% 15%);
 
@@ -77,7 +77,7 @@ const Button = styled.button`
 
   outline-offset: 5px;
 
-  & > ${Svg} {
+  & > svg {
     inline-size: 100%;
     block-size: 100%;
     stroke-linecap: round;
