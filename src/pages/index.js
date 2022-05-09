@@ -4,6 +4,7 @@ import Layout from "../layout/layout"
 import WavingHand from "../components/waving-hand"
 import SocialIcons from "../components/social-icons"
 import { Link } from "gatsby"
+import { keyframes } from "styled-components"
 
 export default function Home() {
   return (
@@ -19,14 +20,17 @@ export default function Home() {
         <SecondaryIntroWrapper>
           <p>一个自学的前端工程师</p>
         </SecondaryIntroWrapper>
-        {/* <LinkButtonWrapper>
-          <Button>
-            <StyledLink to="/prjects">我的项目</StyledLink>
-          </Button>
-          <Button>
-            <StyledLink to="posts">我的文章</StyledLink>
-          </Button>
-        </LinkButtonWrapper> */}
+        <NavButtonWrapper>
+          <NavButton>
+            <StyledLink to="/projects">我的项目</StyledLink>
+          </NavButton>
+          <NavButton>
+            <StyledLink to="/posts">我的文章</StyledLink>
+          </NavButton>
+          <NavButton>
+            <StyledLink to="/about">关于我</StyledLink>
+          </NavButton>
+        </NavButtonWrapper>
         <SocialIconWrapper>
           <SocialIcons />
         </SocialIconWrapper>
@@ -57,32 +61,55 @@ const IntroWrapper = styled.div`
 
 const SecondaryIntroWrapper = styled.div``
 
-const LinkButtonWrapper = styled.div`
-  margin-top: 50px;
-  font-size: 1.2rem;
+const NavButtonWrapper = styled.div`
+  transition: opacity 500ms ease-in-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+
+  @media only screen and (max-width: 600px) {
+    opacity: 1;
+    height: auto;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  will-change: opacity;
 `
 
 const SocialIconWrapper = styled.div`
-  margin-top: 30px;
-`
-
-const Button = styled.button`
-  background: none;
-  border: none;
-  padding: 5px;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  margin: 0 10px;
-  background-color: #f47fb5;
-  & > a {
-    text-decoration: none;
-    &:visited {
-      border-color: white;
-    }
-  }
+  margin-top: 20px;
 `
 
 const StyledLink = styled(Link)`
-  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  &:hover {
+    color: var(--text);
+    background-color: initial;
+  }
+`
+
+const NavButton = styled.div`
+  will-change: background-color;
+  margin: 10px 0;
+  padding: 5px 10px;
+  background-color: var(--nav-button-bg);
+  box-shadow: var(--shadow-elevation-low);
+  border-radius: 5px;
+  animation: navButtonBgAnimation 1500ms ease-in-out infinite alternate;
+  animation-delay: 3s;
+
+  @keyframes navButtonBgAnimation {
+    from {
+      background-color: var(--nav-button-bg);
+    }
+    to {
+      background-color: var(--nav-button-hover-bg);
+    }
+  }
+
+  &:hover {
+    background-color: var(--nav-button-hover-bg);
+  }
 `

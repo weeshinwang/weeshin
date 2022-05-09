@@ -18,7 +18,7 @@ export default function ProjectsPage() {
             <li>变量持久化</li>
             <li>lerna 管理客户端与 CLI 包</li>
             <li>已发布 npm 包</li>
-            <li>&#8942;</li>
+            &#8942;
           </FeaturesWrapper>
           <StacksWrapper>
             <p>技术栈</p>
@@ -53,7 +53,7 @@ export default function ProjectsPage() {
             <li>自定义内容 Schema 以及商户配置页面</li>
             <li>全局订单状态持久化</li>
             <li>styled-component CSS-in-JS 方案</li>
-            <li>&#8942;</li>
+            &#8942;
           </FeaturesWrapper>
           <StacksWrapper>
             <p>技术栈</p>
@@ -94,15 +94,15 @@ const ProjectWrapper = styled.div`
   }
 
   & > div {
-    margin: 16px;
+    margin: 30px;
   }
 `
 
 const ProjectCard = styled.div`
-  border: 1px solid red;
   width: 350px;
   height: 380px;
-
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevation-high);
   & ul {
     padding: 0;
     list-style-type: none;
@@ -118,7 +118,11 @@ const ProjectCard = styled.div`
 
 const IntroWrapper = styled.p``
 
-const FeaturesWrapper = styled.ul``
+const FeaturesWrapper = styled.ul`
+  & li::before {
+    content: "✅";
+  }
+`
 
 const StacksWrapper = styled.div``
 

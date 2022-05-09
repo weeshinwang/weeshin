@@ -80,7 +80,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-
+  /* 11. Define Global Variables */
   html {
     --backgroundColor: ${(props) =>
       props.theme === "dark"
@@ -92,9 +92,57 @@ const GlobalStyle = createGlobalStyle`
       props.theme === "dark" ? DARK_COLORS.hoverBg : LIGHT_COLORS.hoverBg};
     --hover-text: ${(props) =>
       props.theme === "dark" ? DARK_COLORS.hoverText : LIGHT_COLORS.hoverText};
+    --blurred-background: ${(props) =>
+      props.theme === "dark"
+        ? DARK_COLORS.blurredBackground
+        : LIGHT_COLORS.blurredBackground};
+    --muted-background: ${(props) =>
+      props.theme === "dark"
+        ? DARK_COLORS.mutedBackground
+        : LIGHT_COLORS.mutedBackground};
+
+
+    --shadow-color: ${(props) =>
+      props.theme === "dark" ? "265deg 26% 42%" : "347deg 32% 66%"};
+
+    --shadow-elevation-low: ${(props) =>
+      props.theme === "dark"
+        ? `0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+        0.5px 0.9px 1.2px -1.2px hsl(var(--shadow-color) / 0.34),
+        1.3px 2.2px 2.9px -2.5px hsl(var(--shadow-color) / 0.34)`
+        : `0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.41),
+    2.6px 2.8px 4.3px -2.5px hsl(var(--shadow-color) / 0.41)`};
+
+    --shadow-elevation-medium: ${(props) =>
+      props.theme === "dark"
+        ? `0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+    1.1px 1.8px 2.4px -0.8px hsl(var(--shadow-color) / 0.36),
+    2.7px 4.5px 5.9px -1.7px hsl(var(--shadow-color) / 0.36),
+    6.5px 11px 14.4px -2.5px hsl(var(--shadow-color) / 0.36)`
+        : `0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.57),
+    12.8px 14.2px 21.5px -2.5px hsl(var(--shadow-color) / 0.57)`};
+
+    --shadow-elevation-high: ${(props) =>
+      props.theme === "dark"
+        ? `0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+    1.9px 3.2px 4.2px -0.4px hsl(var(--shadow-color) / 0.34),
+    3.5px 6px 7.8px -0.7px hsl(var(--shadow-color) / 0.34),
+    5.8px 9.8px 12.8px -1.1px hsl(var(--shadow-color) / 0.34),
+    9.2px 15.7px 20.5px -1.4px hsl(var(--shadow-color) / 0.34),
+    14.4px 24.5px 32px -1.8px hsl(var(--shadow-color) / 0.34),
+    21.9px 37.2px 48.6px -2.1px hsl(var(--shadow-color) / 0.34),
+    32.3px 54.9px 71.7px -2.5px hsl(var(--shadow-color) / 0.34)`
+        : `0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.71),
+    13px 14.4px 21.8px -1.2px hsl(var(--shadow-color) / 0.71),
+    56.7px 62.9px 95.3px -2.5px hsl(var(--shadow-color) / 0.71)`};
+
+    --nav-button-bg: ${(props) =>
+      props.theme === "dark" ? `hsl(320, 50%, 15%)` : `hsl(335, 80%, 95%)`};
+    --nav-button-hover-bg: ${(props) =>
+      props.theme === "dark" ? `hsl(265deg 26% 42%)` : `hsl(350, 70%, 85%)`};
+
     --font-size: 16px;
     font-size: var(--font-size);
-  }
 
   body {
     background-image: var(--backgroundColor);

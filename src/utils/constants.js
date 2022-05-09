@@ -44,6 +44,14 @@ export const LIGHT_COLORS = {
   alert: "hsl(37deg, 100%, 50%)",
   alertBackground: "hsla(52deg, 100%, 50%, 0.25)",
   venn: ["hsl(190deg, 100%, 65%)", "hsl(340deg, 100%, 65%)"],
+  boxShadow: `--shadow-color: 347deg 32% 66%;
+  --shadow-elevation-low: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.41),
+    2.6px 2.8px 4.3px -2.5px hsl(var(--shadow-color) / 0.41);
+  --shadow-elevation-medium: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.57),
+    12.8px 14.2px 21.5px -2.5px hsl(var(--shadow-color) / 0.57);
+  --shadow-elevation-high: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.71),
+    13px 14.4px 21.8px -1.2px hsl(var(--shadow-color) / 0.71),
+    56.7px 62.9px 95.3px -2.5px hsl(var(--shadow-color) / 0.71);`,
 }
 
 LIGHT_COLORS.syntax = {
@@ -105,6 +113,22 @@ export const DARK_COLORS = {
   alert: "hsl(30deg, 100%, 50%)",
   alertBackground: "hsla(38deg, 100%, 50%, 0.1)",
   venn: ["hsl(250deg, 100%, 50%)", "hsl(175deg, 100%, 50%)"],
+  boxShadow: `--shadow-color: 265deg 26% 42%;
+  --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+    0.5px 0.9px 1.2px -1.2px hsl(var(--shadow-color) / 0.34),
+    1.3px 2.2px 2.9px -2.5px hsl(var(--shadow-color) / 0.34);
+  --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+    1.1px 1.8px 2.4px -0.8px hsl(var(--shadow-color) / 0.36),
+    2.7px 4.5px 5.9px -1.7px hsl(var(--shadow-color) / 0.36),
+    6.5px 11px 14.4px -2.5px hsl(var(--shadow-color) / 0.36);
+  --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+    1.9px 3.2px 4.2px -0.4px hsl(var(--shadow-color) / 0.34),
+    3.5px 6px 7.8px -0.7px hsl(var(--shadow-color) / 0.34),
+    5.8px 9.8px 12.8px -1.1px hsl(var(--shadow-color) / 0.34),
+    9.2px 15.7px 20.5px -1.4px hsl(var(--shadow-color) / 0.34),
+    14.4px 24.5px 32px -1.8px hsl(var(--shadow-color) / 0.34),
+    21.9px 37.2px 48.6px -2.1px hsl(var(--shadow-color) / 0.34),
+    32.3px 54.9px 71.7px -2.5px hsl(var(--shadow-color) / 0.34);`,
 }
 
 DARK_COLORS.syntax = {
