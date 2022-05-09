@@ -76,15 +76,8 @@ const GlobalStyle = createGlobalStyle`
   /*
   10. Gatsby Specific settings
   */
-  /* #___gatsby {
-    height: 100%;
-  }
-
-  #gatsby-focus-wrapper {
-    height: 100%;
-  } */
   #___gatsby, #gatsby-focus-wrapper {
-    all: inherit;
+    height: 100%;
   }
 
 
@@ -106,10 +99,23 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-image: var(--backgroundColor);
     transition: background 300ms;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   body * {
     color: var(--text);
+  }
+
+  a {
+    text-decoration: underline dotted #f47fb5;
+    &:hover {
+      background-color: var(--hover-bg);
+      color: var(--hover-text);
+      text-decoration: none
+    }
+    transition: background 500ms;
   }
 
 

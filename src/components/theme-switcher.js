@@ -58,7 +58,7 @@ export default function ThemeSwitcher() {
 }
 
 const SwitcherWrapper = styled.div`
-  --size: 38px;
+  --size: 30px;
   --icon-fill: hsl(210 10% 30%);
   --icon-fill-hover: hsl(210 10% 15%);
 

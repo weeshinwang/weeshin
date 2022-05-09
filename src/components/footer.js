@@ -14,15 +14,6 @@ const FooterWrapper = styled.div`
   grid-area: footer;
   text-align: center;
   justify-items: center;
-  & a {
-    text-decoration: underline dotted #f47fb5;
-    &:hover {
-      background-color: #f47fb5;
-      color: white;
-      text-decoration: none;
-    }
-    transition: 0.3s;
-  }
 `
 
 export default React.memo(Footer)
