@@ -68,17 +68,22 @@ const PostCardWrapper = styled.div`
   box-shadow: var(--shadow-elevation-medium);
   border-radius: 5px;
   padding: 20px;
+
   &:hover {
     background-color: var(--nav-button-hover-bg);
     cursor: pointer;
   }
 
-  & > li p:first-of-type {
+  & p:first-of-type {
     color: var(--gray-500);
   }
 
-  & > li * {
+  & * {
     margin: 5px 0;
+  }
+
+  & h1 {
+    padding-bottom: 5px;
   }
 `
 

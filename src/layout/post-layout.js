@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import ThemeContext from "../components/theme-context"
 import Seo from "./seo"
 import ThemeSwitcher from "../components/theme-switcher"
 import { graphql } from "gatsby"
@@ -7,44 +8,47 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import styled from "styled-components/macro"
 import Highlight, { defaultProps } from "prism-react-renderer"
-import vsDark from "prism-react-renderer/themes/vsDark"
-
-const PrismSyntaxHighlightingComponent = {
-  pre: (props) => {
-    const className = props.children.props.className || ""
-
-    const matches = className.match(/language-(?<lang>.*)/)
-
-    console.log("YAY", matches.groups.lang)
-
-    return (
-      <Highlight
-        {...defaultProps}
-        code={props.children.props.children}
-        language={
-          matches && matches.groups && matches.groups.lang
-            ? matches.groups.lang.toLowerCase()
-            : ""
-        }
-        theme={vsDark}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={style}>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-    )
-  },
-}
+import nightOwl from "prism-react-renderer/themes/nightOwl"
+import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
 
 export default function PageTemplate({ data: { mdx } }) {
+  const [theme] = useContext(ThemeContext)
+
+  const codeBlockTheme = theme === "dark" ? nightOwl : nightOwlLight
+
+  const PrismSyntaxHighlightingComponent = {
+    pre: (props) => {
+      const className = props.children.props.className || ""
+
+      const matches = className.match(/language-(?<lang>.*)/)
+
+      return (
+        <Highlight
+          {...defaultProps}
+          code={props.children.props.children}
+          language={
+            matches && matches.groups && matches.groups.lang
+              ? matches.groups.lang.toLowerCase()
+              : ""
+          }
+          theme={codeBlockTheme}
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre className={className} style={style}>
+              {tokens.map((line, i) => (
+                <div {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+      )
+    },
+  }
+
   return (
     <>
       <Seo title="posts" />
@@ -94,7 +98,6 @@ const SinglePostWrapper = styled.div`
   display: grid;
   grid-template: 50px 1fr 50px / auto;
   justify-content: center;
-  /* margin: 0 20px; */
   padding: 0 20px;
   & * {
     text-align: justify;
@@ -109,7 +112,7 @@ const SintlePostHeader = styled.div`
   font-size: 1.5rem;
   align-items: end;
   border-bottom: 1px solid var(--gray-500);
-  padding: 5px 0;
+  padding: 10px 0;
 
   & > div:first-of-type {
     margin-bottom: -5px;
@@ -138,6 +141,14 @@ const SinglePostContentWrapper = styled.div`
     white-space: -pre-wrap; /* Opera 4-6 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
+
+  & h1 {
+    margin: 16px 0;
+  }
+
+  & h2 {
+    margin-top: 16px;
   }
 `
 const SinglePostDateWrapper = styled.div`

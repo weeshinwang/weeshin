@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { createGlobalStyle } from "styled-components/macro"
 import { LIGHT_COLORS, DARK_COLORS } from "../utils/constants"
 import ThemeContext from "./theme-context"
+import "../utils/font.css"
 
 export default function GlobalStyles() {
   const [theme] = useContext(ThemeContext)
@@ -135,6 +136,28 @@ const GlobalStyle = createGlobalStyle`
     13px 14.4px 21.8px -1.2px hsl(var(--shadow-color) / 0.71),
     56.7px 62.9px 95.3px -2.5px hsl(var(--shadow-color) / 0.71)`};
 
+  --code-shadow-color: 0deg 0% 63%;
+  --code-shadow-elevation-low:
+    0.7px 0.6px 1px hsl(var(--code-shadow-color) / 0.34),
+    1.1px 1.1px 1.8px -1.2px hsl(var(--code-shadow-color) / 0.34),
+    2.6px 2.6px 4.1px -2.5px hsl(var(--code-shadow-color) / 0.34);
+  --code-shadow-elevation-medium:
+    0.7px 0.6px 1px hsl(var(--code-shadow-color) / 0.36),
+    2.2px 2.1px 3.4px -0.8px hsl(var(--code-shadow-color) / 0.36),
+    5.4px 5.3px 8.5px -1.7px hsl(var(--code-shadow-color) / 0.36),
+    13.2px 12.9px 20.8px -2.5px hsl(var(--code-shadow-color) / 0.36);
+  --code-shadow-elevation-high:
+    0.7px 0.6px 1px hsl(var(--code-shadow-color) / 0.34),
+    3.8px 3.8px 6px -0.4px hsl(var(--code-shadow-color) / 0.34),
+    7.2px 7px 11.3px -0.7px hsl(var(--code-shadow-color) / 0.34),
+    11.8px 11.6px 18.6px -1.1px hsl(var(--code-shadow-color) / 0.34),
+    18.8px 18.5px 29.7px -1.4px hsl(var(--code-shadow-color) / 0.34),
+    29.4px 28.9px 46.4px -1.8px hsl(var(--code-shadow-color) / 0.34),
+    44.7px 43.9px 70.5px -2.1px hsl(var(--code-shadow-color) / 0.34),
+    65.8px 64.6px 103.7px -2.5px hsl(var(--code-shadow-color) / 0.34);
+
+
+
     --nav-button-bg: ${(props) =>
       props.theme === "dark" ? `hsl(320, 50%, 15%)` : `hsl(335, 80%, 95%)`};
 
@@ -170,13 +193,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px 0;
+    box-shadow: var(--code-shadow-elevation-low);
     & * {
       font-family: 'Roboto Mono', monospace;
     }
   }
 
+  /* #f47fb5 */
   a {
-    text-decoration: underline dotted #f47fb5;
+    text-decoration: underline dotted hsl(332, 84%, 73%);
     &:hover {
       background-color: var(--hover-bg);
       color: var(--hover-text);

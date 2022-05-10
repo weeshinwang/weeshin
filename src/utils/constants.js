@@ -52,6 +52,20 @@ export const LIGHT_COLORS = {
   --shadow-elevation-high: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.71),
     13px 14.4px 21.8px -1.2px hsl(var(--shadow-color) / 0.71),
     56.7px 62.9px 95.3px -2.5px hsl(var(--shadow-color) / 0.71);`,
+
+  codeBlockBoxShadow: `
+    --shadow-color: 0deg 0% 70%;
+    --shadow-elevation-low:
+      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.08),
+      1.8px 0.3px 2.6px -0.5px hsl(var(--shadow-color) / 0.41);
+    --shadow-elevation-medium:
+      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.11),
+      8.8px 1.7px 12.8px -0.5px hsl(var(--shadow-color) / 0.57);
+    --shadow-elevation-high:
+      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.14),
+      11.9px 2.3px 17.3px -0.2px hsl(var(--shadow-color) / 0.52),
+      39.3px 7.7px 57.1px -0.5px hsl(var(--shadow-color) / 0.9);
+  `,
 }
 
 LIGHT_COLORS.syntax = {
