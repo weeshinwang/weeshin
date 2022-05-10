@@ -6,7 +6,43 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import styled from "styled-components/macro"
-const shortcodes = { Link } // Provide common components here
+import Highlight, { defaultProps } from "prism-react-renderer"
+import vsDark from "prism-react-renderer/themes/vsDark"
+
+const PrismSyntaxHighlightingComponent = {
+  pre: (props) => {
+    const className = props.children.props.className || ""
+
+    const matches = className.match(/language-(?<lang>.*)/)
+
+    console.log("YAY", matches.groups.lang)
+
+    return (
+      <Highlight
+        {...defaultProps}
+        code={props.children.props.children}
+        language={
+          matches && matches.groups && matches.groups.lang
+            ? matches.groups.lang.toLowerCase()
+            : ""
+        }
+        theme={vsDark}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={style}>
+            {tokens.map((line, i) => (
+              <div {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    )
+  },
+}
 
 export default function PageTemplate({ data: { mdx } }) {
   return (
@@ -23,7 +59,7 @@ export default function PageTemplate({ data: { mdx } }) {
         </SintlePostHeader>
         <SinglePostContentWrapper>
           <h1>{mdx.frontmatter.displayTitle}</h1>
-          <MDXProvider components={shortcodes}>
+          <MDXProvider components={PrismSyntaxHighlightingComponent}>
             <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
           </MDXProvider>
         </SinglePostContentWrapper>
