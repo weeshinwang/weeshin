@@ -33,10 +33,10 @@ export default function ProjectsPage() {
             <p>
               源代码：
               <span>
-                <a href="">GitHub</a>
+                <a href="https://www.github.com">GitHub</a>
               </span>
               <span>
-                <a href="">Gitee</a>
+                <a href="https://www.gitee.com">Gitee</a>
               </span>
             </p>
           </CodeWrapper>
@@ -61,17 +61,17 @@ export default function ProjectsPage() {
           </StacksWrapper>
           <SourceWrapper>
             <p>
-              <a href="">在线访问</a>
+              <a href="https://www.github.com">在线访问</a>
             </p>
           </SourceWrapper>
           <CodeWrapper>
             <p>
               源代码：
               <span>
-                <a href="">GitHub</a>
+                <a href="https://www.github.com">GitHub</a>
               </span>
               <span>
-                <a href="">Gitee</a>
+                <a href="https://www.gitee.com">Gitee</a>
               </span>
             </p>
           </CodeWrapper>

@@ -4,7 +4,6 @@ import Layout from "../layout/layout"
 import WavingHand from "../components/waving-hand"
 import SocialIcons from "../components/social-icons"
 import { Link } from "gatsby"
-import { keyframes } from "styled-components"
 
 export default function Home() {
   return (
@@ -88,6 +87,8 @@ const SocialIconWrapper = styled.div`
 const StyledLink = styled(Link)`
   font-size: 1.2rem;
   text-decoration: none;
+  border-bottom: none;
+
   &:hover {
     color: var(--text);
     background-color: initial;

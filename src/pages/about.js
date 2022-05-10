@@ -1,6 +1,5 @@
 import React from "react"
 import Layout from "../layout/layout"
-import styled from "styled-components/macro"
 import { graphql, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"

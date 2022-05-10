@@ -53,14 +53,14 @@ export default function PageTemplate({ data: { mdx } }) {
     <>
       <Seo title="posts" />
       <SinglePostWrapper>
-        <SintlePostHeader>
+        <SinglePostHeader>
           <div>
             <Link to="/posts">⬅️</Link>
           </div>
           <div>
             <ThemeSwitcher />
           </div>
-        </SintlePostHeader>
+        </SinglePostHeader>
         <SinglePostContentWrapper>
           <h1>{mdx.frontmatter.displayTitle}</h1>
           <MDXProvider components={PrismSyntaxHighlightingComponent}>
@@ -70,7 +70,7 @@ export default function PageTemplate({ data: { mdx } }) {
         <SinglePostDateWrapper>
           <p>
             发布于：{mdx.frontmatter.date}
-            {mdx.frontmatter.date == mdx.frontmatter.lastmod ||
+            {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
               ` | 修改于：${mdx.frontmatter.lastmod}`}
           </p>
         </SinglePostDateWrapper>
@@ -96,31 +96,41 @@ export const pageQuery = graphql`
 
 const SinglePostWrapper = styled.div`
   display: grid;
-  grid-template: 50px 1fr 50px / auto;
+  grid-template-rows: 50px 1fr 50px;
   justify-content: center;
   padding: 0 20px;
   & * {
     text-align: justify;
   }
   background: var(--post-background-color);
+  margin: 0 auto;
 `
 
-const SintlePostHeader = styled.div`
+const SinglePostHeader = styled.div`
   grid-row: 1;
   display: flex;
   justify-content: space-between;
   font-size: 1.5rem;
+  line-height: 1;
   align-items: end;
   border-bottom: 1px solid var(--gray-500);
   padding: 10px 0;
 
   & > div:first-of-type {
-    margin-bottom: -5px;
+    padding: 0;
+    margin: 0;
+
+    /* @media not all and (hover: none) {
+      &:hover {
+        transform: none;
+      }
+    } */
+    /* TODO: should be optimized for doom flicker */
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
-  & > div:first-of-type:hover {
-    transform: translateY(-2px);
-  }
   & a {
     text-decoration: none;
     &:hover {
@@ -132,7 +142,7 @@ const SintlePostHeader = styled.div`
 const SinglePostContentWrapper = styled.div`
   justify-self: center;
   grid-row: 2;
-  min-width: 330px;
+  min-width: 300px;
   max-width: 700px;
 
   & pre {
@@ -143,12 +153,26 @@ const SinglePostContentWrapper = styled.div`
     word-wrap: break-word; /* Internet Explorer 5.5+ */
   }
 
+  & span.token {
+    display: inline-block;
+    /* white-space: normal; */
+    max-width: 100%;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+
   & h1 {
     margin: 16px 0;
   }
 
-  & h2 {
+  & h2,
+  & h3 {
     margin-top: 16px;
+  }
+
+  & a {
+    text-decoration: none;
+    border-bottom: dotted 2px hsl(332, 84%, 73%);
   }
 `
 const SinglePostDateWrapper = styled.div`

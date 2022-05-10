@@ -1,5 +1,5 @@
 ---
-title: "Redux学习记录"
+title: "redux学习记录"
 displayTitle: "Redux 学习记录"
 date: 2021-10-25T22:54:10+08:00
 lastmod: 2021-11-24T22:54:10+08:00
@@ -38,8 +38,6 @@ Redux 是基于[`Flux` 架构](https://facebook.github.io/flux/docs/in-depth-ove
 - 动作（Action）：可以让用户改变状态的事件。
 
 在普通的 React 应用中，这三个部分的功能可以重叠。例如：组件既可以渲染以展示信息给用户，又可以保存状态信息。而基于 Flux 架构设计的 Redux 通过将状态置于单独一个对象进行管理，从而使三个部分分隔开来，并且规定数据的流动一定是单向的，如下图所示：
-
-{{< image src="/imgs/One-way-data-flow.webp" height="500px" title="One way data flow">}}
 
 具体来说就是：状态保存当前应用的信息 => 视图将这些信息展示给用户 => 用户通过与视图的交互产生动作，从而改变状态 => 视图更新最新状态的数据...
 
@@ -123,10 +121,10 @@ store 对象通过 `store.getState` 这一 API 可以获得当前的状态。例
 console.log(store.getState()); // Prints 'off'
 ```
 
-其实，在调用 `store.dispatch` API 时，实际上是在用以下方式调用 `reducer`：
+其实，在调用 `store.dispatch` API 时，实际上是在用以下方式调用 `reducer`,
 
-```JS
-lightSwitchReducer(store.getState(), { type: 'toggle' });
+```js
+lightSwitchReducer(store.getState(), { type: "toggle" })
 ```
 
 ### `store.subscribe(listener)`
