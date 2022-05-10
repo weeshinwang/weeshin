@@ -59,7 +59,11 @@ const IntroWrapper = styled.div`
   white-space: nowrap;
 `
 
-const SecondaryIntroWrapper = styled.div``
+const SecondaryIntroWrapper = styled.div`
+  & > p {
+    color: var(--gray-500);
+  }
+`
 
 const NavButtonWrapper = styled.div`
   transition: opacity 500ms ease-in-out;

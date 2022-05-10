@@ -20,9 +20,9 @@ export function ThemeProvider({ children }) {
         : "light"
   }
 
-  const defaultTheme = getColorPreference()
+  // const defaultTheme = getColorPreference()
 
-  const [theme, setTheme] = useState(defaultTheme)
+  const [theme, setTheme] = useState(getColorPreference)
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>

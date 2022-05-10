@@ -1,11 +1,6 @@
 import React, { useContext } from "react"
 import styled, { createGlobalStyle, keyframes } from "styled-components/macro"
-import {
-  LIGHT_COLORS,
-  DARK_COLORS,
-  BREAKPOINTS,
-  BREAKPOINT_SIZES,
-} from "../utils/constants"
+import { LIGHT_COLORS, DARK_COLORS } from "../utils/constants"
 import ThemeContext from "./theme-context"
 
 export default function GlobalStyles() {
@@ -138,12 +133,16 @@ const GlobalStyle = createGlobalStyle`
 
     --nav-button-bg: ${(props) =>
       props.theme === "dark" ? `hsl(320, 50%, 15%)` : `hsl(335, 80%, 95%)`};
+
     --nav-button-hover-bg: ${(props) =>
-      props.theme === "dark" ? `hsl(265deg 26% 42%)` : `hsl(350, 70%, 85%)`};
+      props.theme === "dark" ? `hsl(265deg 26% 42%)` : `hsl(335, 80%, 95%)`};
+
+    --gray-500: ${(props) =>
+      props.theme === "dark" ? `hsl(225deg, 7%, 60%)` : `hsl(210deg, 8%, 50%)`};
 
     --font-size: 16px;
     font-size: var(--font-size);
-
+  }
   body {
     background-image: var(--backgroundColor);
     transition: background 300ms;
@@ -154,6 +153,12 @@ const GlobalStyle = createGlobalStyle`
 
   body * {
     color: var(--text);
+    h1 {
+      font-size: 1.4rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+    }
   }
 
   a {
@@ -165,6 +170,4 @@ const GlobalStyle = createGlobalStyle`
     }
     transition: background 500ms;
   }
-
-
 `

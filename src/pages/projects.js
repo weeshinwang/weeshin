@@ -26,7 +26,7 @@ export default function ProjectsPage() {
           </StacksWrapper>
           <SourceWrapper>
             <p>
-              本地使用 <code>npx jarbook open</code> 试用或在线访问
+              使用 <code>npx jarbook open</code> 试用或在线访问
             </p>
           </SourceWrapper>
           <CodeWrapper>
@@ -94,15 +94,21 @@ const ProjectWrapper = styled.div`
   }
 
   & > div {
-    margin: 30px;
+    margin: 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    padding: 20px 0;
+    transition: 300ms;
   }
 `
 
 const ProjectCard = styled.div`
-  width: 350px;
+  width: 330px;
   height: 380px;
   border-radius: 16px;
   box-shadow: var(--shadow-elevation-high);
+
   & ul {
     padding: 0;
     list-style-type: none;

@@ -50,8 +50,8 @@ const RightDesktop = styled.div`
 `
 
 const LogoWrapper = styled.div`
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 25%;
   /* border: 1px solid lightyellow; */
   overflow: hidden;

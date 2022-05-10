@@ -28,7 +28,7 @@ export default function ThemeSwitcher() {
   return (
     <>
       <SwitcherWrapper aria-label={theme} onClick={handleClick}>
-        <Svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+        <Svg aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24">
           <mask className="moon" id="moon-mask">
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
             <circle cx="24" cy="10" r="6" fill="black" />
@@ -57,10 +57,10 @@ export default function ThemeSwitcher() {
   )
 }
 
-const SwitcherWrapper = styled.div`
-  --size: 30px;
-  --icon-fill: hsl(210 10% 30%);
-  --icon-fill-hover: hsl(210 10% 15%);
+const SwitcherWrapper = styled.button`
+  --size: 1.5rem;
+  --icon-fill: hsl(210 10% 15%);
+  --icon-fill-hover: hsl(210 10% 30%);
 
   background: none;
   border: none;
@@ -77,6 +77,13 @@ const SwitcherWrapper = styled.div`
 
   outline-offset: 5px;
 
+  /* TODO: should this line  be removed for accessibility
+  button:focus { outline:0 !important; } */
+
+  &:focus {
+    outline: 0;
+  }
+
   & > svg {
     inline-size: 100%;
     block-size: 100%;
@@ -88,9 +95,9 @@ const SwitcherWrapper = styled.div`
     --icon-fill-hover: hsl(210 10% 70%);
   }
 
-  @media (hover: none) {
+  /* @media (hover: none) {
     --size: 48px;
-  }
+  } */
 `
 
 const Svg = styled.svg`
@@ -99,7 +106,14 @@ const Svg = styled.svg`
   --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
   --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 
+  /* TODO: wechat browser is not supported */
   & > :is(.moon, .sun, .sun-beams) {
+    transform-origin: center center;
+  }
+
+  & > .moon,
+  & > .sun,
+  & > .sun-beams {
     transform-origin: center center;
   }
 
