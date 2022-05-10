@@ -166,6 +166,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Roboto, sans-serif;
   }
 
+  /* code {
+    font-family: 'Roboto Sans', monospace;
+    background-color: lightblue;
+  } */
+
   a {
     text-decoration: underline dotted #f47fb5;
     &:hover {

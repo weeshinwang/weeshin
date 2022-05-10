@@ -1,8 +1,6 @@
 import React, { useContext } from "react"
 import Seo from "./seo"
 import ThemeSwitcher from "../components/theme-switcher"
-import ThemeContext from "../components/theme-context"
-
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -11,8 +9,6 @@ import styled from "styled-components/macro"
 const shortcodes = { Link } // Provide common components here
 
 export default function PageTemplate({ data: { mdx } }) {
-  const [theme] = useContext(ThemeContext)
-
   return (
     <>
       <Seo title="posts" />
