@@ -57,7 +57,7 @@ export default function ThemeSwitcher() {
   )
 }
 
-const SwitcherWrapper = styled.button`
+const SwitcherWrapper = styled.div`
   --size: 1.5rem;
   --icon-fill: hsl(210 10% 15%);
   --icon-fill-hover: hsl(210 10% 30%);

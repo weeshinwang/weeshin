@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import styled, { createGlobalStyle, keyframes } from "styled-components/macro"
+import { createGlobalStyle } from "styled-components/macro"
 import { LIGHT_COLORS, DARK_COLORS } from "../utils/constants"
 import ThemeContext from "./theme-context"
 
@@ -77,10 +77,14 @@ const GlobalStyle = createGlobalStyle`
 
   /* 11. Define Global Variables */
   html {
-    --backgroundColor: ${(props) =>
+    --background-image: ${(props) =>
       props.theme === "dark"
         ? DARK_COLORS.homepageBgImage
         : LIGHT_COLORS.homepageBgImage};
+    --post-background-color: ${(props) =>
+      props.theme === "dark"
+        ? DARK_COLORS.background
+        : LIGHT_COLORS.background};
     --text: ${(props) =>
       props.theme === "dark" ? DARK_COLORS.text : LIGHT_COLORS.text};
     --hover-bg: ${(props) =>
@@ -135,7 +139,7 @@ const GlobalStyle = createGlobalStyle`
       props.theme === "dark" ? `hsl(320, 50%, 15%)` : `hsl(335, 80%, 95%)`};
 
     --nav-button-hover-bg: ${(props) =>
-      props.theme === "dark" ? `hsl(265deg 26% 42%)` : `hsl(335, 80%, 95%)`};
+      props.theme === "dark" ? `hsl(265deg 26% 42%)` : `hsl(350, 70%, 85%)`};
 
     --gray-500: ${(props) =>
       props.theme === "dark" ? `hsl(225deg, 7%, 60%)` : `hsl(210deg, 8%, 50%)`};
@@ -144,7 +148,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: var(--font-size);
   }
   body {
-    background-image: var(--backgroundColor);
+    background-image: var(--background-image);
     transition: background 300ms;
     margin: 0;
     background-repeat: no-repeat;
@@ -154,11 +158,12 @@ const GlobalStyle = createGlobalStyle`
   body * {
     color: var(--text);
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.375rem;
     }
     h2 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
+    font-family: Roboto, sans-serif;
   }
 
   a {

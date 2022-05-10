@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components/macro"
-import GlobalStyles from "../components/global-styles"
 import Seo from "./seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
@@ -14,7 +13,6 @@ export default function Layout({
 }) {
   return (
     <>
-      <GlobalStyles />
       <LayoutWrapper>
         <Seo
           title={title}

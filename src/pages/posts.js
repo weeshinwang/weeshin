@@ -10,15 +10,15 @@ const BlogIndex = ({ data }) => {
       <PostPageWrapper>
         <PostWrapper>
           {posts.map(({ node: post }) => (
-            <PostCardWrapper>
-              <li key={post.id}>
-                <Link to={post.frontmatter.title}>
+            <li key={post.id}>
+              <Link to={post.frontmatter.title}>
+                <PostCardWrapper>
                   <h1>{post.frontmatter.displayTitle}</h1>
                   <p>{post.frontmatter.date}</p>
                   <p>{post.excerpt}</p>
-                </Link>
-              </li>
-            </PostCardWrapper>
+                </PostCardWrapper>
+              </Link>
+            </li>
           ))}
         </PostWrapper>
       </PostPageWrapper>
@@ -27,7 +27,10 @@ const BlogIndex = ({ data }) => {
 }
 export const pageQuery = graphql`
   query blogIndex {
-    allMdx(filter: { frontmatter: { type: { eq: "post" } } }) {
+    allMdx(
+      filter: { frontmatter: { type: { eq: "post" } } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
       edges {
         node {
           id
@@ -54,6 +57,9 @@ const PostPageWrapper = styled.div`
 const PostWrapper = styled.ul`
   list-style: none;
   padding: 0 15px;
+  & a {
+    text-decoration: none;
+  }
 `
 
 const PostCardWrapper = styled.div`
@@ -65,9 +71,6 @@ const PostCardWrapper = styled.div`
   &:hover {
     background-color: var(--nav-button-hover-bg);
     cursor: pointer;
-  }
-  & > li a {
-    text-decoration: none;
   }
 
   & > li p:first-of-type {
