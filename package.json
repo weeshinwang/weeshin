@@ -32,7 +32,8 @@
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-helmet": "^6.1.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^2.0.7",
