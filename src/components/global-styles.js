@@ -169,7 +169,13 @@ const GlobalStyle = createGlobalStyle`
 
     --font-size: 16px;
     font-size: var(--font-size);
+
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
   }
+
   body {
     margin: 0;
     background-size:contain

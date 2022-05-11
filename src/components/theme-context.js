@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { THEME_STORAGE_KEY } from "../utils/constants"
+import React, { useState, useEffect, useLayoutEffect } from "react"
+// import { THEME_STORAGE_KEY } from "../utils/constants"
 
 // TODO: refractor with built-in styled-component ThemeProvider API
 
@@ -7,23 +7,28 @@ const ThemeContext = React.createContext()
 
 // TODO: dark mode screen flickering during first render
 export function ThemeProvider({ children }) {
-  const storageKey = THEME_STORAGE_KEY
+  // const storageKey = THEME_STORAGE_KEY
 
   const ISSERVER = typeof window === "undefined"
 
+  const useCustomEffect = ISSERVER ? useEffect : useLayoutEffect
+
   const getColorPreference = () => {
     if (ISSERVER) return "light"
-    if (localStorage.getItem(storageKey))
-      return localStorage.getItem(storageKey)
-    else
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
+    // if (localStorage.getItem(storageKey))
+    //   return localStorage.getItem(storageKey)
+    // else
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
   }
-
+  const reflectPreference = () => {
+    document.firstElementChild.setAttribute("data-theme", theme)
+  }
   // const defaultTheme = getColorPreference()
 
   const [theme, setTheme] = useState(getColorPreference)
+  useCustomEffect(reflectPreference, [theme])
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>

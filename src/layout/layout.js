@@ -36,10 +36,6 @@ const LayoutWrapper = styled.div`
     "header header header"
     "left main right"
     "footer footer footer";
-  background-image: var(--background-image);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
 `
 
 const MainWrapper = styled.main`
