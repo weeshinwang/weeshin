@@ -171,11 +171,8 @@ const GlobalStyle = createGlobalStyle`
     font-size: var(--font-size);
   }
   body {
-    background-image: var(--background-image);
-    transition: background 300ms;
     margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size:contain
   }
 
   body * {

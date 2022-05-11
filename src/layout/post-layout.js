@@ -106,7 +106,7 @@ const SinglePostWrapper = styled.div`
   }
   background: var(--post-background-color);
   margin: 0 auto;
-  height: 100%;
+  min-height: 100%;
 `
 
 const SinglePostHeader = styled.div`

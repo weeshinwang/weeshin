@@ -29,13 +29,17 @@ export default function Layout({
 }
 
 const LayoutWrapper = styled.div`
-  height: 100%;
+  min-height: 100%;
   display: grid;
   grid-template: 60px 1fr 60px / auto minmax(min-content, 1100px) auto;
   grid-template-areas:
     "header header header"
     "left main right"
     "footer footer footer";
+  background-image: var(--background-image);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 `
 
 const MainWrapper = styled.main`

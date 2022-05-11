@@ -5,6 +5,7 @@ import { THEME_STORAGE_KEY } from "../utils/constants"
 
 const ThemeContext = React.createContext()
 
+// TODO: dark mode screen flickering during first render
 export function ThemeProvider({ children }) {
   const storageKey = THEME_STORAGE_KEY
 
