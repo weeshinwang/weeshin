@@ -10,6 +10,7 @@ import styled from "styled-components/macro"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
+import Comments from "../components/remark-ninja"
 
 export default function PageTemplate({ data: { mdx } }) {
   const [theme] = useContext(ThemeContext)
@@ -66,6 +67,7 @@ export default function PageTemplate({ data: { mdx } }) {
           <MDXProvider components={PrismSyntaxHighlightingComponent}>
             <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
           </MDXProvider>
+          {/* <Comments /> */}
         </SinglePostContentWrapper>
         <SinglePostDateWrapper>
           <p>
