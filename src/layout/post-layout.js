@@ -118,6 +118,10 @@ const SinglePostHeader = styled.div`
   align-items: end;
   border-bottom: 1px solid var(--gray-500);
   padding: 10px 0;
+  /* sticky header */
+  position: sticky;
+  top: 0;
+  background-color: inherit;
 
   & > div:first-of-type {
     padding: 0;
