@@ -105,9 +105,10 @@ const ProjectWrapper = styled.div`
 
 const ProjectCard = styled.div`
   width: 330px;
-  height: 380px;
+  height: fit-content;
+  padding: 10px;
   border-radius: 16px;
-  box-shadow: var(--shadow-elevation-high);
+  box-shadow: var(--color-shadow-elevation-high);
 
   & ul {
     padding: 0;

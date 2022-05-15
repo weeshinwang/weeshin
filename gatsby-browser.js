@@ -1,16 +1,6 @@
 import React from "react"
-import { ThemeProvider } from "./src/components/theme-context"
-import GlobalStyles from "./src/components/global-styles"
+import App from "./src/components/app"
 
-export function wrapPageElement({ element }) {
-  return (
-    <>
-      <GlobalStyles />
-      {element}
-    </>
-  )
-}
-
-export function wrapRootElement({ element }) {
-  return <ThemeProvider>{element}</ThemeProvider>
+export const wrapRootElement = ({ element }) => {
+  return <App>{element}</App>
 }

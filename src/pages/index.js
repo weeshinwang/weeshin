@@ -60,7 +60,7 @@ const IntroWrapper = styled.div`
 
 const SecondaryIntroWrapper = styled.div`
   & > p {
-    color: var(--gray-500);
+    color: var(--color-gray-500);
   }
 `
 
@@ -99,7 +99,7 @@ const NavButton = styled.div`
   will-change: background-color;
   margin: 10px 0;
   padding: 5px 10px;
-  background-color: var(--nav-button-bg);
+  background-color: var(--color-button-bg);
   box-shadow: var(--shadow-elevation-low);
   border-radius: 5px;
   animation: navButtonBgAnimation 1500ms ease-in-out infinite alternate;
@@ -107,14 +107,14 @@ const NavButton = styled.div`
 
   @keyframes navButtonBgAnimation {
     from {
-      background-color: var(--nav-button-bg);
+      background-color: var(--color-button-bg);
     }
     to {
-      background-color: var(--nav-button-hover-bg);
+      background-color: var(--color-button-hover-bg);
     }
   }
 
   &:hover {
-    background-color: var(--nav-button-hover-bg);
+    background-color: var(--color-button-hover-bg);
   }
 `

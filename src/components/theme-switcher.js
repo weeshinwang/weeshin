@@ -4,22 +4,17 @@ import ThemeContext from "./theme-context"
 import useSound from "use-sound"
 import switchOn from "../sounds/switch-on.mp3"
 import switchOff from "../sounds/switch-off.mp3"
-// import { THEME_STORAGE_KEY } from "../utils/constants"
 
 export default function ThemeSwitcher() {
-  // TODO: implementing localStorage to store dark mode value will result in first render flash
-  // const setPreference = () => {
-  //   if (ISSERVER) return
-  //   localStorage.setItem(storageKey, theme)
-  //   reflectPreference()
-  // }
-
   const [soundSwitchOn] = useSound(switchOn)
   const [soundSwitchOff] = useSound(switchOff)
-  const [theme, setTheme] = useContext(ThemeContext)
+  const { theme, setTheme } = useContext(ThemeContext)
 
   const isDark = theme === "dark"
-  const handleClick = () => {
+
+  const handleClick = (event) => {
+    event.preventDefault()
+
     setTheme(isDark ? "light" : "dark")
     if (isDark) {
       soundSwitchOn()

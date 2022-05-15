@@ -65,17 +65,17 @@ const PostWrapper = styled.ul`
 const PostCardWrapper = styled.div`
   min-width: 330px;
   margin: 30px 0;
-  box-shadow: var(--shadow-elevation-medium);
+  box-shadow: var(--color-shadow-elevation-medium);
   border-radius: 5px;
   padding: 20px;
 
   &:hover {
-    background-color: var(--nav-button-hover-bg);
+    background-color: var(--color-button-hover-bg);
     cursor: pointer;
   }
 
   & p:first-of-type {
-    color: var(--gray-500);
+    color: var(--color-gray-500);
   }
 
   & * {

@@ -9,8 +9,8 @@ export default function Nav() {
         {/* <ListItem to="/">主页</ListItem> */}
         <ListItem
           activeStyle={{
-            backgroundColor: "var(--hover-bg)",
-            color: "var(--hover-text)",
+            backgroundColor: "var(--color-hover-bg)",
+            color: "var(--color-hover-text)",
           }}
           to="/projects"
         >
@@ -18,8 +18,8 @@ export default function Nav() {
         </ListItem>
         <ListItem
           activeStyle={{
-            backgroundColor: "var(--hover-bg)",
-            color: "var(--hover-text)",
+            backgroundColor: "var(--color-hover-bg)",
+            color: "var(--color-hover-text)",
           }}
           to="/posts"
         >
@@ -27,8 +27,17 @@ export default function Nav() {
         </ListItem>
         <ListItem
           activeStyle={{
-            backgroundColor: "var(--hover-bg)",
-            color: "var(--hover-text)",
+            backgroundColor: "var(--color-hover-bg)",
+            color: "var(--color-hover-text)",
+          }}
+          to="/logs"
+        >
+          日志
+        </ListItem>
+        <ListItem
+          activeStyle={{
+            backgroundColor: "var(--color-hover-bg)",
+            color: "var(--color-hover-text)",
           }}
           to="/about"
         >
@@ -46,16 +55,17 @@ const NavWrapper = styled.nav`
   }
 `
 
-const List = styled.ul`
+const List = styled.div`
   display: flex;
   list-style: none;
   align-items: baseline;
+  margin-left: 30px;
 `
 
 const ListItem = styled(Link)`
   outline: none;
   margin: 0 5px;
-  padding: 2px 5px;
+  padding: 0px 8px;
   font-weight: 700;
   font-size: 1.15rem;
   text-decoration: none;
@@ -65,7 +75,7 @@ const ListItem = styled(Link)`
   margin: 0 10px;
   border: none;
   background-color: transparent;
-  border-radius: 3px;
+  border-radius: 5px;
   &:hover {
     background-color: #f47fb5;
     color: white;

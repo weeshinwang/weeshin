@@ -1,3 +1,9 @@
+export const COLOR_MODE_KEY = "color-mode"
+export const INITIAL_COLOR_MODE_CSS_PROP = "--initial-color-mode"
+export const HTML_THEME_PROP = "data-theme"
+export const BOX_SHADOW_VARIABLE = "--color-box-shadow"
+export const CODE_BOX_SHADOW_VARIABLE = "--color-box-shadow-code"
+
 export const LIGHT_COLORS = {
   text: "hsl(222deg, 22%, 5%)",
   hoverBg: "hsl(332.3,84.2%,72.7%)",
@@ -14,7 +20,7 @@ export const LIGHT_COLORS = {
     900: "hsl(225deg, 25%, 20%)",
     1000: "hsl(225deg, 15%, 15%)",
   },
-  homepageBgImage: `linear-gradient(
+  gradientBackground: `linear-gradient(
     315deg,
     hsl(240deg 100% 93%) 0%,
     hsl(266deg 83% 92%) 9%,
@@ -44,28 +50,31 @@ export const LIGHT_COLORS = {
   alert: "hsl(37deg, 100%, 50%)",
   alertBackground: "hsla(52deg, 100%, 50%, 0.25)",
   venn: ["hsl(190deg, 100%, 65%)", "hsl(340deg, 100%, 65%)"],
-  boxShadow: `--shadow-color: 347deg 32% 66%;
-  --shadow-elevation-low: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.41),
-    2.6px 2.8px 4.3px -2.5px hsl(var(--shadow-color) / 0.41);
-  --shadow-elevation-medium: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.57),
-    12.8px 14.2px 21.5px -2.5px hsl(var(--shadow-color) / 0.57);
-  --shadow-elevation-high: 0.7px 0.8px 1.2px hsl(var(--shadow-color) / 0.71),
-    13px 14.4px 21.8px -1.2px hsl(var(--shadow-color) / 0.71),
-    56.7px 62.9px 95.3px -2.5px hsl(var(--shadow-color) / 0.71);`,
 
-  codeBlockBoxShadow: `
-    --shadow-color: 0deg 0% 70%;
-    --shadow-elevation-low:
-      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.08),
-      1.8px 0.3px 2.6px -0.5px hsl(var(--shadow-color) / 0.41);
-    --shadow-elevation-medium:
-      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.11),
-      8.8px 1.7px 12.8px -0.5px hsl(var(--shadow-color) / 0.57);
-    --shadow-elevation-high:
-      0.5px 0.1px 0.7px hsl(var(--shadow-color) / 0.14),
-      11.9px 2.3px 17.3px -0.2px hsl(var(--shadow-color) / 0.52),
-      39.3px 7.7px 57.1px -0.5px hsl(var(--shadow-color) / 0.9);
-  `,
+  boxShadow: {
+    baseBox: {
+      shadowColor: "347deg 32% 66%",
+      shadowElevationLow: `0.7px 0.8px 1.2px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.41),
+      2.6px 2.8px 4.3px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.41)`,
+      shadowElevationMedium: `0.7px 0.8px 1.2px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.57),
+      12.8px 14.2px 21.5px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.57)`,
+      shadowElevationHigh: `0.7px 0.8px 1.2px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.71),
+      13px 14.4px 21.8px -1.2px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.71),
+      56.7px 62.9px 95.3px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.71)`,
+    },
+    codeBox: {
+      shadowColor: "0deg 0% 70%",
+      shadowElevationLow: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.08),
+      1.8px 0.3px 2.6px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.41)`,
+      shadowElevationMedium: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.11),
+      8.8px 1.7px 12.8px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.57)`,
+      shadowElevationHigh: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.14),
+      11.9px 2.3px 17.3px -0.2px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.52),
+      39.3px 7.7px 57.1px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.9)`,
+    },
+  },
+  buttonBg: "hsl(335, 80%, 95%)",
+  buttonHoverBg: "hsl(350, 70%, 85%)",
 }
 
 LIGHT_COLORS.syntax = {
@@ -99,7 +108,7 @@ export const DARK_COLORS = {
     900: "hsl(210deg, 25%, 88%)",
     1000: "hsl(210deg, 25%, 96%)",
   },
-  homepageBgImage: `linear-gradient(
+  gradientBackground: `linear-gradient(
     315deg,
     hsl(353deg 100% 15%) 0%,
     hsl(342deg 100% 14%) 3%,
@@ -127,22 +136,39 @@ export const DARK_COLORS = {
   alert: "hsl(30deg, 100%, 50%)",
   alertBackground: "hsla(38deg, 100%, 50%, 0.1)",
   venn: ["hsl(250deg, 100%, 50%)", "hsl(175deg, 100%, 50%)"],
-  boxShadow: `--shadow-color: 265deg 26% 42%;
-  --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
-    0.5px 0.9px 1.2px -1.2px hsl(var(--shadow-color) / 0.34),
-    1.3px 2.2px 2.9px -2.5px hsl(var(--shadow-color) / 0.34);
-  --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
-    1.1px 1.8px 2.4px -0.8px hsl(var(--shadow-color) / 0.36),
-    2.7px 4.5px 5.9px -1.7px hsl(var(--shadow-color) / 0.36),
-    6.5px 11px 14.4px -2.5px hsl(var(--shadow-color) / 0.36);
-  --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
-    1.9px 3.2px 4.2px -0.4px hsl(var(--shadow-color) / 0.34),
-    3.5px 6px 7.8px -0.7px hsl(var(--shadow-color) / 0.34),
-    5.8px 9.8px 12.8px -1.1px hsl(var(--shadow-color) / 0.34),
-    9.2px 15.7px 20.5px -1.4px hsl(var(--shadow-color) / 0.34),
-    14.4px 24.5px 32px -1.8px hsl(var(--shadow-color) / 0.34),
-    21.9px 37.2px 48.6px -2.1px hsl(var(--shadow-color) / 0.34),
-    32.3px 54.9px 71.7px -2.5px hsl(var(--shadow-color) / 0.34);`,
+
+  boxShadow: {
+    baseBox: {
+      shadowColor: "265deg 26% 42%",
+      shadowElevationLow: `0.3px 0.5px 0.7px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      0.5px 0.9px 1.2px -1.2px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      1.3px 2.2px 2.9px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34)`,
+      shadowElevationMedium: `0.3px 0.5px 0.7px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.36),
+      1.1px 1.8px 2.4px -0.8px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.36),
+      2.7px 4.5px 5.9px -1.7px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.36),
+      6.5px 11px 14.4px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.36)`,
+      shadowElevationHigh: `0.3px 0.5px 0.7px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      1.9px 3.2px 4.2px -0.4px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      3.5px 6px 7.8px -0.7px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      5.8px 9.8px 12.8px -1.1px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      9.2px 15.7px 20.5px -1.4px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      14.4px 24.5px 32px -1.8px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      21.9px 37.2px 48.6px -2.1px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34),
+      32.3px 54.9px 71.7px -2.5px hsl(var(${BOX_SHADOW_VARIABLE}) / 0.34)`,
+    },
+    codeBox: {
+      shadowColor: "0deg 0% 70%",
+      shadowElevationLow: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.08),
+      1.8px 0.3px 2.6px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.41)`,
+      shadowElevationMedium: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.11),
+      8.8px 1.7px 12.8px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.57)`,
+      shadowElevationHigh: `0.5px 0.1px 0.7px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.14),
+      11.9px 2.3px 17.3px -0.2px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.52),
+      39.3px 7.7px 57.1px -0.5px hsl(var(${CODE_BOX_SHADOW_VARIABLE}) / 0.9)`,
+    },
+  },
+  buttonBg: "hsl(320, 50%, 15%)",
+  buttonHoverBg: "hsl(265deg 26% 42%)",
 }
 
 DARK_COLORS.syntax = {
@@ -188,7 +214,9 @@ export const BREAKPOINTS = {
   desktop: `(min-width: ${BREAKPOINT_SIZES.md + 1}px)`,
 }
 
-export const THEME_STORAGE_KEY = "theme-preference"
+export const FONT_STYLES = {
+  baseFontSize: "16px",
+}
 
 // export const SPRINGS = {
 //   default: {
@@ -383,3 +411,126 @@ export const THEME_STORAGE_KEY = "theme-preference"
 //   regex: "#ffd700",
 //   fn: "rgb(0, 190, 255)",
 // }
+
+export const COLORS = {
+  text: {
+    light: LIGHT_COLORS.text,
+    dark: DARK_COLORS.text,
+  },
+  "hover-text": {
+    light: LIGHT_COLORS.hoverText,
+    dark: DARK_COLORS.hoverText,
+  },
+  "hover-bg": {
+    light: LIGHT_COLORS.hoverBg,
+    dark: DARK_COLORS.hoverBg,
+  },
+  "button-bg": {
+    light: LIGHT_COLORS.buttonBg,
+    dark: DARK_COLORS.buttonBg,
+  },
+  "button-hover-bg": {
+    light: LIGHT_COLORS.buttonHoverBg,
+    dark: DARK_COLORS.buttonHoverBg,
+  },
+  background: {
+    light: LIGHT_COLORS.background,
+    dark: DARK_COLORS.background,
+  },
+  "background-blurred": {
+    light: LIGHT_COLORS.blurredBackground,
+    dark: DARK_COLORS.blurredBackground,
+  },
+  "background-muted": {
+    light: LIGHT_COLORS.mutedBackground,
+    dark: DARK_COLORS.mutedBackground,
+  },
+  "background-gradient": {
+    light: LIGHT_COLORS.gradientBackground,
+    dark: DARK_COLORS.gradientBackground,
+  },
+  "gray-100": {
+    light: LIGHT_COLORS.gray[100],
+    dark: DARK_COLORS.gray[100],
+  },
+  "gray-300": {
+    light: LIGHT_COLORS.gray[300],
+    dark: DARK_COLORS.gray[300],
+  },
+  "gray-500": {
+    light: LIGHT_COLORS.gray[500],
+    dark: DARK_COLORS.gray[500],
+  },
+  "gray-700": {
+    light: LIGHT_COLORS.gray[700],
+    dark: DARK_COLORS.gray[700],
+  },
+  "gray-900": {
+    light: LIGHT_COLORS.gray[900],
+    dark: DARK_COLORS.gray[900],
+  },
+  "box-shadow": {
+    light: LIGHT_COLORS.boxShadow.baseBox.shadowColor,
+    dark: DARK_COLORS.boxShadow.baseBox.shadowColor,
+  },
+  "shadow-elevation-low": {
+    light: LIGHT_COLORS.boxShadow.baseBox.shadowElevationLow,
+    dark: DARK_COLORS.boxShadow.baseBox.shadowElevationLow,
+  },
+  "shadow-elevation-medium": {
+    light: LIGHT_COLORS.boxShadow.baseBox.shadowElevationMedium,
+    dark: DARK_COLORS.boxShadow.baseBox.shadowElevationMedium,
+  },
+  "shadow-elevation-high": {
+    light: LIGHT_COLORS.boxShadow.baseBox.shadowElevationHigh,
+    dark: DARK_COLORS.boxShadow.baseBox.shadowElevationHigh,
+  },
+  "box-shadow-code": {
+    light: LIGHT_COLORS.boxShadow.codeBox.shadowColor,
+    dark: DARK_COLORS.boxShadow.codeBox.shadowColor,
+  },
+  "shadow-elevation-low-code": {
+    light: LIGHT_COLORS.boxShadow.codeBox.shadowElevationLow,
+    dark: DARK_COLORS.boxShadow.codeBox.shadowElevationLow,
+  },
+  "shadow-elevation-medium-code": {
+    light: LIGHT_COLORS.boxShadow.codeBox.shadowElevationMedium,
+    dark: DARK_COLORS.boxShadow.codeBox.shadowElevationMedium,
+  },
+  "shadow-elevation-high-code": {
+    light: LIGHT_COLORS.boxShadow.codeBox.shadowElevationHigh,
+    dark: DARK_COLORS.boxShadow.codeBox.shadowElevationHigh,
+  },
+}
+
+export const COLOR = {
+  text: {
+    light: "hsl(0deg, 0%, 10%)", // white
+    dark: "hsl(0deg, 0%, 100%)", // near-black
+  },
+  background: {
+    light: "hsl(0deg, 0%, 100%)", // white
+    dark: "hsl(250deg, 70%, 7%)", // navy navy blue
+  },
+  primary: {
+    light: "hsl(340deg, 100%, 40%)", // Pinkish-red
+    dark: "hsl(50deg, 100%, 50%)", // Yellow
+  },
+  secondary: {
+    light: "hsl(250deg, 100%, 50%)", // Purplish-blue
+    dark: "hsl(190deg, 100%, 40%)", // Cyan
+  },
+  // Grays, scaling from least-noticeable to most-noticeable
+  gray300: {
+    light: "hsl(0deg, 0%, 70%)",
+    dark: "hsl(0deg, 0%, 30%)",
+  },
+  gray500: {
+    light: "hsl(0deg, 0%, 50%)",
+    dark: "hsl(0deg, 0%, 50%)",
+  },
+  gray700: {
+    light: "hsl(0deg, 0%, 30%)",
+    dark: "hsl(0deg, 0%, 70%)",
+  },
+}

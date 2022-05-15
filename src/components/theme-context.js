@@ -1,37 +1,46 @@
-import React, { useState, useEffect, useLayoutEffect } from "react"
-// import { THEME_STORAGE_KEY } from "../utils/constants"
-
-// TODO: refractor with built-in styled-component ThemeProvider API
+import React, { useState, useMemo, useEffect } from "react"
+import {
+  COLOR_MODE_KEY,
+  HTML_THEME_PROP,
+  INITIAL_COLOR_MODE_CSS_PROP,
+  COLORS,
+} from "../utils/constants"
 
 const ThemeContext = React.createContext()
 
-// TODO: dark mode screen flickering during first render
 export function ThemeProvider({ children }) {
-  // const storageKey = THEME_STORAGE_KEY
+  const [theme, rawSetTheme] = useState(undefined)
 
-  const ISSERVER = typeof window === "undefined"
+  useEffect(() => {
+    const root = window.document.documentElement
+    const initialColor = root.style.getPropertyValue(
+      INITIAL_COLOR_MODE_CSS_PROP
+    )
 
-  const useCustomEffect = ISSERVER ? useEffect : useLayoutEffect
+    rawSetTheme(initialColor)
+  }, [])
 
-  const getColorPreference = () => {
-    if (ISSERVER) return "light"
-    // if (localStorage.getItem(storageKey))
-    //   return localStorage.getItem(storageKey)
-    // else
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  }
-  const reflectPreference = () => {
-    document.firstElementChild.setAttribute("data-theme", theme)
-  }
-  // const defaultTheme = getColorPreference()
+  const contextValue = useMemo(() => {
+    const setTheme = (value) => {
+      const root = window.document.documentElement
 
-  const [theme, setTheme] = useState(getColorPreference)
-  useCustomEffect(reflectPreference, [theme])
+      localStorage.setItem(COLOR_MODE_KEY, value)
+
+      root.setAttribute(HTML_THEME_PROP, value)
+
+      Object.entries(COLORS).forEach(([name, colorByTheme]) => {
+        const cssVarName = `--color-${name}`
+        root.style.setProperty(cssVarName, colorByTheme[value])
+      })
+
+      rawSetTheme(value)
+    }
+
+    return { theme, setTheme }
+  }, [theme, rawSetTheme])
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   )

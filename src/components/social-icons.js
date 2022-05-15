@@ -70,11 +70,11 @@ const IconWrapper = styled.div`
     height: auto;
 
     & path {
-      fill: ${({ hover }) => hover || `var(--text)`};
+      fill: ${({ hover }) => hover || `var(--color-text)`};
     }
 
     &:hover path {
-      fill: ${({ hover }) => hover || `var(--hover-bg)`};
+      fill: ${({ hover }) => hover || `var(--color-hover-bg)`};
     }
 
     transition: 300ms;

@@ -104,7 +104,7 @@ const SinglePostWrapper = styled.div`
   & * {
     text-align: justify;
   }
-  background: var(--post-background-color);
+  background: var(--color-background);
   margin: 0 auto;
   min-height: 100%;
 `
@@ -116,7 +116,7 @@ const SinglePostHeader = styled.div`
   font-size: 1.5rem;
   line-height: 1;
   align-items: end;
-  border-bottom: 1px solid var(--gray-500);
+  border-bottom: 1px solid var(--color-gray-500);
   padding: 10px 0;
   /* sticky header */
   position: sticky;
