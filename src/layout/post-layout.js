@@ -13,7 +13,7 @@ import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
 // import Comments from "../components/remark-ninja"
 
 export default function PageTemplate({ data: { mdx } }) {
-  const [theme] = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
 
   const codeBlockTheme = theme === "dark" ? nightOwl : nightOwlLight
 

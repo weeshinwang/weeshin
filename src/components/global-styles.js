@@ -90,8 +90,8 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].light};
     --font-size: 16px;
 
-    &[data-theme="dark"]{
-      --color-text:${COLORS["text"].dark};
+    &[data-theme="dark"] {
+    --color-text:${COLORS["text"].dark};
     --color-hover-text:${COLORS["hover-text"].dark};
     --color-hover-bg:${COLORS["hover-bg"].dark};
     --color-button-hover-bg:${COLORS["button-hover-bg"].dark};
@@ -118,7 +118,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     color: var(--color-text);
-    background: var(--color-background-gradient);
+    background-image: var(--color-background-gradient);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
