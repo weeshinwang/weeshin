@@ -26,7 +26,7 @@ const BlogIndex = ({ data }) => {
   )
 }
 export const pageQuery = graphql`
-  query blogIndex {
+  query logsIndex {
     allMdx(
       filter: { frontmatter: { type: { eq: "post" } } }
       sort: { fields: frontmatter___date, order: DESC }

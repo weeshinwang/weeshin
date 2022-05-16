@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components/macro"
 import "../utils/font.css"
+import { COLORS } from "../utils/constants"
 
 const GlobalStyles = createGlobalStyle`
   /* GRAB FROM https://www.joshwcomeau.com/css/custom-css-reset/ */
@@ -63,8 +64,55 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  /* 11. Setting global styles variables */
+
   html {
-    --font-size: 16px
+    --color-text:${COLORS["text"].light};
+    --color-hover-text:${COLORS["hover-text"].light};
+    --color-hover-bg:${COLORS["hover-bg"].light};
+    --color-button-hover-bg:${COLORS["button-hover-bg"].light};
+    --color-background:${COLORS["background"].light};
+    --color-background-blurred:${COLORS["background-blurred"].light};
+    --color-background-muted:${COLORS["background-muted"].light};
+    --color-background-gradient:${COLORS["background-gradient"].light};
+    --color-gray-100:${COLORS["gray-100"].light};
+    --color-gray-300:${COLORS["gray-300"].light};
+    --color-gray-500:${COLORS["gray-500"].light};
+    --color-gray-700:${COLORS["gray-700"].light};
+    --color-gray-900:${COLORS["gray-900"].light};
+    --color-box-shadow:${COLORS["box-shadow"].light};
+    --color-shadow-elevation-low:${COLORS["shadow-elevation-low"].light};
+    --color-shadow-elevation-medium:${COLORS["shadow-elevation-medium"].light};
+    --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].light};
+    --color-box-shadow-code:${COLORS["box-shadow-code"].light};
+    --color-shadow-elevation-low-code:${COLORS["shadow-elevation-low-code"].light};
+    --color-shadow-elevation-medium-code:${COLORS["shadow-elevation-medium-code"].light};
+    --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].light};
+    --font-size: 16px;
+
+    &[data-theme="dark"]{
+      --color-text:${COLORS["text"].dark};
+    --color-hover-text:${COLORS["hover-text"].dark};
+    --color-hover-bg:${COLORS["hover-bg"].dark};
+    --color-button-hover-bg:${COLORS["button-hover-bg"].dark};
+    --color-background:${COLORS["background"].dark};
+    --color-background-blurred:${COLORS["background-blurred"].dark};
+    --color-background-muted:${COLORS["background-muted"].dark};
+    --color-background-gradient:${COLORS["background-gradient"].dark};
+    --color-gray-100:${COLORS["gray-100"].dark};
+    --color-gray-300:${COLORS["gray-300"].dark};
+    --color-gray-500:${COLORS["gray-500"].dark};
+    --color-gray-700:${COLORS["gray-700"].dark};
+    --color-gray-900:${COLORS["gray-900"].dark};
+    --color-box-shadow:${COLORS["box-shadow"].dark};
+    --color-shadow-elevation-low:${COLORS["shadow-elevation-low"].dark};
+    --color-shadow-elevation-medium:${COLORS["shadow-elevation-medium"].dark};
+    --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].dark};
+    --color-box-shadow-code:${COLORS["box-shadow-code"].dark};
+    --color-shadow-elevation-low-code:${COLORS["shadow-elevation-low-code"].dark};
+    --color-shadow-elevation-medium-code:${COLORS["shadow-elevation-medium-code"].dark};
+    --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].dark};
+    }
   }
 
 

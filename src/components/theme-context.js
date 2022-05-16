@@ -1,10 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react"
-import {
-  COLOR_MODE_KEY,
-  HTML_THEME_PROP,
-  INITIAL_COLOR_MODE_CSS_PROP,
-  COLORS,
-} from "../utils/constants"
+import { COLOR_MODE_KEY, HTML_THEME_PROP } from "../utils/constants"
 
 const ThemeContext = React.createContext()
 
@@ -13,9 +8,7 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = window.document.documentElement
-    const initialColor = root.style.getPropertyValue(
-      INITIAL_COLOR_MODE_CSS_PROP
-    )
+    const initialColor = root.getAttribute(HTML_THEME_PROP)
 
     rawSetTheme(initialColor)
   }, [])
@@ -27,11 +20,6 @@ export function ThemeProvider({ children }) {
       localStorage.setItem(COLOR_MODE_KEY, value)
 
       root.setAttribute(HTML_THEME_PROP, value)
-
-      Object.entries(COLORS).forEach(([name, colorByTheme]) => {
-        const cssVarName = `--color-${name}`
-        root.style.setProperty(cssVarName, colorByTheme[value])
-      })
 
       rawSetTheme(value)
     }
