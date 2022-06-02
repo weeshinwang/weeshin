@@ -21,14 +21,14 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "posts",
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/src/mdx/posts`,
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "about",
-        path: `${__dirname}/src/about`,
+        path: `${__dirname}/src/mdx/about`,
       },
     },
     "gatsby-remark-images",

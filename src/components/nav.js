@@ -30,15 +30,6 @@ export default function Nav() {
             backgroundColor: "var(--color-hover-bg)",
             color: "var(--color-hover-text)",
           }}
-          to="/thoughts"
-        >
-          想法
-        </ListItem>
-        <ListItem
-          activeStyle={{
-            backgroundColor: "var(--color-hover-bg)",
-            color: "var(--color-hover-text)",
-          }}
           to="/about"
         >
           关于我
