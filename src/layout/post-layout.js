@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import ThemeContext from "../components/theme-context"
 import Seo from "./seo"
 import ThemeSwitcher from "../components/theme-switcher"
@@ -49,6 +49,15 @@ export default function PageTemplate({ data: { mdx } }) {
       )
     },
   }
+
+  // set anchor tag to open in new tab
+  useEffect(() => {
+    console.log("😂😂😂")
+    document.querySelectorAll("a").forEach((a) => {
+      a.setAttribute("target", "_blank")
+      a.setAttribute("rel", "noopener noreferrer")
+    })
+  }, [])
 
   return (
     <>
