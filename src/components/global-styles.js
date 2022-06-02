@@ -138,9 +138,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   pre {
-    padding: 10px 20px;
+    padding: 0px 20px;
+    padding-top: 15px;
     border-radius: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
     box-shadow: var(--code-shadow-elevation-low);
     & * {
       font-family: 'Roboto Mono', monospace;

@@ -77,14 +77,14 @@ export default function PageTemplate({ data: { mdx } }) {
             <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
           </MDXProvider>
           {/* <Comments /> */}
+          <SinglePostDateWrapper>
+            <p>
+              发布于：{mdx.frontmatter.date}
+              {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
+                ` | 修改于：${mdx.frontmatter.lastmod}`}
+            </p>
+          </SinglePostDateWrapper>
         </SinglePostContentWrapper>
-        <SinglePostDateWrapper>
-          <p>
-            发布于：{mdx.frontmatter.date}
-            {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
-              ` | 修改于：${mdx.frontmatter.lastmod}`}
-          </p>
-        </SinglePostDateWrapper>
       </SinglePostWrapper>
     </>
   )
@@ -109,11 +109,10 @@ const SinglePostWrapper = styled.div`
   display: grid;
   grid-template-rows: 50px 1fr 50px;
   justify-content: center;
-  padding: 0 20px;
   & * {
     text-align: justify;
   }
-  background: var(--color-background);
+  background: var(--color-gray-100);
   margin: 0 auto;
   min-height: 100%;
 `
@@ -126,12 +125,12 @@ const SinglePostHeader = styled.div`
   line-height: 1;
   align-items: end;
   border-bottom: 1px solid var(--color-gray-500);
-  padding: 10px 0;
+  padding: 10px 15px;
   /* sticky header */
   position: sticky;
   top: 0;
   background-color: inherit;
-
+  background: var(--color-background);
   & > div:first-of-type {
     padding: 0;
     margin: 0;
@@ -156,6 +155,8 @@ const SinglePostHeader = styled.div`
 `
 
 const SinglePostContentWrapper = styled.div`
+  background: var(--color-background);
+  padding: 0 20px;
   justify-self: center;
   grid-row: 2;
   min-width: 300px;
@@ -178,20 +179,55 @@ const SinglePostContentWrapper = styled.div`
   }
 
   & h1 {
-    margin: 16px 0;
+    margin-top: 16px;
   }
 
-  & h2,
+  & h2 {
+    margin: 32px 0px 16px 0px;
+  }
   & h3 {
-    margin-top: 16px;
+    margin: 16px 0px 8px 0px;
+  }
+
+  & h2 {
+    &::before {
+      content: "##";
+      margin-right: 8px;
+      display: inline-block;
+      color: var(--color-hover-bg);
+    }
+  }
+
+  & h3 {
+    &::before {
+      content: "###";
+      margin-right: 8px;
+      display: inline-block;
+      color: var(--color-hover-bg);
+    }
   }
 
   & a {
     text-decoration: none;
-    border-bottom: dotted 2px hsl(332, 84%, 73%);
+    border-bottom: dotted 2px var(--color-hover-bg);
+  }
+
+  & ul,
+  & ol {
+    padding: 10px 15px;
+    margin-left: 0px;
+    /* list-style-type: space-counter; */
   }
 `
 const SinglePostDateWrapper = styled.div`
+  padding: 10px 0;
+  & p {
+    text-align: center;
+    font-weight: bold;
+  }
+`
+
+const SinglePostCommentWrapper = styled.div`
   justify-self: center;
   align-self: center;
   grid-row: 3;
