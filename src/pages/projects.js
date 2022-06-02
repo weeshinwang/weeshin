@@ -25,21 +25,34 @@ export default function ProjectsPage() {
             <p>React🔸TypeScript🔸redux🔸esbuild</p>
           </StacksWrapper>
           <SourceWrapper>
-            <p>
-              使用 <code>npx jarbook open</code> 试用或在线访问
-            </p>
+            <LinkedButton>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://jarbook-7gh2znir713d94e3-1253351468.tcloudbaseapp.com/"
+              >
+                在线访问
+              </a>
+            </LinkedButton>
+            <LinkedButton>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://github.com/weeshinwang/jarbook/"
+              >
+                GitHub
+              </a>
+            </LinkedButton>
+            <LinkedButton>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://gitee.com/weeshin/jarbook/"
+              >
+                Gitee
+              </a>
+            </LinkedButton>
           </SourceWrapper>
-          <CodeWrapper>
-            <p>
-              源代码：
-              <span>
-                <a href="https://www.github.com">GitHub</a>
-              </span>
-              <span>
-                <a href="https://www.gitee.com">Gitee</a>
-              </span>
-            </p>
-          </CodeWrapper>
         </ProjectCard>
         <ProjectCard>
           <h2>slicks</h2>
@@ -60,21 +73,26 @@ export default function ProjectsPage() {
             <p>React🔸Gatsby🔸GraphQL🔸Sanity</p>
           </StacksWrapper>
           <SourceWrapper>
-            <p>
-              <a href="https://www.github.com">在线访问</a>
-            </p>
+            <LinkedButton>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://slicks-0gsqfnyh1d1bc2a4-1253351468.tcloudbaseapp.com/"
+              >
+                在线访问
+              </a>
+            </LinkedButton>
+            <LinkedButton>
+              <a target="_blank" rel="noreferrer" href="https://www.github.com">
+                GitHub
+              </a>
+            </LinkedButton>
+            <LinkedButton>
+              <a target="_blank" rel="noreferrer" href="https://www.gitee.com">
+                Gitee
+              </a>
+            </LinkedButton>
           </SourceWrapper>
-          <CodeWrapper>
-            <p>
-              源代码：
-              <span>
-                <a href="https://www.github.com">GitHub</a>
-              </span>
-              <span>
-                <a href="https://www.gitee.com">Gitee</a>
-              </span>
-            </p>
-          </CodeWrapper>
         </ProjectCard>
       </ProjectWrapper>
     </Layout>
@@ -105,7 +123,7 @@ const ProjectWrapper = styled.div`
 
 const ProjectCard = styled.div`
   width: 330px;
-  height: fit-content;
+  height: minmax(400px, fit-content);
   padding: 10px;
   border-radius: 16px;
   box-shadow: var(--color-shadow-elevation-high);
@@ -130,8 +148,30 @@ const FeaturesWrapper = styled.ul`
     content: "✅";
   }
 `
-
 const StacksWrapper = styled.div``
+const SourceWrapper = styled.div`
+  margin-top: 10px;
+`
+const LinkedButton = styled.button`
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px 5px;
+  background-color: transparent;
+  border: 1px solid #43978d;
+  padding: 2px 5px;
+  border-radius: 5px;
+  &:hover {
+    background-color: var(--color-hover-bg);
+    border-color: transparent;
+    a {
+      color: var(--color-hover-text);
+    }
+  }
+  transition: background 500ms;
 
-const SourceWrapper = styled.div``
-const CodeWrapper = styled.div``
+  a {
+    background-color: initial;
+    text-decoration: none;
+    transition: none;
+  }
+`
