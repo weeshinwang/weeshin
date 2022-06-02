@@ -11,7 +11,7 @@ const BlogIndex = ({ data }) => {
         <PostWrapper>
           {posts.map(({ node: post }) => (
             <li key={post.id}>
-              <Link to={post.frontmatter.title}>
+              <Link to={post.id}>
                 <PostCardWrapper>
                   <h1>{post.frontmatter.displayTitle}</h1>
                   <p>{post.frontmatter.date}</p>

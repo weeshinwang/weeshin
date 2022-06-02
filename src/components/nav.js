@@ -30,9 +30,9 @@ export default function Nav() {
             backgroundColor: "var(--color-hover-bg)",
             color: "var(--color-hover-text)",
           }}
-          to="/logs"
+          to="/thoughts"
         >
-          日志
+          想法
         </ListItem>
         <ListItem
           activeStyle={{
