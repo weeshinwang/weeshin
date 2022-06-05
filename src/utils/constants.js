@@ -8,6 +8,8 @@ export const LIGHT_COLORS = {
   text: "hsl(222deg, 22%, 5%)",
   hoverBg: "hsl(332.3,84.2%,72.7%)",
   hoverText: "hsl(0deg, 0%, 100%)",
+  codeText: "hsl(0deg, 79%, 63%)",
+  codeBg: "hsla(44, 6%, 50%, 0.15)",
   gray: {
     100: "hsl(225deg, 25%, 95%)",
     200: "hsl(225deg, 16%, 90%)",
@@ -96,6 +98,8 @@ export const DARK_COLORS = {
   text: "hsl(0deg, 0%, 100%)",
   hoverBg: "hsl(332.3,84.2%,72.7%)",
   hoverText: "hsl(0deg, 0%, 100%)",
+  codeText: "hsl(0deg, 79%, 63%)",
+  codeBg: "hsla(44, 6%, 50%, 0.15)",
   gray: {
     100: "hsl(210deg, 15%, 20%)",
     200: "hsl(210deg, 15%, 25%)",
@@ -424,6 +428,14 @@ export const COLORS = {
   "hover-bg": {
     light: LIGHT_COLORS.hoverBg,
     dark: DARK_COLORS.hoverBg,
+  },
+  "code-text": {
+    light: LIGHT_COLORS.codeText,
+    dark: DARK_COLORS.codeText,
+  },
+  "code-bg": {
+    light: LIGHT_COLORS.codeBg,
+    dark: DARK_COLORS.codeBg,
   },
   "button-bg": {
     light: LIGHT_COLORS.buttonBg,

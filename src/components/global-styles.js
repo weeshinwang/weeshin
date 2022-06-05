@@ -70,6 +70,8 @@ const GlobalStyles = createGlobalStyle`
     --color-text:${COLORS["text"].light};
     --color-hover-text:${COLORS["hover-text"].light};
     --color-hover-bg:${COLORS["hover-bg"].light};
+    --color-code-text: ${COLORS["code-text"].light};
+    --color-code-bg: ${COLORS["code-bg"].light};
     --color-button-hover-bg:${COLORS["button-hover-bg"].light};
     --color-background:${COLORS["background"].light};
     --color-background-blurred:${COLORS["background-blurred"].light};
@@ -94,6 +96,8 @@ const GlobalStyles = createGlobalStyle`
     --color-text:${COLORS["text"].dark};
     --color-hover-text:${COLORS["hover-text"].dark};
     --color-hover-bg:${COLORS["hover-bg"].dark};
+    --color-code-text: ${COLORS["code-text"].dark};
+    --color-code-bg: ${COLORS["code-bg"].dark};
     --color-button-hover-bg:${COLORS["button-hover-bg"].dark};
     --color-background:${COLORS["background"].dark};
     --color-background-blurred:${COLORS["background-blurred"].dark};
@@ -115,15 +119,21 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-
-  body {
-    color: var(--color-text);
+  html {
+    min-height: 100%;
     background-image: var(--color-background-gradient);
     background-attachment: fixed;
+
+  }
+
+  body {
+    min-height: 100%;
+    color: var(--color-text);
     background-size: cover;
     background-repeat: no-repeat;
     transition: color 350ms ease 0s, background 350ms ease 0s;
     font-size: var(--font-size);
+    font-family: Roboto, sans-serif;
   }
 
   body * {
@@ -134,18 +144,28 @@ const GlobalStyles = createGlobalStyle`
     h2 {
       font-size: 1.2rem;
     }
-    font-family: Roboto, sans-serif;
+    font-family: 'Merriweather Sans', 'Microsoft YaHei', sans-serif;
   }
 
   pre {
-    padding: 0px 20px;
-    padding-top: 15px;
+    padding: 0px 1.5rem;
+    padding-top: 2rem;
     border-radius: 10px;
-    margin: 15px 0;
+    margin: 1rem 0;
     box-shadow: var(--code-shadow-elevation-low);
     & * {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
     }
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    line-height: normal;
+    background: var(--color-code-bg);
+    color: var(--color-code-text);
+    border-radius: 3px;
+    font-size: 85%;
+    padding: 0.2em 0.4em;
   }
 
   /* #f47fb5 */

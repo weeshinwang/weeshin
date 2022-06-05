@@ -85,6 +85,7 @@ export default function PageTemplate({ data: { mdx } }) {
             </p>
           </SinglePostDateWrapper>
         </SinglePostContentWrapper>
+        <SinglePostCommentWrapper></SinglePostCommentWrapper>
       </SinglePostWrapper>
     </>
   )
@@ -160,7 +161,8 @@ const SinglePostContentWrapper = styled.div`
   justify-self: center;
   grid-row: 2;
   min-width: 300px;
-  max-width: 700px;
+  max-width: 760px;
+  line-height: 1.6rem;
 
   & pre {
     white-space: pre-wrap; /* Since CSS 2.1 */
@@ -179,7 +181,7 @@ const SinglePostContentWrapper = styled.div`
   }
 
   & h1 {
-    margin-top: 16px;
+    margin: 16px 0;
   }
 
   & h2 {
@@ -228,6 +230,7 @@ const SinglePostDateWrapper = styled.div`
 `
 
 const SinglePostCommentWrapper = styled.div`
+  background: var(--color-background);
   justify-self: center;
   align-self: center;
   grid-row: 3;

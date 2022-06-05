@@ -25,33 +25,27 @@ export default function ProjectsPage() {
             <p>React🔸TypeScript🔸redux🔸esbuild</p>
           </StacksWrapper>
           <SourceWrapper>
-            <LinkedButton>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://jarbook-7gh2znir713d94e3-1253351468.tcloudbaseapp.com/"
-              >
-                在线访问
-              </a>
-            </LinkedButton>
-            <LinkedButton>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://github.com/weeshinwang/jarbook/"
-              >
-                GitHub
-              </a>
-            </LinkedButton>
-            <LinkedButton>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://gitee.com/weeshin/jarbook/"
-              >
-                Gitee
-              </a>
-            </LinkedButton>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://jarbook-7gh2znir713d94e3-1253351468.tcloudbaseapp.com/"
+            >
+              在线访问
+            </OuterLinks>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/weeshinwang/jarbook/"
+            >
+              GitHub
+            </OuterLinks>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://gitee.com/weeshin/jarbook/"
+            >
+              Gitee
+            </OuterLinks>
           </SourceWrapper>
         </ProjectCard>
         <ProjectCard>
@@ -73,25 +67,27 @@ export default function ProjectsPage() {
             <p>React🔸Gatsby🔸GraphQL🔸Sanity</p>
           </StacksWrapper>
           <SourceWrapper>
-            <LinkedButton>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://slicks-0gsqfnyh1d1bc2a4-1253351468.tcloudbaseapp.com/"
-              >
-                在线访问
-              </a>
-            </LinkedButton>
-            <LinkedButton>
-              <a target="_blank" rel="noreferrer" href="https://www.github.com">
-                GitHub
-              </a>
-            </LinkedButton>
-            <LinkedButton>
-              <a target="_blank" rel="noreferrer" href="https://www.gitee.com">
-                Gitee
-              </a>
-            </LinkedButton>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://slicks-0gsqfnyh1d1bc2a4-1253351468.tcloudbaseapp.com/"
+            >
+              在线访问
+            </OuterLinks>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.github.com"
+            >
+              GitHub
+            </OuterLinks>
+            <OuterLinks
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.gitee.com"
+            >
+              Gitee
+            </OuterLinks>
           </SourceWrapper>
         </ProjectCard>
       </ProjectWrapper>
@@ -128,16 +124,21 @@ const ProjectCard = styled.div`
   border-radius: 16px;
   box-shadow: var(--color-shadow-elevation-high);
 
-  & ul {
+  ul {
     padding: 0;
     list-style-type: none;
   }
 
-  & li {
+  li {
     list-style: none;
     padding: 0;
     margin: 0;
     text-indent: 0;
+  }
+  h2 {
+    font-family: Merriweather;
+    font-size: 1.5rem;
+    text-decoration: underline;
   }
 `
 
@@ -152,7 +153,9 @@ const StacksWrapper = styled.div``
 const SourceWrapper = styled.div`
   margin-top: 10px;
 `
-const LinkedButton = styled.button`
+
+const OuterLinks = styled.a`
+  text-decoration: none;
   cursor: pointer;
   display: inline-block;
   margin: 5px 5px;
@@ -163,15 +166,6 @@ const LinkedButton = styled.button`
   &:hover {
     background-color: var(--color-hover-bg);
     border-color: transparent;
-    a {
-      color: var(--color-hover-text);
-    }
   }
   transition: background 500ms;
-
-  a {
-    background-color: initial;
-    text-decoration: none;
-    transition: none;
-  }
 `
