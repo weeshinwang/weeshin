@@ -53,7 +53,6 @@ const LogoWrapper = styled.div`
   height: 30px;
   width: 30px;
   border-radius: 25%;
-  /* border: 1px solid lightyellow; */
   overflow: hidden;
   transition: 750ms ease-in-out;
   &:hover {

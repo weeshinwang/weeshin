@@ -10,7 +10,7 @@ export default function ProjectsPage() {
           <h2>jarbook</h2>
           <IntroWrapper>一个 React 代码笔记本</IntroWrapper>
           <FeaturesWrapper>
-            <li>esbuild wasm 在浏览器中即时打包代码</li>
+            <li>esbuild wasm 浏览器中即时打包</li>
             <li>实时显示 React 组件</li>
             <li>在线调用任意 npm 包</li>
             <li>渲染 Markdown 片段</li>
@@ -118,7 +118,7 @@ const ProjectWrapper = styled.div`
 `
 
 const ProjectCard = styled.div`
-  width: 330px;
+  width: 320px;
   height: minmax(400px, fit-content);
   padding: 10px;
   border-radius: 16px;

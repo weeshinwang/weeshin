@@ -119,19 +119,8 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  html {
-    min-height: 100%;
-    background-image: var(--color-background-gradient);
-    background-attachment: fixed;
-
-  }
-
   body {
-    min-height: 100%;
     color: var(--color-text);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: color 350ms ease 0s, background 350ms ease 0s;
     font-size: var(--font-size);
     font-family: Roboto, sans-serif;
   }
@@ -158,6 +147,22 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  #___gatsby {
+    &::before {
+      content: '';
+      background-image: var(--color-background-gradient);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      min-height: 100vh;
+      width: 100vw;
+      z-index: -1;
+    }
+    position: absolute;
+    width: 100%;
+  }
+
   code {
     font-family: 'JetBrains Mono', monospace;
     line-height: normal;
@@ -181,9 +186,5 @@ const GlobalStyles = createGlobalStyle`
     }
     transition: background 500ms;
   }
-/*
-  *, *::before, *::after {
-    transition: background 0.4s ease 0s, background-color 0.4s ease 0s, border-color 0.4s ease 0s, background-image 0.4s ease 0s
-  } */
 `
 export default GlobalStyles

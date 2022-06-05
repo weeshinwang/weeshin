@@ -41,7 +41,6 @@ export default function Home() {
 const ContentWrapper = styled.div`
   max-width: 700px;
   height: 100%;
-  /* border: 1px solid black; */
   border-radius: 5px;
   margin: 0 auto;
   display: flex;
@@ -76,7 +75,6 @@ const NavButtonWrapper = styled.div`
     margin-top: 10px;
     text-align: center;
   }
-
   will-change: opacity;
 `
 
