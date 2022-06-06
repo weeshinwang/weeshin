@@ -11,18 +11,18 @@ export default function ProjectsPage() {
           <IntroWrapper>一个 React 代码笔记本</IntroWrapper>
           <FeaturesWrapper>
             <li>esbuild wasm 浏览器中即时打包</li>
-            <li>实时显示 React 组件</li>
+            <li>实时预览 React 组件</li>
             <li>在线调用任意 npm 包</li>
             <li>渲染 Markdown 片段</li>
             <li>代码提示以及代码美化</li>
             <li>变量持久化</li>
-            <li>lerna 管理客户端与 CLI 包</li>
+            <li>Lerna 管理客户端与 CLI 包</li>
             <li>已发布 npm 包</li>
             &#8942;
           </FeaturesWrapper>
           <StacksWrapper>
             <p>技术栈</p>
-            <p>React🔸TypeScript🔸redux🔸esbuild</p>
+            <p>React🔸TypeScript🔸Redux🔸esbuild</p>
           </StacksWrapper>
           <SourceWrapper>
             <OuterLinks
@@ -77,14 +77,14 @@ export default function ProjectsPage() {
             <OuterLinks
               target="_blank"
               rel="noreferrer"
-              href="https://www.github.com"
+              href="https://www.github.com/weeshinwang/slicks/"
             >
               GitHub
             </OuterLinks>
             <OuterLinks
               target="_blank"
               rel="noreferrer"
-              href="https://www.gitee.com"
+              href="https://www.gitee.com/weeshin/slicks/"
             >
               Gitee
             </OuterLinks>
