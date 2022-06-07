@@ -15,7 +15,6 @@ const BlogIndex = ({ data }) => {
                 <PostCardWrapper>
                   <h1>{post.frontmatter.displayTitle}</h1>
                   <p>{post.frontmatter.date}</p>
-                  {/* <p>{post.excerpt}</p> */}
                 </PostCardWrapper>
               </Link>
             </li>
@@ -59,6 +58,9 @@ const PostWrapper = styled.ul`
   padding: 0 15px;
   & a {
     text-decoration: none;
+    &:hover {
+      color: var(--color-text);
+    }
   }
 `
 

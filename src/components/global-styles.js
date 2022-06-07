@@ -170,7 +170,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* #f47fb5 */
   a {
-    color: inherit;
+    color: var(--color-text);
     text-decoration: underline dotted 2px hsl(332, 84%, 73%);
     &:hover {
       background-color: var(--color-hover-bg);
