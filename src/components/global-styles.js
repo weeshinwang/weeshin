@@ -122,18 +122,13 @@ const GlobalStyles = createGlobalStyle`
   body {
     color: var(--color-text);
     font-size: var(--font-size);
-    font-family: Roboto, sans-serif;
-  }
-
-  body * {
-    color: var(--color-text);
+    font-family: 'Merriweather Sans', system-ui, —apple-system, Roboto, Segoe UI, Emoji, Helvetica, Arial, sans-serif;
     h1 {
       font-size: 1.375rem;
     }
     h2 {
       font-size: 1.2rem;
     }
-    font-family: 'Merriweather Sans', 'Microsoft YaHei', sans-serif;
   }
 
   pre {
@@ -175,6 +170,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* #f47fb5 */
   a {
+    color: inherit;
     text-decoration: underline dotted 2px hsl(332, 84%, 73%);
     &:hover {
       background-color: var(--color-hover-bg);

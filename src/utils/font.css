@@ -197,3 +197,10 @@
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
+
+@font-face {
+  font-family: Emoji;
+  src: local("Apple Color Emojiji"), local("Segoe UI Emoji"),
+    local("Segoe UI Symbol"), local("Noto Color Emoji");
+  unicode-range: U+1F000-1F644, U+203C-3299;
+}
