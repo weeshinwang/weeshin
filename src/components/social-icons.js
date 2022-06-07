@@ -2,11 +2,19 @@ import React from "react"
 import styled from "styled-components/macro"
 import { Link } from "gatsby"
 
+// TODO:
+// 1. add icon hover text
+// 2. abstract data outside component
+
 export default function SocialIcons() {
   return (
     <>
       <IconWrapper>
-        <a href="https://github.com/weeshinwang">
+        <a
+          href="https://github.com/weeshinwang"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
@@ -17,12 +25,49 @@ export default function SocialIcons() {
           </svg>
         </a>
       </IconWrapper>
-
       <IconWrapper>
-        <a href="https://gitee.com/weeshin">
+        <a
+          href="https://gitee.com/weeshin"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
             <defs />
             <path d="M512 1024C230.4 1024 0 793.6 0 512S230.4 0 512 0s512 230.4 512 512-230.4 512-512 512zm259.2-569.6H480c-12.8 0-25.6 12.8-25.6 25.6v64c0 12.8 12.8 25.6 25.6 25.6h176c12.8 0 25.6 12.8 25.6 25.6V608c0 41.6-35.2 76.8-76.8 76.8h-240c-12.8 0-25.6-12.8-25.6-25.6V416c0-41.6 35.2-76.8 76.8-76.8h355.2c12.8 0 25.6-12.8 25.6-25.6v-64c0-12.8-12.8-25.6-25.6-25.6H416c-105.6 0-188.8 86.4-188.8 188.8V768c0 12.8 12.8 25.6 25.6 25.6h374.4c92.8 0 169.6-76.8 169.6-169.6V480c0-12.8-12.8-25.6-25.6-25.6z" />
+          </svg>
+        </a>
+      </IconWrapper>
+
+      <IconWrapper>
+        <a
+          href="https://stackoverflow.com/users/6017056/weeshin"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.869 5.903l3.114 4.567-.975.665-3.115-4.567.976-.665zm-2.812 2.585l4.84 2.838-.6 1.017-4.842-2.838.602-1.017zm-1.276 2.724l5.413 1.521-.291 1.077-5.428-1.458.306-1.14zm-.588 2.461l5.687.569-.103 1.12-5.691-.513.107-1.176zm-.169 2.16h5.835v1.167h-5.835v-1.167zm7.976 3.167h-10v-6h1v5h8v-5h1v6zm.195-8.602l-.945-5.446 1.162-.202.947 5.446-1.164.202z" />
+          </svg>
+        </a>
+      </IconWrapper>
+
+      <IconWrapper>
+        <a
+          href="https://twitter.com/weeshinwang"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z" />
           </svg>
         </a>
       </IconWrapper>

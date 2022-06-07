@@ -54,10 +54,10 @@ export default function ProjectsPage() {
           <FeaturesWrapper>
             <li>完全响应式设计</li>
             <li>Sanity 无头 CMS</li>
-            <li>Gatsby Image 优化图片加载</li>
-            <li>云函数发送订单邮件</li>
-            <li>React Helmet 优化应用 SEO</li>
             <li>自定义内容 Schema 以及商户配置页面</li>
+            <li>云函数发送订单邮件</li>
+            <li>渐进式图片加载</li>
+            <li>React Helmet 优化应用 SEO</li>
             <li>全局订单状态持久化</li>
             <li>styled-component CSS-in-JS 方案</li>
             &#8942;
