@@ -10,7 +10,19 @@ import styled from "styled-components/macro"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
+import rangeParser from "parse-numeric-range"
 // import Comments from "../components/remark-ninja"
+
+const calculateLinesToHighlight = (meta) => {
+  const RE = /{([\d,-]+)}/
+  if (RE.test(meta)) {
+    const strlineNumbers = RE.exec(meta)[1]
+    const lineNumbers = rangeParser(strlineNumbers)
+    return (index) => lineNumbers.includes(index + 1)
+  } else {
+    return () => false
+  }
+}
 
 export default function PageTemplate({ data: { mdx } }) {
   const { theme } = useContext(ThemeContext)
@@ -22,6 +34,10 @@ export default function PageTemplate({ data: { mdx } }) {
       const className = props.children.props.className || ""
 
       const matches = className.match(/language-(?<lang>.*)/)
+
+      const shouldHighlightLine = calculateLinesToHighlight(
+        props.children.props.metastring
+      )
 
       return (
         <Highlight
@@ -36,16 +52,31 @@ export default function PageTemplate({ data: { mdx } }) {
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>
-              {tokens.map((line, i) => (
-                <Line key={i} {...getLineProps({ line, key: i })}>
-                  <LineNo>{i + 1}</LineNo>
-                  <LineContent>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </LineContent>
-                </Line>
-              ))}
+              {tokens.map((line, i) => {
+                console.log("🚩🚩🚩", shouldHighlightLine(i))
+                if (shouldHighlightLine(i)) {
+                  return (
+                    <HighlightLines key={i} {...getLineProps({ line, key: i })}>
+                      <LineNo>{i + 1}</LineNo>
+                      <LineContent>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token, key })} />
+                        ))}
+                      </LineContent>
+                    </HighlightLines>
+                  )
+                }
+                return (
+                  <Line key={i} {...getLineProps({ line, key: i })}>
+                    <LineNo>{i + 1}</LineNo>
+                    <LineContent>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      ))}
+                    </LineContent>
+                  </Line>
+                )
+              })}
             </Pre>
           )}
         </Highlight>
@@ -163,7 +194,7 @@ const SinglePostContentWrapper = styled.div`
   justify-self: center;
   grid-row: 2;
   min-width: 300px;
-  max-width: 760px;
+  max-width: 800px;
   line-height: 1.6rem;
 
   & pre {
@@ -243,7 +274,7 @@ const SinglePostCommentWrapper = styled.div`
 const Pre = styled.pre`
   text-align: left;
   margin: 1em 0;
-  padding: 0.5em 0.6em;
+  padding: 0.6em 0.8em;
   overflow: scroll;
 `
 
@@ -251,7 +282,16 @@ const Line = styled.div`
   display: table-row;
 `
 
+const HighlightLines = styled.div`
+  display: table-row;
+  background-color: var(--color-highlight-line);
+  display: block;
+  border-left: 0.2em solid var(--color-highlight-mark);
+  margin-left: -0.2em;
+`
+
 const LineNo = styled.span`
+  padding-left: 0.5rem;
   display: table-cell;
   text-align: right;
   padding-right: 1em;

@@ -73,6 +73,8 @@ const GlobalStyles = createGlobalStyle`
     --color-code-text: ${COLORS["code-text"].light};
     --color-code-bg: ${COLORS["code-bg"].light};
     --color-button-hover-bg:${COLORS["button-hover-bg"].light};
+    --color-highlight-line: ${COLORS["color-highlight-line"].light};
+    --color-highlight-mark: ${COLORS["color-highlight-line"].dark};
     --color-background:${COLORS["background"].light};
     --color-background-blurred:${COLORS["background-blurred"].light};
     --color-background-muted:${COLORS["background-muted"].light};
@@ -92,6 +94,7 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].light};
     --font-size: 16px;
 
+
     &[data-theme="dark"] {
     --color-text:${COLORS["text"].dark};
     --color-hover-text:${COLORS["hover-text"].dark};
@@ -99,6 +102,8 @@ const GlobalStyles = createGlobalStyle`
     --color-code-text: ${COLORS["code-text"].dark};
     --color-code-bg: ${COLORS["code-bg"].dark};
     --color-button-hover-bg:${COLORS["button-hover-bg"].dark};
+    --color-highlight-line: ${COLORS["color-highlight-line"].dark};
+    --color-highlight-mark: ${COLORS["color-highlight-line"].light};
     --color-background:${COLORS["background"].dark};
     --color-background-blurred:${COLORS["background-blurred"].dark};
     --color-background-muted:${COLORS["background-muted"].dark};

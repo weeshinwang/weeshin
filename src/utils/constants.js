@@ -10,6 +10,7 @@ export const LIGHT_COLORS = {
   hoverText: "hsl(0deg, 0%, 100%)",
   codeText: "hsl(0deg, 79%, 63%)",
   codeBg: "hsla(44, 6%, 50%, 0.15)",
+  highlightLine: "hsl(325deg, 50%, 90%)",
   gray: {
     100: "hsl(225deg, 25%, 95%)",
     200: "hsl(225deg, 16%, 90%)",
@@ -100,6 +101,7 @@ export const DARK_COLORS = {
   hoverText: "hsl(0deg, 0%, 100%)",
   codeText: "hsl(0deg, 79%, 63%)",
   codeBg: "hsla(44, 6%, 50%, 0.15)",
+  highlightLine: "hsl(325deg, 50%, 20%)",
   gray: {
     100: "hsl(210deg, 15%, 20%)",
     200: "hsl(210deg, 15%, 25%)",
@@ -445,6 +447,11 @@ export const COLORS = {
     light: LIGHT_COLORS.buttonHoverBg,
     dark: DARK_COLORS.buttonHoverBg,
   },
+  "color-highlight-line": {
+    light: LIGHT_COLORS.highlightLine,
+    dark: DARK_COLORS.highlightLine,
+  },
+
   background: {
     light: LIGHT_COLORS.background,
     dark: DARK_COLORS.background,
