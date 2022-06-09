@@ -52,7 +52,6 @@ export default function PageTemplate({ data: { mdx } }) {
 
   // set anchor tag to open in new tab
   useEffect(() => {
-    console.log("😂😂😂")
     document.querySelectorAll("a").forEach((a) => {
       a.setAttribute("target", "_blank")
       a.setAttribute("rel", "noopener noreferrer")

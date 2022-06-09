@@ -6,8 +6,17 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import {} from "gatsby"
 import styled from "styled-components"
 const shortcodes = { Link } // Provide common components here
+import { useEffect } from "react"
 
 export default function PageTemplate({ data: { mdx } }) {
+  // set anchor tag to open in new tab
+  useEffect(() => {
+    document.querySelectorAll("a").forEach((a) => {
+      a.setAttribute("target", "_blank")
+      a.setAttribute("rel", "noopener noreferrer")
+    })
+  }, [])
+
   return (
     <Layout title="about">
       <AboutPageWrapper>
@@ -37,4 +46,13 @@ const AboutPageWrapper = styled.div`
   min-width: 300px;
   max-width: 700px;
   padding: 0 16px;
+  line-height: 2;
+  font-size: 1rem;
+  & ul,
+  & ol {
+    padding: 0px 15px;
+    margin-left: 0px;
+
+    /* list-style-type: space-counter; */
+  }
 `
