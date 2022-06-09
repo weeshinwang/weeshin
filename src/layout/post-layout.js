@@ -280,6 +280,8 @@ const Pre = styled.pre`
 
 const Line = styled.div`
   display: table-row;
+  display: block;
+  margin-left: -0.6em;
 `
 
 const HighlightLines = styled.div`
@@ -287,11 +289,12 @@ const HighlightLines = styled.div`
   background-color: var(--color-highlight-line);
   display: block;
   border-left: 0.2em solid var(--color-highlight-mark);
-  margin-left: -0.2em;
+  margin-left: -0.8em;
+  width: calc(100% + 1.6em);
 `
 
 const LineNo = styled.span`
-  padding-left: 0.5rem;
+  padding-left: 0.8rem;
   display: table-cell;
   text-align: right;
   padding-right: 1em;
