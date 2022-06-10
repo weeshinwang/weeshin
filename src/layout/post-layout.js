@@ -162,7 +162,6 @@ const SinglePostHeader = styled.div`
   /* sticky header */
   position: sticky;
   top: 0;
-  background-color: inherit;
   background: var(--color-background);
   & > div:first-of-type {
     padding: 0;
@@ -185,26 +184,29 @@ const SinglePostHeader = styled.div`
       background-color: initial;
     }
   }
+  z-index: 1;
 `
 
 const SinglePostContentWrapper = styled.div`
   background: var(--color-background);
-  padding: 0 20px;
+  padding: 0 50px;
   justify-self: center;
   grid-row: 2;
   min-width: 300px;
-  max-width: 800px;
-  line-height: 1.6rem;
+  max-width: 900px;
+  line-height: 1.8rem;
 
-  & pre {
+  pre {
     white-space: pre-wrap; /* Since CSS 2.1 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
     white-space: -pre-wrap; /* Opera 4-6 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+    margin: 32px 0;
+    box-shadow: var(--color-box-shadow-code);
   }
 
-  & span.token {
+  span.token {
     display: inline-block;
     /* white-space: normal; */
     max-width: 100%;
@@ -212,18 +214,19 @@ const SinglePostContentWrapper = styled.div`
     word-wrap: break-word;
   }
 
-  & h1 {
+  h1 {
     margin: 16px 0;
   }
 
-  & h2 {
+  h2 {
     margin: 32px 0px 16px 0px;
   }
-  & h3 {
+
+  h3 {
     margin: 16px 0px 8px 0px;
   }
 
-  & h2 {
+  h2 {
     &::before {
       content: "##";
       margin-right: 8px;
@@ -232,7 +235,7 @@ const SinglePostContentWrapper = styled.div`
     }
   }
 
-  & h3 {
+  h3 {
     &::before {
       content: "###";
       margin-right: 8px;
@@ -241,16 +244,24 @@ const SinglePostContentWrapper = styled.div`
     }
   }
 
-  & a {
+  a {
     text-decoration: none;
     border-bottom: dotted 2px var(--color-hover-bg);
   }
 
-  & ul,
-  & ol {
+  ul,
+  ol {
     padding: 10px 15px;
     margin-left: 0px;
-    /* list-style-type: space-counter; */
+  }
+
+  ul li {
+    list-style-type: "👉";
+    padding-left: 8px;
+  }
+
+  ol li {
+    padding-left: 8px;
   }
 
   table {

@@ -89,9 +89,6 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-medium:${COLORS["shadow-elevation-medium"].light};
     --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].light};
     --color-box-shadow-code:${COLORS["box-shadow-code"].light};
-    --color-shadow-elevation-low-code:${COLORS["shadow-elevation-low-code"].light};
-    --color-shadow-elevation-medium-code:${COLORS["shadow-elevation-medium-code"].light};
-    --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].light};
     --font-size: 16px;
 
 
@@ -118,10 +115,6 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-medium:${COLORS["shadow-elevation-medium"].dark};
     --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].dark};
     --color-box-shadow-code:${COLORS["box-shadow-code"].dark};
-    --color-shadow-elevation-low-code:${COLORS["shadow-elevation-low-code"].dark};
-    --color-shadow-elevation-medium-code:${COLORS["shadow-elevation-medium-code"].dark};
-    --color-shadow-elevation-high-code:${COLORS["shadow-elevation-high-code"].dark};
-    }
   }
 
   body {
@@ -167,7 +160,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'JetBrains Mono', monospace;
     line-height: normal;
     background: var(--color-code-bg);
-    color: var(--color-code-text);
+    color: var(--color-text);
     border-radius: 3px;
     font-size: 85%;
     padding: 0.2em 0.4em;
