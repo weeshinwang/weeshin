@@ -53,7 +53,6 @@ export default function PageTemplate({ data: { mdx } }) {
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>
               {tokens.map((line, i) => {
-                console.log("🚩🚩🚩", shouldHighlightLine(i))
                 if (shouldHighlightLine(i)) {
                   return (
                     <HighlightLines key={i} {...getLineProps({ line, key: i })}>
@@ -252,6 +251,20 @@ const SinglePostContentWrapper = styled.div`
     padding: 10px 15px;
     margin-left: 0px;
     /* list-style-type: space-counter; */
+  }
+
+  table {
+    width: 100%;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid var(--color-hover-bg);
+    border-collapse: collapse;
+  }
+  th {
+    text-align: center;
   }
 `
 const SinglePostDateWrapper = styled.div`
