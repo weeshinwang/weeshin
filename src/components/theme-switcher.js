@@ -104,6 +104,13 @@ const Svg = styled.svg`
   --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
   --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 
+  .moon,
+  .sun,
+  .sun-beams {
+    will-change: transform;
+    will-change: opacity;
+  }
+
   /* TODO: wechat browser is not supported */
   & > :is(.moon, .sun, .sun-beams) {
     transform-origin: center center;

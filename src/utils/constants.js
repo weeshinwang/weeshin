@@ -11,6 +11,8 @@ export const LIGHT_COLORS = {
   codeText: "hsl(0deg, 79%, 63%)",
   codeBg: "hsla(44, 6%, 50%, 0.15)",
   highlightLine: "hsl(325deg, 50%, 90%)",
+  quoteBorder: "hsl(160, 80%, 35%)",
+  quoteBackground: "hsl(160, 80%, 95%)",
   gray: {
     100: "hsl(225deg, 25%, 95%)",
     200: "hsl(225deg, 16%, 90%)",
@@ -94,6 +96,8 @@ export const DARK_COLORS = {
   codeText: "hsl(0deg, 79%, 63%)",
   codeBg: "hsla(44, 6%, 50%, 0.15)",
   highlightLine: "hsl(325deg, 50%, 20%)",
+  quoteBorder: "hsl(160, 80%, 40%)",
+  quoteBackground: "hsl(160, 90%, 7%)",
   gray: {
     100: "hsl(210deg, 15%, 20%)",
     200: "hsl(210deg, 15%, 25%)",
@@ -434,7 +438,14 @@ export const COLORS = {
     light: LIGHT_COLORS.highlightLine,
     dark: DARK_COLORS.highlightLine,
   },
-
+  "color-quote-border": {
+    light: LIGHT_COLORS.quoteBorder,
+    dark: DARK_COLORS.quoteBorder,
+  },
+  "color-quote-background": {
+    light: LIGHT_COLORS.quoteBackground,
+    dark: DARK_COLORS.quoteBackground,
+  },
   background: {
     light: LIGHT_COLORS.background,
     dark: DARK_COLORS.background,

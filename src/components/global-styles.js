@@ -75,6 +75,8 @@ const GlobalStyles = createGlobalStyle`
     --color-button-hover-bg:${COLORS["button-hover-bg"].light};
     --color-highlight-line: ${COLORS["color-highlight-line"].light};
     --color-highlight-mark: ${COLORS["color-highlight-line"].dark};
+    --color-quote-border: ${COLORS["color-quote-border"].light};
+    --color-quote-background: ${COLORS["color-quote-background"].light};
     --color-background:${COLORS["background"].light};
     --color-background-blurred:${COLORS["background-blurred"].light};
     --color-background-muted:${COLORS["background-muted"].light};
@@ -101,6 +103,8 @@ const GlobalStyles = createGlobalStyle`
     --color-button-hover-bg:${COLORS["button-hover-bg"].dark};
     --color-highlight-line: ${COLORS["color-highlight-line"].dark};
     --color-highlight-mark: ${COLORS["color-highlight-line"].light};
+    --color-quote-border: ${COLORS["color-quote-border"].dark};
+    --color-quote-background: ${COLORS["color-quote-background"].dark};
     --color-background:${COLORS["background"].dark};
     --color-background-blurred:${COLORS["background-blurred"].dark};
     --color-background-muted:${COLORS["background-muted"].dark};

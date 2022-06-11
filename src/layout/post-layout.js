@@ -35,6 +35,11 @@ export default function PageTemplate({ data: { mdx } }) {
 
       const matches = className.match(/language-(?<lang>.*)/)
 
+      const lang =
+        matches && matches.groups && matches.groups.lang
+          ? matches.groups.lang.toLowerCase()
+          : ""
+
       const shouldHighlightLine = calculateLinesToHighlight(
         props.children.props.metastring
       )
@@ -43,15 +48,12 @@ export default function PageTemplate({ data: { mdx } }) {
         <Highlight
           {...defaultProps}
           code={props.children.props.children.trim()}
-          language={
-            matches && matches.groups && matches.groups.lang
-              ? matches.groups.lang.toLowerCase()
-              : ""
-          }
+          language={lang}
           theme={codeBlockTheme}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>
+              <Lang>{lang.toUpperCase()}</Lang>
               {tokens.map((line, i) => {
                 if (shouldHighlightLine(i)) {
                   return (
@@ -193,6 +195,21 @@ const Button = styled.button`
   }
 `
 
+const Lang = styled.div`
+  text-align: end;
+  background-color: var(--color-gray-100);
+  color: var(--color-text);
+  width: fit-content;
+  margin-top: -0.6em;
+  margin-left: -0.8em;
+  margin-bottom: 0.6em;
+  padding: 0 0.5rem;
+  border-radius: 10px 0 0 0;
+  user-select: none;
+  /* margin-left: auto;
+  margin-right: 0; */
+`
+
 const SinglePostContentWrapper = styled.div`
   background: var(--color-background);
   padding: 0 50px;
@@ -282,6 +299,13 @@ const SinglePostContentWrapper = styled.div`
   }
   th {
     text-align: center;
+  }
+
+  blockquote {
+    border-left: 2px solid var(--color-quote-border);
+    background-color: var(--color-quote-background);
+    padding: 0.5rem 1rem;
+    padding-right: 0;
   }
 `
 const SinglePostDateWrapper = styled.div`
