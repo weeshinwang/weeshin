@@ -96,9 +96,9 @@ export default function PageTemplate({ data: { mdx } }) {
       <Seo title="posts" />
       <SinglePostWrapper>
         <SinglePostHeader>
-          <div>
+          <Button role="button">
             <Link to="/posts">⬅️</Link>
-          </div>
+          </Button>
           <div>
             <ThemeSwitcher />
           </div>
@@ -163,21 +163,6 @@ const SinglePostHeader = styled.div`
   position: sticky;
   top: 0;
   background: var(--color-background);
-  & > div:first-of-type {
-    padding: 0;
-    margin: 0;
-
-    /* @media not all and (hover: none) {
-      &:hover {
-        transform: none;
-      }
-    } */
-    /* TODO: should be optimized for doom flicker */
-    &:hover {
-      transform: translateY(-2px);
-    }
-  }
-
   & a {
     text-decoration: none;
     &:hover {
@@ -185,6 +170,27 @@ const SinglePostHeader = styled.div`
     }
   }
   z-index: 1;
+`
+
+const Button = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  a {
+    display: block;
+  }
+
+  &:hover a {
+    transform: translateY(-6px);
+  }
+  a {
+    transition: transform 200ms;
+  }
 `
 
 const SinglePostContentWrapper = styled.div`
