@@ -5,6 +5,7 @@ import ThemeSwitcher from "../components/theme-switcher"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { CodePen, CodeSandbox } from "mdx-embed"
 import { Link } from "gatsby"
 import styled from "styled-components/macro"
 import Highlight, { defaultProps } from "prism-react-renderer"
@@ -85,6 +86,11 @@ export default function PageTemplate({ data: { mdx } }) {
     },
   }
 
+  const EmbededComponent = {
+    CodePen,
+    CodeSandbox,
+  }
+
   // set anchor tag to open in new tab
   useEffect(() => {
     document.querySelectorAll("a").forEach((a) => {
@@ -107,7 +113,12 @@ export default function PageTemplate({ data: { mdx } }) {
         </SinglePostHeader>
         <SinglePostContentWrapper>
           <h1>{mdx.frontmatter.displayTitle}</h1>
-          <MDXProvider components={PrismSyntaxHighlightingComponent}>
+          <MDXProvider
+            components={{
+              ...PrismSyntaxHighlightingComponent,
+              ...EmbededComponent,
+            }}
+          >
             <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
           </MDXProvider>
           {/* <Comments /> */}
