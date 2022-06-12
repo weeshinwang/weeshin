@@ -12,6 +12,7 @@ import Highlight, { defaultProps } from "prism-react-renderer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
 import rangeParser from "parse-numeric-range"
+import { VideoEmbed } from "../components/media"
 // import Comments from "../components/remark-ninja"
 
 const calculateLinesToHighlight = (meta) => {
@@ -89,6 +90,7 @@ export default function PageTemplate({ data: { mdx } }) {
   const EmbededComponent = {
     CodePen,
     CodeSandbox,
+    VideoEmbed,
   }
 
   // set anchor tag to open in new tab
@@ -342,6 +344,11 @@ const SinglePostContentWrapper = styled.div`
     padding: 0.5rem 1rem;
     padding-right: 0;
     margin: 1rem 0;
+  }
+
+  video,
+  .mdx-embed {
+    margin: 1.5rem 0;
   }
 `
 const SinglePostDateWrapper = styled.div`

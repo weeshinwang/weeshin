@@ -1,0 +1,191 @@
+---
+title: "JavaScript设计模式大全"
+displayTitle: "JavaScript 设计模式大全"
+date: 2022-06-12
+lastmod: 2022-06-12
+tags: [design-pattern]
+categories: [编程技术]
+type: "post"
+draft: false
+---
+
+> 本文翻译自 [patterns.dev](https://www.patterns.dev/posts/)
+
+## [观察者模式（Observer Pattern）](https://www.patterns.dev/posts/observer-pattern/)
+
+_**🎉 当事件发生时，使用被观察者来通知观察者。**_
+
+<br />
+
+通过使用**观察者模式**，我们可以使某类特定的对象（称为**观察者**，Observers）订阅另一类对象（称为**被观察者**，Observable）。当一个事件发生时，被观察者将会通知所有的观察者。
+
+一个被观察对象通常包含三个重要的部分：
+
+- `观察者` （`observers`） ：当特定事件发生时会接收到通知的观察者数组。
+- `subscribe()` ：一个将观察者加入观察者列表的方法；
+- `unsubscribe()` ：一个将观察者移除出观察者列表的方法；
+- `notify()` ：一个当特定事件发生时，通知所有观察者的方法。
+
+相当棒！现在我们来创建一个被观察者对象。一种最简单创建它的方法是使用 ES6 语法中的 [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+```js
+class Observable {
+  constructor() {
+    this.observers = []
+  }
+
+  subscribe(func) {
+    this.observers.push(func)
+  }
+
+  unsubscribe(func) {
+    this.observers = this.observers.filter((observer) => observer !== func)
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer(data))
+  }
+}
+```
+
+完美！我们现在可以通过订阅（`subscribe()`）方法来将观察者添加入观察者列表，或使用取消订阅（`unsubscribe()`）的方法来将观察者移除出观察者列表，亦或是使用通知（`notify()`）方法来通知所有的观察者。
+
+让我们使用被观察者对象来写一些代码。我们有一个非常基础的应用，它仅仅有两个组件构成：一个按钮（`Button`）和一个开关（`Switch`）。
+
+```js
+export default function App() {
+  return (
+    <div className="App">
+      <Button>Click me!</Button>
+      <FormControlLabel control={<Switch />} />
+    </div>
+  )
+}
+```
+
+我们想要追踪用户与应用的**交互**。当有用户点击按钮或切换开关，我们想记录这个事件发生时的时间戳。在记录之外，我们也想要创建一个当事件发生时就会出现的 Toast 通知。
+
+本质上，我们想要做以下的事情：
+
+<VideoEmbed src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056518/patterns.dev/jspat-41_nxsnbd.mp4" />
+
+当用户调用 `handleClick` 或者 `handleToggle` 函数时，这两个函数也会调用在观察者对象中的 `notify` 方法。`notify` 方法将通过 `handleClick` 或 `handleToggle` 函数传递的数据通知给所有的订阅者。
+
+首先，让我们来创建 `logger` 和 `toastify` 函数。这些函数将最终接收从 `notify` 方法传递的数据。
+
+```js
+import { ToastContainer, toast } from "react-toastify"
+
+function logger(data) {
+  console.log(`${Date.now()} ${data}`)
+}
+
+function toastify(data) {
+  toast(data)
+}
+
+export default function App() {
+  return (
+    <div className="App">
+      <Button>Click me!</Button>
+      <FormControlLabel control={<Switch />} />
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+当前，被观察者还不能发现 `logger` 和 `toastify` 函数：被观察者还不能通知它们。为了将这两个函数变为观察者，我们需要使用在被观察者中的 `subscribe` 方法来订阅它们。
+
+```js
+import { ToastContainer, toast } from "react-toastify"
+
+function logger(data) {
+  console.log(`${Date.now()} ${data}`)
+}
+
+function toastify(data) {
+  toast(data)
+}
+
+observable.subscribe(logger)
+observable.subscribe(toastify)
+
+export default function App() {
+  return (
+    <div className="App">
+      <Button>Click me!</Button>
+      <FormControlLabel control={<Switch />} />
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+这样，当事件发生时，`logger` 和 `toastify` 函数将会得到通知。现在我们仅需要实现在事实上通知被观察者的函数：`handleClick` 和 `handleToggle`。这些函数应调用在被观察者中的 `notify` 方法，并传递给观察者所需的数据。
+
+```js
+import { ToastContainer, toast } from "react-toastify"
+
+function logger(data) {
+  console.log(`${Date.now()} ${data}`)
+}
+
+function toastify(data) {
+  toast(data)
+}
+
+observable.subscribe(logger)
+observable.subscribe(toastify)
+
+export default function App() {
+  function handleClick() {
+    observable.notify("User clicked button!")
+  }
+
+  function handleToggle() {
+    observable.notify("User toggled switch!")
+  }
+
+  return (
+    <div className="App">
+      <Button>Click me!</Button>
+      <FormControlLabel control={<Switch />} />
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+非常棒！我们刚刚完成了整个工作流：`handleClick` 和 `handleToggle` 调用在被观察者中的 `notify` 方法，并传递相关数据。在此之后，观察者通知所有的订阅者，在这个例子中，是使用 `logger` 和 `toastify` 函数来完成。
+
+当用户与其中一个组件交互式，`logger` 和 `toastify` 函数会接收到通知与传递给 `notify` 方法的数据。
+
+<CodeSandbox codeSandboxId="quizzical-sinoussi-md8k5" />
+
+尽管我们可以在很多地方使用观察者模式，它在当使用**异步或事件为基础的数据**时相当有用。或许你想要特定组件在某些数据下载完成后得到通知，或者是，当用户向消息栏发送新消息时你想要所有其他用户收到通知。
+
+### 案例研究
+
+一个使用观察者模式的流行 JavaScript 库是 `RxJS` :
+
+> ReactiveX combines the Observer pattern with the Iterator pattern and functional programming with collections to fill the need for an ideal way of managing sequences of events. - RxJS
+
+通过 RxJS，我们可以创建被观察者对象以及订阅特定的时间。让我们来看一个其官方文档中的例子：记录用户是否拖拽文档。
+
+<CodeSandbox codeSandboxId="stoic-turing-kqq9z" />
+
+RxJS 有非常多内置的特性和例子使用了观察者模式。
+
+### 优点
+
+使用观察者模式是一个很好的方式来实行关注点分离（Separation of Concerns）和单一功能 （Single-responsibility）的原则。观察者对象与被观察者对象不是很紧密的耦合，且可以随时解耦。被观察者对象负责监听事件，与此同时，观察者对象仅负责处理收到的数据。
+
+### 缺点
+
+如果观察者对象变得非常复杂，当通知所有的订阅者时，会出现一些性能方面的问题。
+
+### 参考文献
+
+- [RxJS](https://rxjs-dev.firebaseapp.com/)
+- [JavaScript Design Patterns: The Observer Pattern](https://www.sitepoint.com/javascript-design-patterns-observer-pattern/)
