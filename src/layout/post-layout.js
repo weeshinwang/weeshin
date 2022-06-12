@@ -5,7 +5,7 @@ import ThemeSwitcher from "../components/theme-switcher"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { CodePen, CodeSandbox } from "mdx-embed"
+import * as MdxEmbed from "mdx-embed"
 import { Link } from "gatsby"
 import styled from "styled-components/macro"
 import Highlight, { defaultProps } from "prism-react-renderer"
@@ -88,8 +88,7 @@ export default function PageTemplate({ data: { mdx } }) {
   }
 
   const EmbededComponent = {
-    CodePen,
-    CodeSandbox,
+    ...MdxEmbed,
     VideoEmbed,
   }
 
