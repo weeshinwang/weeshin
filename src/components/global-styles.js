@@ -120,6 +120,7 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].dark};
     --color-box-shadow-code:${COLORS["box-shadow-code"].dark};
   }
+}
 
   body {
     color: var(--color-text);

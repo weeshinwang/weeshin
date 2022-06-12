@@ -225,12 +225,18 @@ const Lang = styled.div`
 
 const SinglePostContentWrapper = styled.div`
   background: var(--color-background);
-  padding: 0 50px;
+  padding: 0 3rem;
   justify-self: center;
   grid-row: 2;
   min-width: 300px;
   max-width: 900px;
   line-height: 1.8rem;
+  @media only screen and (max-width: 900px) {
+    padding: 0 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 0 1rem;
+  }
 
   pre {
     white-space: pre-wrap; /* Since CSS 2.1 */
