@@ -167,7 +167,8 @@ const GlobalStyles = createGlobalStyle`
     color: var(--color-text);
     border-radius: 3px;
     font-size: 85%;
-    padding: 0.2em 0.4em;
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.2rem;
   }
 
   /* #f47fb5 */

@@ -1,0 +1,124 @@
+---
+title: "JavaScript中箭头函数的几种语法格式"
+displayTitle: "JavaScript 中箭头函数的几种语法格式"
+date: 2022-01-23
+lastmod: 2022-01-30
+tags: [javascript, es6, frontend]
+categories: [编程技术]
+type: "post"
+draft: false
+---
+
+箭头函数（Arrow Function）是 ES6 标准中新增的一种语法格式，可以使函数表达式更加的简洁，其主要用于来书写匿名函数（Anonymous Function）的表达式。
+
+箭头函数的语法格式可以按照两个类别来记忆，分别是按照**输入参数的个数**以及**函数表达式的行数**。通过输入参数的个数可以来归类参数括号（`()`）是否可以省略，而函数表达式的行数则可以来归类将函数主体括起来的花括号（`{}`）是否可以省略。
+
+## 以输入参数的个数来归类是否可省略参数括号
+
+- 当没有输入参数时
+  此时参数括号不能省略。例如：
+
+```JS
+const noParam = () => {
+	// 函数主体
+};
+```
+
+- 当输入参数个数为 1 时
+  此时，参数括号可省略（当然也可不省略）。例如：
+
+```JS
+const oneParam = param => {
+	// 函数主体
+};
+/*
+也可以不省略参数括号
+*/
+const oneParam = (param) => {
+	// 函数主体
+};
+```
+
+- 当输入参数个数大于 1 时
+  此时参数括号不能省略。例如：
+
+```JS
+const manyParams = (param1, param2) => {
+	// 函数主体
+};
+```
+
+## 用函数主体的行数来归类是否可省略花括号
+
+- 当函数主体只有一行时，此时花括号可以省略，并且`return`关键词也需要省略，这叫做隐式返回（Implicit Return）。例如：
+
+```JS
+const singleLine = param => param * 2 //一个输入参数时，参数括号可省略
+```
+
+- 当函数主体有多行时，花括号不能省略。例如：
+
+```JS
+const multiLine = param => {
+	const output = param * 2
+	return output
+};
+```
+
+## 关于显示返回与隐式返回
+
+隐式返回表示省略返回关键词`return`的写法，在上方的例子中已经接触到。与之相对的是显示返回（Explicit Return），也就是不省略`return`关键词的写法。
+在刚才那个函数主体只有一行的例子中，将返回的表达式写作多行也是允许的。也就是：
+
+```JS
+const singleLine = param =>
+param * 2
+
+singleLine(3) // 返回值6
+```
+
+如果要在箭头函数中使用隐式返回，其返回必须是一个函数表达式（expression），而不能是函数声明（statement）。
+
+> 函数表达式返回一个值或者可以被一个值代替，而函数声明会执行一些代码。
+
+例如：
+
+```JS
+const implicit = param => param ? 'HELLO' : 'WORLD'
+implicit(1) // return 'HELLO'
+
+//但是下面的写法就会报错
+const implicitAlt = param => if(param) {return 'HELLO'}
+// Uncaught SyntaxError: expected expression, got keyword 'if'
+```
+
+原因是 `if`属于一个函数声明而条件（三元）运算符是一个表达式。
+此外，还有一些错误写法需要辨识，例如：
+
+```JS
+const singleLine = param => return param * 2
+/*
+ERROR: Uncaught SyntaxError: expected expression, got keyword 'return'
+return属于函数声明
+*/
+
+const returnObj = param => {'some string'}
+returnObj(1)
+/*
+return undefined
+因为当有花括号时，此时不在是隐式返回，必须有return关键词。正确写法为：
+const returnObj = param => {return 'some string'}
+*/
+```
+
+## 总结
+
+- 当输入参数个数为 1 时，参数括号可省略，其余情况下不可省略。
+- 当函数主体为一行时，可以使用隐式返回，将花括号省略。此时箭头函数右方必须为函数表达式，不能为函数声明(`return`关键词必须同时省略)。
+
+## 参考文献
+
+1. [Arrow function expressions: MDN Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+2. [Require parens in arrow function arguments (arrow-parens): ESint Doc](https://eslint.org/docs/rules/arrow-parens)
+3. [JavaScript Arrow Function Return Rules](https://jaketrent.com/post/javascript-arrow-function-return-rules)
+4. [Arrow Functions Return Rules in JavaScript](https://medium.com/@bunlong/arrow-functions-return-rules-in-javascript-b63ed5f25994)

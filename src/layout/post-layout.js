@@ -291,14 +291,38 @@ const SinglePostContentWrapper = styled.div`
     width: 100%;
   }
 
-  table,
+  /* table,
   th,
   td {
     border: 1px solid var(--color-hover-bg);
     border-collapse: collapse;
+    border-left: none;
+    border-right: none;
+  } */
+  table {
+    border: 2px solid var(--color-hover-bg);
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    border-left: none;
+    border-right: none;
   }
+
+  thead tr th {
+    border-bottom: 2px solid var(--color-hover-bg);
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+  }
+
+  td {
+    padding: 0 0.5rem;
+  }
+
   th {
     text-align: center;
+  }
+
+  table {
+    margin: 1rem 0;
   }
 
   blockquote {
@@ -306,6 +330,7 @@ const SinglePostContentWrapper = styled.div`
     background-color: var(--color-quote-background);
     padding: 0.5rem 1rem;
     padding-right: 0;
+    margin: 1rem 0;
   }
 `
 const SinglePostDateWrapper = styled.div`
