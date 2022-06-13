@@ -110,11 +110,11 @@ const IconWrapper = styled.div`
   display: inline-block;
   margin: 0 5px;
 
-  & svg {
+  svg {
     width: 100%;
     height: auto;
 
-    & path {
+    path {
       fill: ${({ hover }) => hover || `var(--color-text)`};
     }
 
