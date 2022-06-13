@@ -14,9 +14,7 @@ const Logo = () => {
   `)
 
   return (
-    <>
-      <GatsbyImage image={getImage(data.file)} alt="Main Logo" />
-    </>
+    <GatsbyImage image={getImage(data.file)} alt="Main Logo" loading="eager" />
   )
 }
 

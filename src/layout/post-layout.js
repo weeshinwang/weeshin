@@ -216,7 +216,7 @@ const Button = styled.button`
   }
 
   &:hover a {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
   }
   a {
     transition: transform 200ms;
