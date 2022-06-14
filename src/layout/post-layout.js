@@ -216,10 +216,13 @@ const Button = styled.button`
   }
 
   &:hover a {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
+    path {
+      fill: var(--color-hover-bg);
+    }
   }
   a {
-    transition: transform 200ms;
+    transition: transform 100ms;
   }
 
   svg {
