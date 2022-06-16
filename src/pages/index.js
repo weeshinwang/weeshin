@@ -89,7 +89,12 @@ const StyledLink = styled(Link)`
 
   &:hover {
     color: var(--text);
-    background-color: initial;
+  }
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    background-color: var(--color-button-hover-bg);
   }
 `
 
@@ -112,7 +117,10 @@ const NavButton = styled.div`
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
     background-color: var(--color-button-hover-bg);
   }
 `

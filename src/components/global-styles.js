@@ -148,10 +148,11 @@ const GlobalStyles = createGlobalStyle`
   #___gatsby {
     &::before {
       content: '';
-      background-image: var(--color-background-gradient);
+      /* background-image: var(--color-background-gradient);
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: center; */
+      background-color: var(--color-gray-100);
       position: fixed;
       min-height: 100vh;
       width: 100vw;
