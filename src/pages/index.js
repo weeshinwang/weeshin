@@ -20,15 +20,9 @@ export default function Home() {
           <p>一个自学的前端工程师</p>
         </SecondaryIntroWrapper>
         <NavButtonWrapper>
-          <NavButton>
-            <StyledLink to="/projects">我的项目</StyledLink>
-          </NavButton>
-          <NavButton>
-            <StyledLink to="/posts">我的文章</StyledLink>
-          </NavButton>
-          <NavButton>
-            <StyledLink to="/about">关于我</StyledLink>
-          </NavButton>
+          <StyledLink to="/projects">我的项目</StyledLink>
+          <StyledLink to="/posts">我的文章</StyledLink>
+          <StyledLink to="/about">关于我</StyledLink>
         </NavButtonWrapper>
         <SocialIconWrapper>
           <SocialIcons />
@@ -68,14 +62,27 @@ const NavButtonWrapper = styled.div`
   opacity: 0;
   height: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   @media only screen and (max-width: 600px) {
     opacity: 1;
     height: auto;
-    margin-top: 10px;
+    margin-top: 1rem;
     text-align: center;
   }
   will-change: opacity;
+
+  a:hover,
+  a:focus,
+  a:active,
+  a:visited {
+    color: var(--text);
+    background-color: inherit;
+  }
+  a:focus-visible {
+    outline: none;
+  }
 `
 
 const SocialIconWrapper = styled.div`
@@ -86,25 +93,12 @@ const StyledLink = styled(Link)`
   font-size: 1.2rem;
   text-decoration: none;
   border-bottom: none;
-
-  &:hover {
-    color: var(--text);
-  }
-  &:hover,
-  &:focus,
-  &:active,
-  &:visited {
-    background-color: var(--color-button-hover-bg);
-  }
-`
-
-const NavButton = styled.div`
-  will-change: background-color;
   margin: 10px 0;
   padding: 5px 10px;
+  border-radius: 5px;
   background-color: var(--color-button-bg);
   box-shadow: var(--shadow-elevation-low);
-  border-radius: 5px;
+
   animation: navButtonBgAnimation 1500ms ease-in-out infinite alternate;
   animation-delay: 3s;
 
@@ -115,12 +109,5 @@ const NavButton = styled.div`
     to {
       background-color: var(--color-button-hover-bg);
     }
-  }
-
-  &:hover,
-  &:focus,
-  &:active,
-  &:visited {
-    background-color: var(--color-button-hover-bg);
   }
 `

@@ -152,7 +152,7 @@ const GlobalStyles = createGlobalStyle`
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center; */
-      background-color: var(--color-gray-100);
+      background-color: var(--color-background);
       position: fixed;
       min-height: 100vh;
       width: 100vw;
