@@ -175,9 +175,12 @@ const SinglePostWrapper = styled.div`
   & * {
     text-align: justify;
   }
-  background: var(--color-gray-100);
+  background-color: var(--color-gray-100);
   margin: 0 auto;
   min-height: 100%;
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 `
 
 const SinglePostHeader = styled.div`
@@ -249,7 +252,7 @@ const Lang = styled.div`
 `
 
 const SinglePostContentWrapper = styled.div`
-  background: var(--color-background);
+  background-color: var(--color-background);
   padding: 0 3rem;
   justify-self: center;
   grid-row: 2;

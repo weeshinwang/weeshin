@@ -74,7 +74,6 @@ const NavButtonWrapper = styled.div`
   will-change: opacity;
 
   a:hover,
-  a:focus,
   a:active,
   a:visited {
     color: var(--text);
@@ -82,6 +81,9 @@ const NavButtonWrapper = styled.div`
   }
   a:focus-visible {
     outline: none;
+  }
+  a:focus {
+    background-color: var(--color-button-hover-bg);
   }
 `
 
@@ -110,4 +112,6 @@ const StyledLink = styled(Link)`
       background-color: var(--color-button-hover-bg);
     }
   }
+  -webkit-tap-highlight-color: var(--color-background);
+  -webkit-tap-highlight-color: transparent;
 `

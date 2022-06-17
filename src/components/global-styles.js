@@ -119,8 +119,18 @@ const GlobalStyles = createGlobalStyle`
     --color-shadow-elevation-medium:${COLORS["shadow-elevation-medium"].dark};
     --color-shadow-elevation-high:${COLORS["shadow-elevation-high"].dark};
     --color-box-shadow-code:${COLORS["box-shadow-code"].dark};
+    }
   }
-}
+
+  input,
+  textarea,
+  button,
+  select,
+  a {
+    -webkit-tap-highlight-color: var(--color-background);
+    -webkit-tap-highlight-color: transparent;
+  }
+
 
   body {
     color: var(--color-text);
@@ -157,6 +167,9 @@ const GlobalStyles = createGlobalStyle`
       min-height: 100vh;
       width: 100vw;
       z-index: -1;
+      -webkit-transition: background-color 250ms linear;
+      -ms-transition: background-color 250ms linear;
+      transition: background-color 250ms linear;
     }
     position: absolute;
     width: 100%;
