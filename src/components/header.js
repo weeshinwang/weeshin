@@ -50,14 +50,14 @@ const RightDesktop = styled.div`
 `
 
 const LogoWrapper = styled.div`
-  height: 30px;
-  width: 30px;
+  height: 2rem;
+  width: 2rem;
   border-radius: 25%;
   overflow: hidden;
-  transition: 750ms ease-in-out;
+  cursor: pointer;
+  transition: 300ms ease-in-out;
   &:hover {
-    transform: rotate(360deg);
-    cursor: pointer;
+    transform: scale(1.1);
   }
 `
 

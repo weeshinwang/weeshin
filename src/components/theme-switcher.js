@@ -57,8 +57,8 @@ export default function ThemeSwitcher() {
 
 const SwitcherWrapper = styled.div`
   --size: 1.5rem;
-  --icon-fill: hsl(210 10% 15%);
-  --icon-fill-hover: hsl(210 10% 30%);
+  --icon-fill: var(--color-text);
+  --icon-fill-hover: var(--color-hover-bg);
 
   background: none;
   border: none;
@@ -88,10 +88,10 @@ const SwitcherWrapper = styled.div`
     stroke-linecap: round;
   }
 
-  [data-theme="dark"] & {
+  /* [data-theme="dark"] & {
     --icon-fill: hsl(210 15% 90%);
-    --icon-fill-hover: hsl(210 10% 70%);
-  }
+    --icon-fill-hover: var(--color-hover-bg);
+  } */
 
   /* @media (hover: none) {
     --size: 48px;

@@ -56,7 +56,7 @@ const List = styled.div`
 const ListItem = styled(Link)`
   outline: none;
   margin: 0 5px;
-  padding: 0px 8px;
+  padding: 0px 10px;
   font-weight: 700;
   font-size: 1.15rem;
   text-decoration: none;
