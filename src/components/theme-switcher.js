@@ -87,15 +87,6 @@ const SwitcherWrapper = styled.div`
     block-size: 100%;
     stroke-linecap: round;
   }
-
-  /* [data-theme="dark"] & {
-    --icon-fill: hsl(210 15% 90%);
-    --icon-fill-hover: var(--color-hover-bg);
-  } */
-
-  /* @media (hover: none) {
-    --size: 48px;
-  } */
 `
 
 const Svg = styled.svg`
@@ -151,37 +142,40 @@ const Svg = styled.svg`
     }
   }
 
-  & > .sun {
-    transition: transform 0.5s var(--ease-elastic-3);
-  }
-
-  & > .sun-beams {
-    transition: transform 0.5s var(--ease-elastic-4), opacity 0.5s var(--ease-3);
-  }
-
-  & .moon > circle {
-    transition: transform 0.25s var(--ease-out-5);
-
-    @supports (cx: 1) {
-      transition: cx 0.25s var(--ease-out-5);
-    }
-  }
-
-  [data-theme="dark"] & {
+  @media only screen and (min-width: 600px) {
     & > .sun {
-      transform: scale(1.75);
-      transition-timing-function: var(--ease-3);
-      transition-duration: 0.25s;
+      transition: transform 0.5s var(--ease-elastic-3);
     }
 
     & > .sun-beams {
-      transform: rotateZ(-25deg);
-      transition-duration: 0.15s;
+      transition: transform 0.5s var(--ease-elastic-4),
+        opacity 0.5s var(--ease-3);
     }
 
-    & > .moon > circle {
-      transition-delay: 0.25s;
-      transition-duration: 0.5s;
+    & .moon > circle {
+      transition: transform 0.25s var(--ease-out-5);
+
+      @supports (cx: 1) {
+        transition: cx 0.25s var(--ease-out-5);
+      }
+    }
+
+    [data-theme="dark"] & {
+      & > .sun {
+        transform: scale(1.75);
+        transition-timing-function: var(--ease-3);
+        transition-duration: 0.25s;
+      }
+
+      & > .sun-beams {
+        transform: rotateZ(-25deg);
+        transition-duration: 0.15s;
+      }
+
+      & > .moon > circle {
+        transition-delay: 0.25s;
+        transition-duration: 0.5s;
+      }
     }
   }
 `
