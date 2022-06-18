@@ -58,7 +58,7 @@ const SecondaryIntroWrapper = styled.div`
 `
 
 const NavButtonWrapper = styled.div`
-  transition: opacity 500ms ease-in-out;
+  transition: opacity 250ms linear;
   opacity: 0;
   height: 0;
   overflow: hidden;
@@ -72,19 +72,6 @@ const NavButtonWrapper = styled.div`
     text-align: center;
   }
   will-change: opacity;
-
-  a:hover,
-  a:active,
-  a:visited {
-    color: var(--text);
-    background-color: var(--color-button-hover-bg);
-  }
-  a:focus-visible {
-    outline: none;
-  }
-  a:focus {
-    background-color: var(--color-button-hover-bg);
-  }
 `
 
 const SocialIconWrapper = styled.div`
@@ -95,12 +82,24 @@ const StyledLink = styled(Link)`
   font-size: 1.2rem;
   text-decoration: none;
   border-bottom: none;
-  margin: 10px 0;
+  margin: 15px 0;
   padding: 5px 10px;
   border-radius: 8px;
-  box-shadow: var(--shadow-elevation-low);
+  box-shadow: 0px 12px 12px -10px hsl(var(--color-box-shadow));
   border: 1px solid var(--color-button-hover-bg);
   -webkit-transition: border 250ms linear;
   -ms-transition: border 250ms linear;
   transition: border 250ms linear;
+
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    color: var(--text);
+    background-color: var(--color-button-hover-bg);
+    box-shadow: none;
+  }
+  &:focus-visible {
+    outline: none;
+  }
 `

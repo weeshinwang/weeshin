@@ -67,13 +67,14 @@ const PostWrapper = styled.ul`
 const PostCardWrapper = styled.div`
   min-width: 330px;
   margin: 30px 0;
-  box-shadow: var(--color-shadow-elevation-medium);
+  box-shadow: 0px 5px 30px -8px hsl(var(--color-box-shadow));
   border-radius: 5px;
   padding: 10px;
 
   &:hover {
     background-color: var(--color-button-hover-bg);
     cursor: pointer;
+    box-shadow: none;
   }
 
   & p:first-of-type {
