@@ -77,7 +77,7 @@ const NavButtonWrapper = styled.div`
   a:active,
   a:visited {
     color: var(--text);
-    background-color: inherit;
+    background-color: var(--color-button-hover-bg);
   }
   a:focus-visible {
     outline: none;
@@ -97,21 +97,10 @@ const StyledLink = styled(Link)`
   border-bottom: none;
   margin: 10px 0;
   padding: 5px 10px;
-  border-radius: 5px;
-  background-color: var(--color-button-bg);
+  border-radius: 8px;
   box-shadow: var(--shadow-elevation-low);
-
-  animation: navButtonBgAnimation 1500ms ease-in-out infinite alternate;
-  animation-delay: 3s;
-
-  @keyframes navButtonBgAnimation {
-    from {
-      background-color: var(--color-button-bg);
-    }
-    to {
-      background-color: var(--color-button-hover-bg);
-    }
-  }
-  -webkit-tap-highlight-color: var(--color-background);
-  -webkit-tap-highlight-color: transparent;
+  border: 1px solid var(--color-button-hover-bg);
+  -webkit-transition: border 250ms linear;
+  -ms-transition: border 250ms linear;
+  transition: border 250ms linear;
 `
