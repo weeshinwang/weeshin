@@ -108,9 +108,10 @@ const Svg = styled.svg`
 
   & > :is(.moon, .sun) {
     fill: var(--icon-fill);
-
-    ${SwitcherWrapper}:is(:hover, :focus-visible) > & {
-      fill: var(--icon-fill-hover);
+    @media (pointer: fine) {
+      ${SwitcherWrapper}:is(:hover, :focus-visible) > & {
+        fill: var(--icon-fill-hover);
+      }
     }
   }
 
@@ -118,8 +119,10 @@ const Svg = styled.svg`
     stroke: var(--icon-fill);
     stroke-width: 2px;
 
-    ${SwitcherWrapper}:is(:hover, :focus-visible) & {
-      stroke: var(--icon-fill-hover);
+    @media (pointer: fine) {
+      ${SwitcherWrapper}:is(:hover, :focus-visible) & {
+        stroke: var(--icon-fill-hover);
+      }
     }
   }
 
@@ -142,7 +145,7 @@ const Svg = styled.svg`
     }
   }
 
-  @media only screen and (min-width: 600px) {
+  @media (pointer: fine) {
     & > .sun {
       transition: transform 0.5s var(--ease-elastic-3);
     }
