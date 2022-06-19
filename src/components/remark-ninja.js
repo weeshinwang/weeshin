@@ -44,6 +44,7 @@ const postComment = async ({
   replyToComment,
 }) => {
   threadSlug = threadSlug || window.location.pathname
+  authorEmail = authorEmail?.trim().toLowerCase()
   return axios
     .post(`${rnUrlPrefix}/api/1/comments`, {
       siteId,
@@ -121,7 +122,6 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
 
   return (
     <CommentFormWrapper className="rn-comment-form" id="rn-comment-form">
-      {error !== undefined && <div className="rn-error">{error}</div>}
       <AuthorBoxWrapper>
         <AuthorNameWrapper>
           <label htmlFor="rn-author-name">{text("name")}</label>
@@ -156,6 +156,7 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
         />
         <input onClick={submit} type="submit" value={text("submit")} />
         {message !== undefined && <span>{message}</span>}
+        {!!error && <span className="rn-error">{error}</span>}
       </CommentBoxWrapper>
       <PromoLink>
         {text("powered_by")}{" "}
@@ -171,10 +172,8 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
   )
 }
 
-const Comment = ({ authorName, authorEmail, body, createdAt, replyFn }) => {
+const Comment = ({ authorName, gravatarHash, body, createdAt, replyFn }) => {
   const date = new Date(createdAt)
-  const email = authorEmail || lsGet(lsAuthorEmailKey)
-  const gravatarHash = MD5(email?.trim()?.toLowerCase())
 
   return (
     <CommentItemWrapper>
@@ -206,6 +205,7 @@ const Comments = ({ siteId = SITE_ID, threadSlug, pageSize }) => {
     loadComments({ siteId, threadSlug, start, limit })
       .then((cs) => {
         setComments(cs)
+        console.log("🤗🤗🤗", cs)
         setError(undefined)
         setReplyingTo(undefined)
       })
@@ -246,13 +246,12 @@ const Comments = ({ siteId = SITE_ID, threadSlug, pageSize }) => {
           onNewComment={load}
           replyingTo={replyingTo}
         />
-        {!!error && <div className="rn-error">{error}</div>}
         <CommentListWrapper>
           {comments.map((c) => (
             <CommentList key={c.id} id={`rn-comment-${c.id}`}>
               <Comment
                 authorName={c.authorName}
-                authorEmail={c.authorEmail}
+                gravatarHash={c.gravatarHash}
                 body={c.bodyHTML}
                 createdAt={c.createdAt}
                 replyFn={() => {
@@ -321,6 +320,7 @@ const AuthorBoxWrapper = styled.div`
   }
 
   div > label {
+    display: block;
     margin-bottom: 5px;
   }
 
@@ -343,6 +343,9 @@ const AuthorBoxWrapper = styled.div`
     & > div {
       width: 100%;
     }
+    div:last-child > label {
+      margin-top: 10px;
+    }
   }
 `
 
@@ -357,10 +360,9 @@ const AuthorNameWrapper = styled.div``
 const AuthorEmailWrapper = styled.div``
 
 const CommentBoxWrapper = styled.div`
-  margin-top: 10px;
   label {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 5px 0;
   }
 
   input[type="submit"] {
@@ -390,6 +392,10 @@ const CommentBoxWrapper = styled.div`
   span {
     color: limegreen;
     padding-left: 1rem;
+  }
+
+  span.rn-error {
+    color: tomato;
   }
 `
 
