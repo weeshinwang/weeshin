@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import styled from "styled-components/macro"
 import text from "../utils/remark-ninja-text"
-import { MD5 } from "crypto-js"
+import DOMPurify from "dompurify"
 
 const rnUrlPrefix = "https://api.rmninja.com"
 
@@ -45,6 +45,8 @@ const postComment = async ({
 }) => {
   threadSlug = threadSlug || window.location.pathname
   authorEmail = authorEmail?.trim().toLowerCase()
+  body = DOMPurify.sanitize(body)
+
   return axios
     .post(`${rnUrlPrefix}/api/1/comments`, {
       siteId,
