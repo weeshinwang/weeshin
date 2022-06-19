@@ -1,426 +1,444 @@
-// import React, { useState, useEffect } from "react"
-// import axios from "axios"
-// import styled from "styled-components/macro"
-// import text from "../utils/remark-ninja-text"
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import styled from "styled-components/macro"
+import text from "../utils/remark-ninja-text"
+import { MD5 } from "crypto-js"
 
-// const rnUrlPrefix = "https://api.rmninja.com"
+const rnUrlPrefix = "https://api.rmninja.com"
 
-// const SITE_ID = process.env.GATSBY_REMARK_NINJA_SITE_ID
+const SITE_ID = process.env.GATSBY_REMARK_NINJA_SITE_ID
 
-// const checkHttpStatus = (resp) => {
-//   if (resp.status >= 400) {
-//     throw new Error(resp.data.message)
-//   } else {
-//     return resp.data
-//   }
-// }
+const checkHttpStatus = (resp) => {
+  if (resp.status >= 400) {
+    throw new Error(resp.data.message)
+  } else {
+    return resp.data
+  }
+}
 
-// const loadComments = ({ siteId, threadSlug, start, limit }) => {
-//   start = start === undefined ? 0 : start
-//   limit = limit === undefined ? 10 : limit
-//   threadSlug = threadSlug || window.location.pathname
-//   return axios
-//     .get(
-//       `${rnUrlPrefix}/api/1/sites/${encodeURIComponent(
-//         siteId
-//       )}/threads/${encodeURIComponent(threadSlug)}/comments`,
-//       {
-//         params: {
-//           start,
-//           limit,
-//         },
-//       }
-//     )
-//     .then(checkHttpStatus)
-// }
+const loadComments = async ({ siteId, threadSlug, start, limit }) => {
+  start = start === undefined ? 0 : start
+  limit = limit === undefined ? 10 : limit
+  threadSlug = threadSlug || window.location.pathname
+  return axios
+    .get(
+      `${rnUrlPrefix}/api/1/sites/${encodeURIComponent(
+        siteId
+      )}/threads/${encodeURIComponent(threadSlug)}/comments`,
+      {
+        params: {
+          start,
+          limit,
+        },
+      }
+    )
+    .then(checkHttpStatus)
+}
 
-// const postComment = ({
-//   siteId,
-//   threadSlug,
-//   authorName,
-//   authorEmail,
-//   body,
-//   replyToComment,
-// }) => {
-//   threadSlug = threadSlug || window.location.pathname
-//   return axios
-//     .post(`${rnUrlPrefix}/api/1/comments`, {
-//       siteId,
-//       threadSlug,
-//       authorName,
-//       authorEmail,
-//       body,
-//       replyToComment,
-//     })
-//     .then(checkHttpStatus)
-// }
+const postComment = async ({
+  siteId,
+  threadSlug,
+  authorName,
+  authorEmail,
+  body,
+  replyToComment,
+}) => {
+  threadSlug = threadSlug || window.location.pathname
+  return axios
+    .post(`${rnUrlPrefix}/api/1/comments`, {
+      siteId,
+      threadSlug,
+      authorName,
+      authorEmail,
+      body,
+      replyToComment,
+    })
+    .then(checkHttpStatus)
+}
 
-// const lsGet = (key) =>
-//   typeof localStorage !== "undefined" && localStorage.getItem(key)
-// const lsSet = (key, val) =>
-//   typeof localStorage !== "undefined" && localStorage.setItem(key, val)
+const lsGet = (key) =>
+  typeof localStorage !== "undefined" && localStorage.getItem(key)
+const lsSet = (key, val) =>
+  typeof localStorage !== "undefined" && localStorage.setItem(key, val)
 
-// const lsAuthorNameKey = "rnCommentAuthorName"
-// const lsAuthorEmailKey = "rnCommentAuthorEmail"
+const lsAuthorNameKey = "rnCommentAuthorName"
+const lsAuthorEmailKey = "rnCommentAuthorEmail"
 
-// const scrollTo = (hash) => {
-//   window.location.hash = `#${hash}`
-// }
+const scrollTo = (hash) => {
+  window.location.hash = `#${hash}`
+}
 
-// const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
-//   const [authorName, setAuthorName] = useState(lsGet(lsAuthorNameKey) || "")
-//   const [authorEmail, setAuthorEmail] = useState(lsGet(lsAuthorEmailKey) || "")
-//   const [body, setBody] = useState("")
-//   const [error, setError] = useState(undefined)
-//   const [message, setMessage] = useState(undefined)
-//   useEffect(() => {
-//     if (replyingTo) {
-//       const replyingToUser = replyingTo.authorName || "Guest"
-//       setBody(`@${replyingToUser} `)
-//     } else {
-//       setBody("")
-//     }
-//   }, [replyingTo])
-//   const submit = (e) => {
-//     e.preventDefault()
-//     e.stopPropagation()
-//     const btn = e.target
-//     btn.disabled = true
-//     lsSet(lsAuthorNameKey, authorName)
-//     lsSet(lsAuthorEmailKey, authorEmail)
-//     setError(undefined)
-//     setMessage(undefined)
-//     postComment({
-//       siteId,
-//       threadSlug,
-//       authorName,
-//       authorEmail,
-//       body,
-//       replyToComment: replyingTo ? replyingTo.id : undefined,
-//     })
-//       .then(() => {
-//         setMessage(text("submitted"))
-//         setBody("")
-//         onNewComment()
-//       })
-//       .catch((e) => {
-//         setError(e.message)
-//       })
-//       .finally(() => {
-//         btn.disabled = false
-//       })
-//   }
-//   return (
-//     <form className="rn-comment-form" id="rn-comment-form">
-//       {error !== undefined && <div className="rn-error">{error}</div>}
-//       <div className="rn-author-box">
-//         <div className="rn-author-name-box">
-//           <label htmlFor="rn-author-name">{text("name")}</label>
-//           <input
-//             id="rn-author-name"
-//             value={authorName}
-//             onChange={(e) => setAuthorName(e.target.value)}
-//             placeholder={text("name_placeholder")}
-//           />
-//         </div>
-//         <div className="rn-author-email-box">
-//           <label htmlFor="rn-author-email">{text("email")}</label>
-//           <input
-//             id="rn-author-email"
-//             type="email"
-//             placeholder={text("email_placeholder")}
-//             value={authorEmail}
-//             onChange={(e) => setAuthorEmail(e.target.value)}
-//           />
-//         </div>
-//       </div>
-//       <label htmlFor="rn-body">{text("comment")}</label>
-//       <textarea
-//         id="rn-body"
-//         rows="5"
-//         value={body}
-//         onChange={(e) => setBody(e.target.value)}
-//       />
-//       <input onClick={submit} type="submit" value={text("submit")} />
-//       {message !== undefined && <span className="rn-success">{message}</span>}
-//       <div className="rn-promo-link">
-//         {text("powered_by")} <a href="https://remark.ninja">Remark Ninja</a>.
-//       </div>
-//     </form>
-//   )
-// }
+const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
+  const [authorName, setAuthorName] = useState(lsGet(lsAuthorNameKey) || "")
+  const [authorEmail, setAuthorEmail] = useState(lsGet(lsAuthorEmailKey) || "")
+  const [body, setBody] = useState("")
+  const [error, setError] = useState(undefined)
+  const [message, setMessage] = useState(undefined)
 
-// const Comment = ({ authorName, gravatarHash, body, createdAt, replyFn }) => {
-//   const date = new Date(createdAt)
-//   return (
-//     <div className="rn-comment-item">
-//       <div className="rn-gravatar">
-//         <img
-//           alt={`Avatar for ${authorName}`}
-//           src={`https://www.gravatar.com/avatar/${gravatarHash}?s=40`}
-//         />
-//       </div>
-//       <div className="rn-main-section">
-//         <div className="rn-author-name">{authorName || text("guest")}</div>
-//         <div className="rn-comment-actions">
-//           <span className="rn-date">{date.toLocaleDateString()}</span>
-//           <button onClick={replyFn}>Reply</button>
-//         </div>
-//         <div
-//           className="rn-comment-body"
-//           dangerouslySetInnerHTML={{ __html: body }}
-//         />
-//       </div>
-//     </div>
-//   )
-// }
+  useEffect(() => {
+    if (replyingTo) {
+      const replyingToUser = replyingTo.authorName || "Guest"
+      setBody(`@${replyingToUser} `)
+    } else {
+      setBody("")
+    }
+  }, [replyingTo])
 
-// const Comments = ({
-//   siteId = SITE_ID,
-//   threadSlug = "WEESHIN-TEST",
-//   pageSize,
-// }) => {
-//   console.log("yay", SITE_ID)
+  const submit = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const btn = e.target
+    btn.disabled = true
+    lsSet(lsAuthorNameKey, authorName)
+    lsSet(lsAuthorEmailKey, authorEmail)
+    setError(undefined)
+    setMessage(undefined)
+    postComment({
+      siteId,
+      threadSlug,
+      authorName,
+      authorEmail,
+      body,
+      replyToComment: replyingTo ? replyingTo.id : undefined,
+    })
+      .then(() => {
+        setMessage(text("submitted"))
+        setBody("")
+        onNewComment()
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
+      .finally(() => {
+        btn.disabled = false
+      })
+  }
 
-//   const [comments, setComments] = useState(undefined)
-//   const [error, setError] = useState(undefined)
-//   const [start, setStart] = useState(0)
-//   const [replyingTo, setReplyingTo] = useState(undefined)
-//   const limit = pageSize === undefined ? 20 : pageSize
-//   const load = () => {
-//     loadComments({ siteId, threadSlug, start, limit })
-//       .then((cs) => {
-//         setComments(cs)
-//         setError(undefined)
-//         setReplyingTo(undefined)
-//       })
-//       .catch((e) => {
-//         setError(e.message)
-//       })
-//   }
-//   const prevPage = () => {
-//     setStart(Math.max(start - limit, 0))
-//   }
-//   const nextPage = () => {
-//     setStart(start + limit)
-//   }
+  return (
+    <CommentFormWrapper className="rn-comment-form" id="rn-comment-form">
+      {error !== undefined && <div className="rn-error">{error}</div>}
+      <AuthorBoxWrapper>
+        <AuthorNameWrapper>
+          <label htmlFor="rn-author-name">{text("name")}</label>
+          <input
+            id="rn-author-name"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            placeholder={text("name_placeholder")}
+          />
+        </AuthorNameWrapper>
+        <AuthorEmailWrapper>
+          <label htmlFor="rn-author-email">{text("email")}</label>
+          <input
+            id="rn-author-email"
+            type="email"
+            placeholder={text("email_placeholder")}
+            value={authorEmail}
+            onChange={(e) => setAuthorEmail(e.target.value)}
+          />
+        </AuthorEmailWrapper>
+      </AuthorBoxWrapper>
+      <CommentBoxWrapper>
+        <label htmlFor="rn-body">{text("comment")}</label>
+        <textarea
+          id="rn-body"
+          rows="5"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+        />
+        <input onClick={submit} type="submit" value={text("submit")} />
+        {message !== undefined && <span>{message}</span>}
+      </CommentBoxWrapper>
+      <PromoLink>
+        {text("powered_by")} <a href="https://remark.ninja">Remark Ninja</a>
+      </PromoLink>
+    </CommentFormWrapper>
+  )
+}
 
-//   useEffect(load, [siteId, threadSlug, pageSize, start, limit])
+const Comment = ({ authorName, authorEmail, body, createdAt, replyFn }) => {
+  const date = new Date(createdAt)
+  const email = authorEmail || lsGet(lsAuthorEmailKey)
+  const gravatarHash = MD5(email?.trim()?.toLowerCase())
 
-//   if (comments === undefined && error === undefined) {
-//     return <div>{text("loading_comments")}</div>
-//   } else if (comments == undefined && error !== undefined) {
-//     return <div className="rn-error">Failed to load comments: {error}</div>
-//   } else {
-//     return (
-//       <CommentWrapper>
-//         {!!replyingTo && (
-//           <div>
-//             Replying to{" "}
-//             <a href={`#rn-comment-${replyingTo.id}`}>
-//               {replyingTo.authorName || "Guest"}
-//             </a>{" "}
-//             <button
-//               className="cancelReply"
-//               onClick={() => setReplyingTo(undefined)}
-//             >
-//               X
-//             </button>
-//           </div>
-//         )}
-//         <CommentForm
-//           siteId={siteId}
-//           threadSlug={threadSlug}
-//           onNewComment={load}
-//           replyingTo={replyingTo}
-//         />
-//         {!!error && <div className="rn-error">{error}</div>}
-//         <ul className="rn-comment-list">
-//           {comments.map((c) => (
-//             <li key={c.id} id={`rn-comment-${c.id}`}>
-//               <Comment
-//                 authorName={c.authorName}
-//                 gravatarHash={c.gravatarHash}
-//                 body={c.bodyHTML}
-//                 createdAt={c.createdAt}
-//                 replyFn={() => {
-//                   setReplyingTo(c)
-//                   scrollTo("rn-comment-form")
-//                 }}
-//               />
-//             </li>
-//           ))}
-//         </ul>
-//         <div className="rn-pagination">
-//           {start > 0 && <a onClick={prevPage}>{text("prev_page")}</a>}
-//           {comments.length === limit && (
-//             <a onClick={nextPage}>{text("next_page")}</a>
-//           )}
-//         </div>
-//       </CommentWrapper>
-//     )
-//   }
-// }
+  return (
+    <CommentItemWrapper>
+      <GravatarWrapper>
+        <img
+          alt={`Avatar for ${authorName}`}
+          src={`https://www.gravatar.com/avatar/${gravatarHash}?s=40`}
+        />
+      </GravatarWrapper>
+      <CommentMainSectionWrapper>
+        <CommentAuthorName>{authorName || text("guest")}</CommentAuthorName>
+        <CommentActions>
+          <span>{date.toLocaleDateString()}</span>
+          <button onClick={replyFn}>回复</button>
+        </CommentActions>
+        <CommentBody dangerouslySetInnerHTML={{ __html: body }} />
+      </CommentMainSectionWrapper>
+    </CommentItemWrapper>
+  )
+}
 
-// const CommentWrapper = styled.div`
-//   .rn-comment-list {
-//     list-style: none;
-//     margin-left: 0;
-//     padding: 0;
-//   }
+const Comments = ({ siteId = SITE_ID, threadSlug, pageSize }) => {
+  const [comments, setComments] = useState(undefined)
+  const [error, setError] = useState(undefined)
+  const [start, setStart] = useState(0)
+  const [replyingTo, setReplyingTo] = useState(undefined)
+  const limit = pageSize === undefined ? 20 : pageSize
+  const load = () => {
+    loadComments({ siteId, threadSlug, start, limit })
+      .then((cs) => {
+        setComments(cs)
+        setError(undefined)
+        setReplyingTo(undefined)
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
+  }
+  const prevPage = () => {
+    setStart(Math.max(start - limit, 0))
+  }
+  const nextPage = () => {
+    setStart(start + limit)
+  }
 
-//   .rn-comment-item {
-//     display: flex;
-//     margin-top: 10px;
-//   }
+  useEffect(load, [siteId, threadSlug, pageSize, start, limit])
 
-//   .rn-comment-item .rn-gravatar {
-//     flex: 0 0 40px;
-//   }
+  if (comments === undefined && error === undefined) {
+    return <div>{text("loading_comments")}</div>
+  } else if (comments === undefined && error !== undefined) {
+    return <div className="rn-error">Failed to load comments: {error}</div>
+  } else {
+    return (
+      <CommentWrapper>
+        {!!replyingTo && (
+          <ReplyWrapper>
+            回复给
+            <a href={`#rn-comment-${replyingTo.id}`}>
+              {replyingTo.authorName || "Guest"}
+            </a>
+            <CancelReplyButton onClick={() => setReplyingTo(undefined)}>
+              取消
+            </CancelReplyButton>
+          </ReplyWrapper>
+        )}
+        <CommentForm
+          siteId={siteId}
+          threadSlug={threadSlug}
+          onNewComment={load}
+          replyingTo={replyingTo}
+        />
+        {!!error && <div className="rn-error">{error}</div>}
+        <CommentListWrapper>
+          {comments.map((c) => (
+            <CommentList key={c.id} id={`rn-comment-${c.id}`}>
+              <Comment
+                authorName={c.authorName}
+                authorEmail={c.authorEmail}
+                body={c.bodyHTML}
+                createdAt={c.createdAt}
+                replyFn={() => {
+                  setReplyingTo(c)
+                  scrollTo("rn-comment-form")
+                }}
+              />
+            </CommentList>
+          ))}
+        </CommentListWrapper>
+        <CommentPagination>
+          {start > 0 && <a onClick={prevPage}>{text("prev_page")}</a>}
+          {comments.length === limit && (
+            <a onClick={nextPage}>{text("next_page")}</a>
+          )}
+        </CommentPagination>
+      </CommentWrapper>
+    )
+  }
+}
 
-//   .rn-main-section {
-//     padding-left: 10px;
-//   }
+const CommentWrapper = styled.div`
+  padding-top: 2rem;
+  border-top: 2px dashed var(--color-button-hover-bg);
+`
 
-//   .rn-author-name {
-//     font-weight: bold;
-//     font-size: 16px;
-//   }
+const ReplyWrapper = styled.div`
+  a {
+    margin: 0 0.5rem;
+  }
+`
 
-//   .rn-comment-body {
-//     font-size: 14px;
-//     font-weight: normal;
-//   }
+const CommentPagination = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
-//   .rn-date {
-//     font-size: 12px;
-//     font-weight: light;
-//     color: #888;
-//   }
+const CommentFormWrapper = styled.form`
+  textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 5px;
+    border: 2px solid var(--color-button-hover-bg);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    &:focus {
+      border-color: transparent;
+      outline: none;
+      box-shadow: 0px 0px 30px -5px hsl(var(--color-box-shadow));
+    }
+  }
+`
 
-//   .rn-comment-actions {
-//     font-size: 12px;
-//     font-weight: light;
-//   }
+const AuthorBoxWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-//   button {
-//     cursor: pointer;
-//   }
+  & > div {
+    width: 48%;
+  }
 
-//   button.cancelReply {
-//     border: none;
-//     background: transparent;
-//     color: rgb(29, 161, 242);
-//     padding-left: 3px;
-//   }
+  div > label {
+    margin-bottom: 5px;
+  }
 
-//   .rn-comment-actions button {
-//     cursor: pointer;
-//     border: none;
-//     background: transparent;
-//     padding-top: 0;
-//     padding-bottom: 0;
-//     color: #888;
-//   }
+  div > input {
+    width: 100%;
+    display: block;
+    padding: 5px;
+    border: 2px solid var(--color-button-hover-bg);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    &:focus {
+      border-color: transparent;
+      outline: none;
+      box-shadow: 0px 0px 30px -5px hsl(var(--color-box-shadow));
+    }
+  }
 
-//   .rn-comment-item:hover .rn-comment-actions button {
-//     color: rgb(29, 161, 242);
-//   }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    & > div {
+      width: 100%;
+    }
+  }
+`
 
-//   a {
-//     color: rgb(29, 161, 242);
-//   }
+const CancelReplyButton = styled.button`
+  border: none;
+  background: transparent;
+  color: var(--color-hover-bg);
+  cursor: pointer;
+`
 
-//   .rn-error {
-//     color: red;
-//     font-size: 14px;
-//   }
+const AuthorNameWrapper = styled.div``
+const AuthorEmailWrapper = styled.div``
 
-//   .rn-comment-form {
-//     width: 100%;
-//   }
+const CommentBoxWrapper = styled.div`
+  margin-top: 10px;
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
 
-//   .rn-comment-form label {
-//     display: block;
-//     margin-top: 5px;
-//   }
+  input[type="submit"] {
+    width: auto;
+    padding: 6px 22px;
+    border-radius: 8px;
+    border: 2px solid var(--color-button-hover-bg);
+    margin-top: 10px;
+    font-size: 1rem;
+    display: inline-block;
+    cursor: pointer;
+    color: var(--color-text);
+    background-color: transparent;
 
-//   .rn-comment-form input {
-//     width: 100%;
-//     display: block;
-//   }
+    &:hover {
+      border-color: transparent;
+      background-color: var(--color-button-hover-bg);
+    }
 
-//   .rn-comment-form textarea {
-//     width: 100%;
-//   }
+    &:disabled {
+      border-color: transparent;
+      background-color: var(--color-gray-500);
+      cursor: wait;
+    }
+  }
 
-//   .rn-comment-form input[type="submit"] {
-//     width: auto;
-//     padding: 6px 22px;
-//     border-radius: 8px;
-//     border-width: 0;
-//     margin-top: 10px;
-//     color: white;
-//     background-color: rgb(29, 161, 242);
-//     font-size: 16px;
-//     display: inline-block;
-//     cursor: pointer;
-//   }
+  span {
+    color: limegreen;
+    padding-left: 1rem;
+  }
+`
 
-//   .rn-comment-form input[type="submit"]:hover {
-//     background-color: rgb(21, 126, 192);
-//   }
+const PromoLink = styled.div`
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  text-align: right !important;
+  margin-top: 0.5rem;
+`
 
-//   .rn-comment-form input[type="submit"]:disabled {
-//     background-color: #7d7f8d;
-//     cursor: wait;
-//   }
+const CommentItemWrapper = styled.div`
+  display: flex;
+`
 
-//   .rn-author-name-box,
-//   .rn-author-email-box {
-//     width: 48%;
-//     margin: 0;
-//   }
+const GravatarWrapper = styled.div``
 
-//   .rn-author-box {
-//     display: flex;
-//     justify-content: space-between;
-//   }
+const CommentMainSectionWrapper = styled.div`
+  padding-left: 10px;
+`
 
-//   .rn-success {
-//     color: green;
-//     padding-left: 10px;
-//   }
+const CommentAuthorName = styled.div`
+  font-size: 0.8rem;
+  font-weight: bold;
+`
 
-//   .rn-pagination {
-//     display: flex;
-//     justify-content: space-between;
-//   }
+const CommentActions = styled.div`
+  width: max-content;
+  span {
+    font-size: 0.8rem;
+    font-weight: light;
+    color: var(--color-gray-500);
+  }
 
-//   .rn-pagination a {
-//     cursor: pointer;
-//     color: rgb(29, 161, 242);
-//   }
+  button {
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    margin: 0 0.3rem;
+    color: var(--color-gray-500);
 
-//   @media (max-width: 700px) {
-//     .rn-author-name-box,
-//     .rn-author-email-box {
-//       width: 100%;
-//     }
-//     .rn-author-box {
-//       flex-direction: column;
-//     }
-//   }
+    color: var(--color-text);
+    text-decoration: underline dotted 2px var(--color-hover-bg);
+    &:hover {
+      background-color: var(--color-hover-bg);
+      color: var(--color-hover-text);
+    }
+  }
+`
 
-//   .rn-promo-link {
-//     font-size: 12px;
-//     color: #7d7f8d;
-//     text-align: right;
-//   }
+const CommentBody = styled.div`
+  margin-top: 0.5rem;
+  font-size: 1rem;
+`
 
-//   .rn-promo-link a {
-//     color: rgb(29, 161, 242);
-//   }
-// `
+const CommentListWrapper = styled.ul`
+  margin-left: 0;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+`
 
-// export default Comments
+const CommentList = styled.li`
+  list-style: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  margin: 0.5rem 0;
+`
+
+export default Comments

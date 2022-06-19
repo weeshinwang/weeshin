@@ -13,7 +13,7 @@ import nightOwl from "prism-react-renderer/themes/nightOwl"
 import nightOwlLight from "prism-react-renderer/themes/nightOwlLight"
 import rangeParser from "parse-numeric-range"
 import { VideoEmbed } from "../components/media"
-// import Comments from "../components/remark-ninja"
+import Comments from "../components/remark-ninja"
 
 const calculateLinesToHighlight = (meta) => {
   const RE = /{([\d,-]+)}/
@@ -130,6 +130,13 @@ export default function PageTemplate({ data: { mdx } }) {
         </SinglePostHeader>
         <SinglePostContentWrapper>
           <h1>{mdx.frontmatter.displayTitle}</h1>
+          <SinglePostDateWrapper>
+            <p>
+              发布于：{mdx.frontmatter.date}
+              {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
+                ` | 修改于：${mdx.frontmatter.lastmod}`}
+            </p>
+          </SinglePostDateWrapper>
           <MDXProvider
             components={{
               ...PrismSyntaxHighlightingComponent,
@@ -138,16 +145,10 @@ export default function PageTemplate({ data: { mdx } }) {
           >
             <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
           </MDXProvider>
-          {/* <Comments /> */}
-          <SinglePostDateWrapper>
-            <p>
-              发布于：{mdx.frontmatter.date}
-              {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
-                ` | 修改于：${mdx.frontmatter.lastmod}`}
-            </p>
-          </SinglePostDateWrapper>
         </SinglePostContentWrapper>
-        <SinglePostCommentWrapper></SinglePostCommentWrapper>
+        <SinglePostCommentWrapper>
+          <Comments />
+        </SinglePostCommentWrapper>
       </SinglePostWrapper>
     </>
   )
@@ -170,7 +171,7 @@ export const pageQuery = graphql`
 
 const SinglePostWrapper = styled.div`
   display: grid;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 50px auto auto;
   justify-content: center;
   & * {
     text-align: justify;
@@ -178,6 +179,7 @@ const SinglePostWrapper = styled.div`
   background-color: var(--color-gray-100);
   margin: 0 auto;
   min-height: 100%;
+  align-content: center;
   -webkit-transition: background-color 250ms linear;
   -ms-transition: background-color 250ms linear;
   transition: background-color 250ms linear;
@@ -336,17 +338,6 @@ const SinglePostContentWrapper = styled.div`
 
   table {
     width: 100%;
-  }
-
-  /* table,
-  th,
-  td {
-    border: 1px solid var(--color-hover-bg);
-    border-collapse: collapse;
-    border-left: none;
-    border-right: none;
-  } */
-  table {
     border: 2px solid var(--color-hover-bg);
     border-collapse: separate;
     border-spacing: 0 5px;
@@ -386,22 +377,15 @@ const SinglePostContentWrapper = styled.div`
   }
 `
 const SinglePostDateWrapper = styled.div`
-  padding: 10px 0;
+  color: var(--color-gray-500);
+  padding-bottom: 10px;
   & p {
-    text-align: center;
+    text-align: left;
     font-weight: bold;
   }
+  border-bottom: 1px dashed var(--color-gray-300);
 `
 
-const SinglePostCommentWrapper = styled.div`
-  background: var(--color-background);
-  justify-self: center;
-  align-self: center;
-  grid-row: 3;
-  & > p {
-    color: var(--gray-500);
-  }
-`
 const Pre = styled.pre`
   text-align: left;
   margin: 1em 0;
@@ -435,4 +419,16 @@ const LineNo = styled.span`
 
 const LineContent = styled.span`
   display: table-cell;
+`
+
+const SinglePostCommentWrapper = styled.div`
+  background: var(--color-background);
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+  grid-row: 3;
+  & > p {
+    color: var(--gray-500);
+  }
+  padding: 3rem;
 `

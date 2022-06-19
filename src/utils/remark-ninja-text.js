@@ -21,7 +21,7 @@ const textMap = {
   },
   email_placeholder: {
     "en-US": "Optional. Used to generate avatar. Hidden from public.",
-    "zh-CN": "可选，用于生成头像，不会公开展示。",
+    "zh-CN": "可选，用于获取 Gravatar 头像，不会公开展示。",
   },
   comment: {
     "en-US": "Comment",
