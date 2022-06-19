@@ -114,6 +114,11 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
       })
   }
 
+  const clearMessage = () => {
+    setMessage(undefined)
+    setError(undefined)
+  }
+
   return (
     <CommentFormWrapper className="rn-comment-form" id="rn-comment-form">
       {error !== undefined && <div className="rn-error">{error}</div>}
@@ -125,6 +130,7 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
             placeholder={text("name_placeholder")}
+            onFocus={clearMessage}
           />
         </AuthorNameWrapper>
         <AuthorEmailWrapper>
@@ -135,6 +141,7 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
             placeholder={text("email_placeholder")}
             value={authorEmail}
             onChange={(e) => setAuthorEmail(e.target.value)}
+            onFocus={clearMessage}
           />
         </AuthorEmailWrapper>
       </AuthorBoxWrapper>
@@ -145,12 +152,16 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
           rows="5"
           value={body}
           onChange={(e) => setBody(e.target.value)}
+          onFocus={clearMessage}
         />
         <input onClick={submit} type="submit" value={text("submit")} />
         {message !== undefined && <span>{message}</span>}
       </CommentBoxWrapper>
       <PromoLink>
-        {text("powered_by")} <a href="https://remark.ninja">Remark Ninja</a>
+        {text("powered_by")}{" "}
+        <a target="_blank" rel="noopener noreferer" href="https://remark.ninja">
+          Remark Ninja
+        </a>
       </PromoLink>
     </CommentFormWrapper>
   )
