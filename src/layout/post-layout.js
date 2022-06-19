@@ -431,4 +431,10 @@ const SinglePostCommentWrapper = styled.div`
     color: var(--gray-500);
   }
   padding: 3rem;
+  @media only screen and (max-width: 900px) {
+    padding: 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 1rem;
+  }
 `

@@ -159,7 +159,11 @@ const CommentForm = ({ siteId, threadSlug, onNewComment, replyingTo }) => {
       </CommentBoxWrapper>
       <PromoLink>
         {text("powered_by")}{" "}
-        <a target="_blank" rel="noopener noreferer" href="https://remark.ninja">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://remark.ninja"
+        >
           Remark Ninja
         </a>
       </PromoLink>
@@ -271,8 +275,14 @@ const Comments = ({ siteId = SITE_ID, threadSlug, pageSize }) => {
 }
 
 const CommentWrapper = styled.div`
-  padding-top: 2rem;
-  border-top: 2px dashed var(--color-button-hover-bg);
+  padding-top: 3rem;
+  @media only screen and (max-width: 900px) {
+    padding-top: 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    padding-top: 1rem;
+  }
+  border-top: 3px dashed var(--color-button-hover-bg);
 `
 
 const ReplyWrapper = styled.div`

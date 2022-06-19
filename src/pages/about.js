@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Layout from "../layout/layout"
 import { graphql, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
@@ -6,7 +6,6 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import {} from "gatsby"
 import styled from "styled-components"
 const shortcodes = { Link } // Provide common components here
-import { useEffect } from "react"
 
 export default function PageTemplate({ data: { mdx } }) {
   // set anchor tag to open in new tab
