@@ -44,7 +44,7 @@ const postComment = async ({
   replyToComment,
 }) => {
   threadSlug = threadSlug || window.location.pathname
-  authorEmail = authorEmail?.trim().toLowerCase()
+  authorEmail = authorEmail?.trim()?.toLowerCase()
   body = DOMPurify.sanitize(body)
 
   return axios
@@ -225,7 +225,11 @@ const Comments = ({ siteId = SITE_ID, threadSlug, pageSize }) => {
   useEffect(load, [siteId, threadSlug, pageSize, start, limit])
 
   if (comments === undefined && error === undefined) {
-    return <div>{text("loading_comments")}</div>
+    return (
+      <div style={{ color: "var(--color-button-hover-bg)" }}>
+        {text("loading_comments")}
+      </div>
+    )
   } else if (comments === undefined && error !== undefined) {
     return <div className="rn-error">Failed to load comments: {error}</div>
   } else {
@@ -412,7 +416,11 @@ const CommentItemWrapper = styled.div`
   display: flex;
 `
 
-const GravatarWrapper = styled.div``
+const GravatarWrapper = styled.div`
+  img {
+    border-radius: 50%;
+  }
+`
 
 const CommentMainSectionWrapper = styled.div`
   padding-left: 10px;
