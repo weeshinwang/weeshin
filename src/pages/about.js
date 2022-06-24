@@ -40,8 +40,7 @@ export const pageQuery = graphql`
   }
 `
 const AboutPageWrapper = styled.div`
-  margin: 0 auto;
-  margin-top: 32px;
+  margin: 32px auto;
   min-width: 300px;
   max-width: 700px;
   padding: 0 16px;

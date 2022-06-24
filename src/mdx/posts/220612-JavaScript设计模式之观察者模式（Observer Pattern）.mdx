@@ -1,6 +1,6 @@
 ---
-title: "JavaScript设计模式大全"
-displayTitle: "JavaScript 设计模式大全"
+title: "JavaScript设计模式之观察者模式（Observer Pattern）"
+displayTitle: "JavaScript 设计模式之观察者模式（Observer Pattern）"
 date: 2022-06-12
 lastmod: 2022-06-12
 tags: [design-pattern]
@@ -9,13 +9,9 @@ type: "post"
 draft: false
 ---
 
-> 本文翻译自 [patterns.dev](https://www.patterns.dev/posts/)
-
-## [观察者模式（Observer Pattern）](https://www.patterns.dev/posts/observer-pattern/)
+> 本文翻译自 [patterns.dev](https://www.patterns.dev/posts/observer-pattern/)
 
 _**🎉 当事件发生时，使用被观察者来通知观察者。**_
-
-<br />
 
 通过使用**观察者模式**，我们可以使某类特定的对象（称为**观察者**，Observers）订阅另一类对象（称为**被观察者**，Observable）。当一个事件发生时，被观察者将会通知所有的观察者。
 
@@ -165,7 +161,7 @@ export default function App() {
 
 尽管我们可以在很多地方使用观察者模式，它在当使用**异步或事件为基础的数据**时相当有用。或许你想要特定组件在某些数据下载完成后得到通知，或者是，当用户向消息栏发送新消息时你想要所有其他用户收到通知。
 
-### 案例研究
+## 案例研究
 
 一个使用观察者模式的流行 JavaScript 库是 `RxJS` :
 
@@ -177,15 +173,15 @@ export default function App() {
 
 RxJS 有非常多内置的特性和例子使用了观察者模式。
 
-### 优点
+## 优点
 
 使用观察者模式是一个很好的方式来实行关注点分离（Separation of Concerns）和单一功能 （Single-responsibility）的原则。观察者对象与被观察者对象不是很紧密的耦合，且可以随时解耦。被观察者对象负责监听事件，与此同时，观察者对象仅负责处理收到的数据。
 
-### 缺点
+## 缺点
 
 如果观察者对象变得非常复杂，当通知所有的订阅者时，会出现一些性能方面的问题。
 
-### 参考文献
+## 参考文献
 
 - [RxJS](https://rxjs-dev.firebaseapp.com/)
 - [JavaScript Design Patterns: The Observer Pattern](https://www.sitepoint.com/javascript-design-patterns-observer-pattern/)
