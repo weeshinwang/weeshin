@@ -150,8 +150,11 @@ const GlobalStyles = createGlobalStyle`
     border-radius: 10px;
     margin: 1rem 0;
     box-shadow: var(--code-shadow-elevation-low);
-    & * {
+    * {
       font-family: 'JetBrains Mono', monospace;
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 
