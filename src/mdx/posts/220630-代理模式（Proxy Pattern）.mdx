@@ -1,0 +1,136 @@
+---
+title: "代理模式（Proxy Pattern）"
+displayTitle: "代理模式（Proxy Pattern）"
+date: 2022-06-30
+lastmod: 2022-06-30
+tags: [design-pattern]
+categories: [编程技术]
+type: "post"
+draft: false
+---
+
+> 本文翻译自 [patterns.dev](https://www.patterns.dev/posts/proxy-pattern/)
+
+**_拦截和控制与目标对象的交互操作。_**
+
+## 代理（Proxy）
+
+通过使用代理对象（Proxy Object），我们可以拥有更多对于与特定对象进行交互的控制。一个代理对象可以决定当我们与这个对象进行交互操作时的行为，例如当我们获取或设置某个值时。
+通俗来讲，一个代理人表示某人的替代者。与其和我们想要联系的人进行直接沟通，我们与能代表他的人进行联系。相同的事情也发生在 JavaScript 代码中：与其对目标对象进行直接操作，我们与代理对象进行交互。
+让我们来创建一个 `person` 对象，用它来代表 John Doe.
+
+```js
+const person = {
+  name: "John Doe",
+  age: 42,
+  nationality: "American",
+}
+```
+
+与其对这个对象进行直接操作，我们想要与代理对象进行交互。在 JavaScript 中，我们可以轻松地通过创建一个 `Proxy` 类的实例来创建一个代理对象。
+
+```js
+const person = {
+  name: "John Doe",
+  age: 42,
+  nationality: "American",
+}
+
+const personProxy = new Proxy(person, {})
+```
+
+传入 `Proxy` 类的第二个参数是一个可以作为处理器（Handler）的对象。在这个处理器对象中，我们可以定义基于操作类型的特定行为。尽管有很多种你可以加入处理器对象的[方法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)，两种最常见的方法是 `get` 和 `set` ：
+
+- `get` ：当想要**获取**某个属性的时候调用；
+- `set` ：当想要**修改**某个属性的时候调用。
+
+实际上，最终会发生如下的情形：
+
+<VideoEmbed src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056520/patterns.dev/jspat-51_xvbob9.mp4" />
+
+与其对 `person` 对象进行直接操作，我们与 `personProxy` 对象进行交互。
+让我们来将处理器添加入 `personProxy` 代理对象。当尝试修改某个属性时，`Proxy` 类中的 `set` 方法会被调用，我们想要这个代理记录这个属性之前和现在的值。当尝试去读取某个属性时，`Proxy` 类中的 `get` 方法会被调用，我们想要这个代理去记录一个可读性更强的语句，这条语句中包含这个属性的键与值的。
+
+```js
+const personProxy = new Proxy(person, {
+  get: (obj, prop) => {
+    console.log(`The value of ${prop} is ${obj[prop]}`)
+  },
+  set: (obj, prop, value) => {
+    console.log(`Changed ${prop} from ${obj[prop]} to ${value}`)
+    obj[prop] = value
+  },
+})
+```
+
+完美！让我们来看看当尝试修改和获取属性时会发生什么。
+
+<CodeSandbox codeSandboxId="cocky-bird-rkgyo" />
+
+当读取 `name` 属性时，代理对象返回一个更佳的语句：`The value of name is John Doe.`
+当修改 `age` 属性时，代理对象返回这个属性之前和现在的值：`Changed age from 42 to 43.`
+
+在添加**验证**的时候，代理会十分有用。用户不应该将 `person` 对象的年龄修改为字符串的值，或者赋予一个空名字。或者当用户试图读取一个不存在的属性时，我们应该通知用户。
+
+```js
+const personProxy = new Proxy(person, {
+  get: (obj, prop) => {
+    if (!obj[prop]) {
+      console.log(
+        `Hmm.. this property doesn't seem to exist on the target object`
+      )
+    } else {
+      console.log(`The value of ${prop} is ${obj[prop]}`)
+    }
+  },
+  set: (obj, prop, value) => {
+    if (prop === "age" && typeof value !== "number") {
+      console.log(`Sorry, you can only pass numeric values for age.`)
+    } else if (prop === "name" && value.length < 2) {
+      console.log(`You need to provide a valid name.`)
+    } else {
+      console.log(`Changed ${prop} from ${obj[prop]} to ${value}.`)
+      obj[prop] = value
+    }
+  },
+})
+```
+
+让我们来看看当我们尝试传入一个错误的值会发生什么！
+
+<CodeSandbox codeSandboxId="focused-rubin-dgk2v" />
+
+代理对象可以确保我们没有传入错误的值来修改 `person` 对象，这可以帮助我们保证数据的纯正性。
+
+## 反射（Reflect）
+
+JavaScript 提供了另一类内置的对象叫做 `Reflect`，它可以让我们使用代理来操作目标对象时的流程变得更容易。
+在此之前，我们尝试通过在代理对象上使用方括号标记（`[]`）来修改或读取目标对象上的属性。不同的是，我们可以使用 `Reflect` 对象来进行相同的操作。`Reflect` 对象上的方法名和 `handler` 对象上的方法名是一致的。
+与其使用 `obj[prop]` 来读取属性，或者通过 `obj[prop] = value` 来设置属性，我们可使用 `Reflect.get()` 和 `Reflect.set()` 来读取和修改在目标对象上的属性。这些方法的入参和处理器对象上的一致。
+
+```js
+const personProxy = new Proxy(person, {
+  get: (obj, prop) => {
+    console.log(`The value of ${prop} is ${Reflect.get(obj, prop)}`)
+  },
+  set: (obj, prop, value) => {
+    console.log(`Changed ${prop} from ${obj[prop]} to ${value}`)
+    Reflect.set(obj, prop, value)
+  },
+})
+```
+
+完美！我们现在可以轻松地通过 `Reflect` 对象来读取和修改目标对象上的属性。
+
+<CodeSandbox codeSandboxId="gallant-violet-o1hjx" />
+
+代理是一个增加对于对象行为控制的强大的方法。代理可以有许多的使用场景：它可以帮助验证、格式化、通知或者调试等过程。
+
+但过度使用 `Proxy` 对象或者在每一次调用 `handler` 方法时进行复杂的操作会对应用的性能造成负面影响。因此最好不要在性能优先的代码中使用代理。
+
+## 参考文献
+
+- [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) - MDN
+- [JavaScript Proxy](https://davidwalsh.name/javascript-proxy) - David Walsh
+- [Awesome ES2015 Proxy](https://github.com/mikaelbr/awesome-es2015-proxy) - GitHub @mikaelbr
+- [Thoughts on ES6 Proxies Performance](http://thecodebarbarian.com/thoughts-on-es6-proxies-performance) - Valeri Karpov
