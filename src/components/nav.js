@@ -7,7 +7,7 @@ export default function Nav() {
     <NavWrapper>
       <List>
         {/* <ListItem to="/">主页</ListItem> */}
-        <ListItem
+        {/* <ListItem
           activeStyle={{
             backgroundColor: "var(--color-hover-bg)",
             color: "var(--color-hover-text)",
@@ -15,7 +15,7 @@ export default function Nav() {
           to="/projects"
         >
           项目
-        </ListItem>
+        </ListItem> */}
         <ListItem
           activeStyle={{
             backgroundColor: "var(--color-hover-bg)",

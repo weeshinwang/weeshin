@@ -71,10 +71,19 @@ const PostCardWrapper = styled.div`
   border-radius: 5px;
   padding: 10px;
 
-  &:hover {
+  &:active,
+  &:focus {
     background-color: var(--color-button-hover-bg);
     cursor: pointer;
     box-shadow: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--color-button-hover-bg);
+      cursor: pointer;
+      box-shadow: none;
+    }
   }
 
   & p:first-of-type {

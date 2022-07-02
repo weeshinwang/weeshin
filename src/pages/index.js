@@ -20,7 +20,7 @@ export default function Home() {
           <p>一个自学的前端工程师</p>
         </SecondaryIntroWrapper>
         <NavButtonWrapper>
-          <StyledLink to="/projects">我的项目</StyledLink>
+          {/* <StyledLink to="/projects">我的项目</StyledLink> */}
           <StyledLink to="/posts">我的文章</StyledLink>
           <StyledLink to="/about">关于我</StyledLink>
         </NavButtonWrapper>
@@ -91,14 +91,21 @@ const StyledLink = styled(Link)`
   -ms-transition: border 250ms linear;
   transition: border 250ms linear;
 
-  &:hover,
   &:active,
-  &:visited,
   &:focus {
     color: var(--text);
     background-color: var(--color-button-hover-bg);
     box-shadow: none;
   }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--text);
+      background-color: var(--color-button-hover-bg);
+      box-shadow: none;
+    }
+  }
+
   &:focus-visible {
     outline: none;
   }
