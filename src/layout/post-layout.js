@@ -129,14 +129,14 @@ export default function PageTemplate({ data: { mdx } }) {
           </div>
         </SinglePostHeader>
         <SinglePostContentWrapper>
-          <h1>{mdx.frontmatter.displayTitle}</h1>
-          <SinglePostDateWrapper>
+          <SinglePostHeaderWrapper>
+            <h1>{mdx.frontmatter.displayTitle}</h1>
             <p>
               发布于：{mdx.frontmatter.date}
               {mdx.frontmatter.date === mdx.frontmatter.lastmod ||
                 ` | 修改于：${mdx.frontmatter.lastmod}`}
             </p>
-          </SinglePostDateWrapper>
+          </SinglePostHeaderWrapper>
           <MDXProvider
             components={{
               ...PrismSyntaxHighlightingComponent,
@@ -376,10 +376,17 @@ const SinglePostContentWrapper = styled.div`
     margin: 1.5rem 0;
   }
 `
-const SinglePostDateWrapper = styled.div`
-  color: var(--color-gray-500);
-  padding-bottom: 10px;
-  & p {
+const SinglePostHeaderWrapper = styled.div`
+  h1,
+  p {
+    width: fit-content;
+  }
+  h1 {
+    margin: 16px auto;
+  }
+  p {
+    margin: 12px auto;
+    color: var(--color-gray-500);
     text-align: left;
     font-weight: bold;
   }
