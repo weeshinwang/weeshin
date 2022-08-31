@@ -1,0 +1,177 @@
+---
+title: "单例模式（Singleton Pattern）"
+displayTitle: "单例模式（Singleton Pattern）"
+date: 2022-08-31
+lastmod: 2022-08-31
+tags: [design-pattern]
+categories: [编程技术]
+type: "post"
+draft: false
+---
+
+> 本文翻译自 [patterns.dev](https://www.patterns.dev/posts/singleton-pattern/)
+
+**_在应用中共享一个单一实例。_**
+
+## 单例的创建
+
+单例是一种实例化一次，就可以在全局访问的类。我们的应用中可以共享这个单一的实例，这使得单例非常适合用于管理应用中的全局状态。
+首先，让我们来看看使用 ES2015 的类语法创建的单例是什么样。这个例子中，我们将要构建一个 `Counter` 类，它有以下方法：
+- `getInstatnce` 方法用于返回实例的值；
+- `getCount` 方法用于返回 `counter` 变量当前的值；
+- `increment` 方法将 `counter` 的值加一
+- `decrement` 方法将 `counter` 的值减一
+
+```js
+let counter = 0;
+
+class Counter {
+  getInstance() {
+    return this;
+  }
+
+  getCount() {
+    return counter;
+  }
+
+  increment() {
+    return ++counter;
+  }
+
+  decrement() {
+    return --counter;
+  }
+}
+```
+
+但是，这个类没有满足成为单例的标准。一个单例应该只能被实例化一次。当前，我们可以创建多个 `Counter` 类的实例。
+
+```js
+let counter = 0;
+
+class Counter {
+  getInstance() {
+    return this;
+  }
+
+  getCount() {
+    return counter;
+  }
+
+  increment() {
+    return ++counter;
+  }
+
+  decrement() {
+    return --counter;
+  }
+}
+
+const counter1 = new Counter();
+const counter2 = new Counter();
+
+console.log(counter1.getInstance() === counter2.getInstance()); // false
+```
+
+通过 `new` 方法两次，我们仅仅设置了 `set1` 和 `set2` 等于不同的实例。`counter` 和 `counter2` 中 `getInstance` 方法返回了不同实例的引用，它们并不是严格相等！
+
+<VideoEmbed src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056519/patterns.dev/jspat-52_zkwyk1.mp4" />
+
+让我们来使 `Counter` 类仅可创建一个实例。
+
+一种可以保证仅有一个实例可以被创建的方法是创建一个变量叫做 `instance`。在 `Counter` 类的构造器函数中，我们将 `instance` 变量设置等于一个当新的实例被创建时对该实例的引用。我们可以通过检查 `instance` 变量是否有值来防止重复创建实例。如果 `instance` 变量有值，就说明一个实例已经存在。这对于单例来说不应该发生，我们应该抛出一个错误让用户知道。
+
+```js
+let instance;
+let counter = 0;
+
+class Counter {
+  constructor() {
+    if (instance) {
+      throw new Error("You can only create one instance!");
+    }
+    instance = this;
+  }
+
+  getInstance() {
+    return this;
+  }
+
+  getCount() {
+    return counter;
+  }
+
+  increment() {
+    return ++counter;
+  }
+
+  decrement() {
+    return --counter;
+  }
+}
+
+const counter1 = new Counter();
+const counter2 = new Counter();
+// Error: You can only create one instance!
+```
+
+完美！就像这样，我们将不能创建多个实例。
+
+让我们从 `counter.js` 文件中导出 `Counter` 实例。在做导出之前，我们应该冻结（freeze）这个实例。`Object.freeze` 方法可以保证引用该实例的代码不会更改这个单例。不能在冻结实例上添加或者修改属性，这降低了无意中覆写了单例上值的风险。
+
+```js
+let instance;
+let counter = 0;
+
+class Counter {
+  constructor() {
+    if (instance) {
+      throw new Error("You can only create one instance!");
+    }
+    instance = this;
+  }
+
+  getInstance() {
+    return this;
+  }
+
+  getCount() {
+    return counter;
+  }
+
+  increment() {
+    return ++counter;
+  }
+
+  decrement() {
+    return --counter;
+  }
+}
+
+const singletonCounter = Object.freeze(new Counter());
+export default singletonCounter;
+```
+
+让我们来看一个运用了 `Counter` 单例的例子。我们有以下文件：
+
+-   `counter.js` : 其中有 `Counter` 类，并将 `Counter` 实例作为默认导出；
+-   `index.js` : 导入 `redButton.js` 和 `blueButton.js` 模组；
+-   `redButton.js` : 导入 `Counter`, 并在 `redButton` 按钮上添加 ` Counter ` 上的 `increment` 方法做为事件监听器，并调用 `getCount` 方法来显示 `counter` 的当前值；
+-   `blueButton.js` : 导入 `Counter`, 并在 `blueButton` 按钮上添加 ` Counter ` 上的 `increment` 方法做为事件监听器，并调用 `getCount` 方法来显示 `counter` 的当前值；
+ `blueButton.js` 和 `redButton.js` 都从 `counter.js` 中导入了同一个实例. 在这两个文件中，这个实例被导入为 `Counter` 变量。
+
+<VideoEmbed src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056519/patterns.dev/jspat-56_wylvcf.mp4" />
+
+当我们调用 `redButton` 或 `blueButton` 上的 `increment` 方法时，两个文件中 `Counter` 实例上的 `counter` 属性值会被同时更新。这无论你是点击了 `redButton` 或 `blueButton`，所有实例会共享同一个 `counter` 值。这就是为什么当我们调用了其他文件中的方法时，本文件中的 `counter` 属性也会加一。
+
+## 优点与缺点
+
+
+## 参考文献
+-   [Do React Hooks replace Redux - Eric Elliott](https://medium.com/javascript-scene/do-react-hooks-replace-redux-210bab340672)
+-   [Working with Singletons in JavaScript - Vijay Prasanna](https://alligator.io/js/js-singletons/)
+-   [JavaScript Design Patterns: The Singleton - Samier Saeed](https://www.sitepoint.com/javascript-design-patterns-singleton/)
+-   [Singleton - Refactoring Guru](https://refactoring.guru/design-patterns/singleton)
+- [JavaScript Proxy](https://davidwalsh.name/javascript-proxy) - David Walsh
+- [Awesome ES2015 Proxy](https://github.com/mikaelbr/awesome-es2015-proxy) - GitHub @mikaelbr
+- [Thoughts on ES6 Proxies Performance](http://thecodebarbarian.com/thoughts-on-es6-proxies-performance) - Valeri Karpov
