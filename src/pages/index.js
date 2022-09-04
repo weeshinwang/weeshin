@@ -17,7 +17,7 @@ export default function Home() {
           <p>我是 weeshin</p>
         </IntroWrapper>
         <SecondaryIntroWrapper>
-          <p>一个自学的前端工程师</p>
+          <p>一名前端工程师</p>
         </SecondaryIntroWrapper>
         <NavButtonWrapper>
           {/* <StyledLink to="/projects">我的项目</StyledLink> */}

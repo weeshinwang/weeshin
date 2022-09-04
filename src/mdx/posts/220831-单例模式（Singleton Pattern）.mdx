@@ -2,7 +2,7 @@
 title: "单例模式（Singleton Pattern）"
 displayTitle: "单例模式（Singleton Pattern）"
 date: 2022-08-31
-lastmod: 2022-08-31
+lastmod: 2022-09-04
 tags: [design-pattern]
 categories: [编程技术]
 type: "post"
@@ -165,13 +165,44 @@ export default singletonCounter;
 当我们调用 `redButton` 或 `blueButton` 上的 `increment` 方法时，两个文件中 `Counter` 实例上的 `counter` 属性值会被同时更新。这无论你是点击了 `redButton` 或 `blueButton`，所有实例会共享同一个 `counter` 值。这就是为什么当我们调用了其他文件中的方法时，本文件中的 `counter` 属性也会加一。
 
 ## 优点与缺点
+将实例化限制为仅产生一个实例可以潜在地节约大量的内存空间。我们现在只需要给唯一一个在应用中被全局引用的实例，而不是每次新产生的实例设置内存空间。但是，单例模式通常被认为是“反模式（Anti-Pattern）”，能（或者是需要）在 JavaScript 语言中避免。
+在许多编程语言中，例如 Java 或者 C++，我们不能用 JavaScript 中的方式来直接创建对象。在这些面向对象语言中，我们需要创建一个能创建对象的类。这个创建的对象拥有这个类的实例的值，就像上方 JavaScript 例子中实例的值一样。
+但是，像上方例子所示的以类来实现单例的方法其实有些过于复杂。因为我们可以直接在 JavaScript 中创建对象，我们可以简单地用常规的对象来实现同样的效果。让我们来讨论一些使用单例的缺点。
+### 使用常规的对象
+让我们使用上方同样的例子，但是这次 `counter` 仅仅是一个简单的对象，其包含：
+- 一个 `count` 属性
+- `increment` 方法将 `counter` 的值加一
+- `decrement` 方法将 `counter` 的值减一
+
+<CodeSandbox codeSandboxId="competent-moon-rvzrr" />
+
+因为对象是引用传递， `redButton.js` 和 `blueButton.js` 导入了对相同 `counter` 对象的引用。在任意一个文件中改变 `count` 的值都会在别的文件也中显示修改后的值。
+
+## Testing
+测试依赖于单例的代码会很麻烦。因为我们每次不能创建一个新的实例，所有的测试都依赖于对前一次测试中全局对象的修改。这种情况下测试的顺序会很重要，一处小的修改都有可能导致整个测试集合失效。测试之后，我们需要重置整个实例，以便重置我们在测试中所做的修改。
+
+<CodeSandbox codeSandboxId="sweet-cache-n55vi" />
+
+### Dependency hiding
+当我们导入其他模组时，例如上方例子中的 `superCounter.js`，可能对于导入的模组中是否导入了一个单例没有那么显而易见。在其他的文件中，像例子中的 `index.js`，我们也导入了这个单例，并调用了它的方法。如此，我们意外的修改了单例中的值。这可能导致意外的行为发生，因为单例的多个实例可以在整个应用内共享，他们会同步修改后的值。
+
+## 全局行为
+一个单例的实例可以在整个应用内被引用。全局变量也有相同的行为：因为全局变量的作用域为全局作用域，我们能在整个应用中获取全局变量的值。
+拥有全局变量通常来说被认为是一个糟糕的设计决定。全局作用域污染可以最使得全局变量的值被意外地覆写，这会导致许多意外的行为。
+在 ES2015 语法中，创建全局变量比较罕见。新引入的 `let` 和 `const` 关键词使经由这两个关键词声明的变量作用域保持为块级作用域，这样可防止程序员意外地污染全局作用域。JavaScript 中全新的 `module` 系统可以在一个模组中使用 `export` 导出值，在另一些文件中使用 `import`  导入这些值，这样使得创建全局可访问却不会污染全局作用域的变量更为轻松。
+但是，单例的常用使用场景是使得应用中拥有某些全局的状态。让你的一部分代码依赖于相同的可变对象可能导致意外的行为。
+通常，特定部分的代码可修改全局状态中的值，另一个部分来消费这些状态数据。代码执行的顺序就十分重要，我们不想意外地先消费状态数据，但状态数据却还没有产生。当你的应用功能不断增多，了解全局状态中的数据流可能会变得十分棘手，因为会有许多组件相互依赖。
+
+## React 中的状态管理
+在 React，我们通常使用例如 Redux 或 React Context 这类状态管理工具，而不是使用单例来管理全局状态。尽管全局状态的行为与单例的行为十分类似，这些工具可以提供只读的状态，而不是像单例仅提供可修改的状态。当使用 Redux 时，在一个组件通过使用 `dispatcher` 来发送一个 `action` 之后，只有纯函数的 ` reducer` 可以更新状态。
+尽管使用全局状态的一些缺点不会因使用这些工具而奇迹般消失，由于组件不能直接地更新状态，我们至少可以保证全局状态是按照我们想要的方式被修改。
 
 
 ## 参考文献
--   [Do React Hooks replace Redux - Eric Elliott](https://medium.com/javascript-scene/do-react-hooks-replace-redux-210bab340672)
--   [Working with Singletons in JavaScript - Vijay Prasanna](https://alligator.io/js/js-singletons/)
--   [JavaScript Design Patterns: The Singleton - Samier Saeed](https://www.sitepoint.com/javascript-design-patterns-singleton/)
--   [Singleton - Refactoring Guru](https://refactoring.guru/design-patterns/singleton)
+- [Do React Hooks replace Redux - Eric Elliott](https://medium.com/javascript-scene/do-react-hooks-replace-redux-210bab340672)
+- [Working with Singletons in JavaScript - Vijay Prasanna](https://alligator.io/js/js-singletons/)
+- [JavaScript Design Patterns: The Singleton - Samier Saeed](https://www.sitepoint.com/javascript-design-patterns-singleton/)
+- [Singleton - Refactoring Guru](https://refactoring.guru/design-patterns/singleton)
 - [JavaScript Proxy](https://davidwalsh.name/javascript-proxy) - David Walsh
 - [Awesome ES2015 Proxy](https://github.com/mikaelbr/awesome-es2015-proxy) - GitHub @mikaelbr
 - [Thoughts on ES6 Proxies Performance](http://thecodebarbarian.com/thoughts-on-es6-proxies-performance) - Valeri Karpov
