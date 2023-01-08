@@ -1,0 +1,106 @@
+---
+title: "TypeScript 中的索引签名（Index Signature）是什么"
+displayTitle: "TypeScript 中的索引签名（Index Signature）是什么"
+date: 2023-01-08
+lastmod: 2023-01-08
+tags: [typescript]
+categories: [编程技术]
+type: "post"
+draft: false
+---
+
+今天在复习《TypeScript 编程》一书中，再一次碰到了“索引签名”这个名词。之前对这个名词有一些一知半解，索性多花了些时间来查阅资料，加深对这个名词的理解。
+
+先说说索引签名在 TypeScript 中的应用。
+```TS
+const Assignments: {
+  [seatNumber: string]: string
+} = {
+  '1A': 'Tom',
+  '1B': 'Jack'
+}
+```
+上述例子中，`[seatNumber: string]: string` 就叫做这个对象的索引签名。
+
+索引签名这个词需要拆开来理解，分为“索引”和“签名”。
+
+## 索引
+索引指的是对象的索引。JavaScript 对象从原理上来讲是一个 Hash Table，它的索引都是字符串。但是我们也可以用 `number` 类型来做 JavaScript 对象的索引。这是因为所有不是字符串类型的索引都会首先调用该索引（原型）上的 `toString` 方法。例如：
+```TS
+let obj = {
+  toString(){
+    console.log('toString called')
+    return 'Hello'
+  }
+}
+
+let foo:any = {};
+foo[obj] = 'World'; // toString called
+console.log(foo[obj]); // toString called, World
+console.log(foo['Hello']); // World
+```
+
+如果我们用数字去定义一个对象的索引，使用该数字的字符串转换值也可以获取该索引的值，例如：
+```JS
+const obj = {
+  1: 'HELLO'
+}
+
+obj[1] // 'HELLO'
+obj['1'] // 'HELLO'
+```
+
+## 签名
+我们都知道一个变量可以有“类型”（Type）, 而一个函数或方法的“类型”我们就叫做“签名”（Signature）或者“类型签名”（Type Signature）。例如：
+```TS
+function greeter(fn: (a: string) => void) {
+  fn("Hello, World");
+}
+ 
+function printToConsole(s: string) {
+  console.log(s);
+}
+ 
+greeter(printToConsole);
+```
+
+在上例中 `(a: string) => void` 就是一个签名，表示一个函数有一个为字符串类型的参数 `a`，以及这个函数没有返回值。
+
+## 索引签名
+因此，索引签名的意思就是定义了索引的类型，以及通过该索引获取到值的类型。
+
+再举一个官方文档中的例子：
+```TS
+interface StringArray {
+  [index: number]: string;
+}
+ 
+const myArray: StringArray = getStringArray();
+const secondItem = myArray[1]; // const secondItem: string
+```
+我们都知道数组是一个特殊的对象，其索引值为数字，上例中接口 `StringArray` 从某种角度来将模拟了 `String[]` 这种类型。该接口有一个索引签名：`[index: number]: string`，它表明 `StringArray` 可以被某一数字索引，而返回一个字符串。
+
+但是需要注意的是，索引签名中定义了索引为某种类型，只是表明可用过某种类型进行索引，并不表示可以通过该类型的所有值进行索引。
+例如：
+```TS
+interface obj: { 
+  [x: string]: number 
+}
+
+let n: number = obj.something;
+
+// 错误
+// Property 'something' is missing in type '{ [x: string]: number; }' but required in type '{ something: number; }'.ts(2741)
+let p: { something: number } = obj;
+```
+上例中，`obj` 对象可以被 `something` 这一字符串进行索引，但是 `something` 并不在 `[x: string]: number` 这个索引签名的类型定义中。
+
+## 参考文献
+1. [Index Signatures - TypeScript Doc](https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures)
+2. [Signature (functions) -MDN](https://developer.mozilla.org/en-US/docs/Glossary/Signature/Function)
+3. [Type signature - Wikipedia](https://en.wikipedia.org/wiki/Type_signature)
+4.  [编程语言中的索引签名是什么？](https://mp.weixin.qq.com/s/JlG6S-D-sHP464bwWq1ubQ)
+5. [Index Signatures - TypeScript Deep Dive](https://basarat.gitbook.io/typescript/type-system/index-signatures)
+
+
+
